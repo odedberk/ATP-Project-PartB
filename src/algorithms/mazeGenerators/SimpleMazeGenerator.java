@@ -17,7 +17,9 @@ public class SimpleMazeGenerator extends AMazeGenerator {
 
         int eRow = rand.nextInt(row);
         int eCol = rand.nextInt(col);
-        while (sRow==eRow && sCol==eCol) { //make sure start!=end
+        while ((sRow==eRow && sCol==eCol)
+                || (sCol==eCol && (sCol==0 || sCol==col-1))
+                || (sRow==eRow && (sRow==0 || sRow==row-1))) { //make sure start!=end and not on same side
             eRow = rand.nextInt(row);
             eCol = rand.nextInt(col);
         }
