@@ -1,9 +1,6 @@
 package test;
 
-import algorithms.mazeGenerators.EmptyMazeGenerator;
-import algorithms.mazeGenerators.IMazeGenerator;
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.SimpleMazeGenerator;
+import algorithms.mazeGenerators.*;
 
 public class testClass {
     public static void main(String[] args) {
