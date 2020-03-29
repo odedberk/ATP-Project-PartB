@@ -1,7 +1,7 @@
 package algorithms.mazeGenerators;
 
 public class Maze {
-    public static void main(String[] args) {
+    private Position start;
+    private  Position goal;
 
-    }
 }
