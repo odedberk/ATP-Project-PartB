@@ -44,7 +44,7 @@ public class Maze {
                     System.out.print("E ");
                 else System.out.print(maze[i][j]+" ");
             }
-            System.out.println();
+            System.out.println(); // print
         }
     }
 }
