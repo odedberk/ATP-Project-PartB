@@ -1,9 +1,6 @@
 package test;
 
-import algorithms.mazeGenerators.EmptyMazeGenerator;
-import algorithms.mazeGenerators.IMazeGenerator;
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.SimpleMazeGenerator;
+import algorithms.mazeGenerators.*;
 
 public class testClass {
     public static void main(String[] args) {
@@ -16,5 +13,12 @@ public class testClass {
         Maze testSimple = simple.generate(10,10);
         System.out.println(simple.measureAlgorithmTimeMillis(1000,1000));
         testSimple.print();
+        System.out.println();
+
+        IMazeGenerator my = new MyMazeGenerator();
+        Maze myMaze = my.generate(10,10);
+        myMaze.print();
+
+
     }
 }
