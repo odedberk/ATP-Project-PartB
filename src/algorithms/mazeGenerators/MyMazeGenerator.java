@@ -17,9 +17,9 @@ public class MyMazeGenerator extends AMazeGenerator {
                 maze[i][j]=1;
             }
         }
-        for(int j=1 ; j<row ; j+=2){
-            for (int i=1; i<col ; i++){
-                if (i%2==1)
+        for(int j=0 ; j<row ; j+=2){
+            for (int i=0; i<col ; i++){
+                if (i%2==0)
                     maze[i][j]=0;
             }
         }
