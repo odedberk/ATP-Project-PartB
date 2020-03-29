@@ -23,7 +23,7 @@ public class MyMazeGenerator extends AMazeGenerator {
                     maze[i][j]=0;
             }
         }
-        int sRow = 0;
+        int sRow = 1;
         int sCol =0;
         while (maze[sRow][sCol]==1){
            sRow= rand.nextInt(row/2);
