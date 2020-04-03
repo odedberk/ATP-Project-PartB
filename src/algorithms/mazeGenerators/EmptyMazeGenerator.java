@@ -33,9 +33,4 @@ public class EmptyMazeGenerator extends AMazeGenerator {
     }
 
 
-    public int getSteps() {
-        return 0;
-    }
-
-
 }

@@ -29,8 +29,4 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         return new Maze(start,end,maze);
     }
 
-
-    public int getSteps() {
-        return 0;
-    }
 }

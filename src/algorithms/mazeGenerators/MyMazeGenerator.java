@@ -3,46 +3,10 @@ import java.util.Random;
 
 
 public class MyMazeGenerator extends AMazeGenerator {
-    public static int steps=0;
-//    @Override
-//    public Maze generate(int row, int col) {
-//        Random rand = new Random();
-//        int[][] maze = new int[row][col];
-//        for(int i=0 ; i<row ; i++){
-//            for (int j=0; j<col ; j++){
-//                maze[i][j]=1;
-//            }
-//        }
-//        for(int j=0 ; j<row ; j+=2){
-//            for (int i=0; i<col ; i++){
-//                if (i%2==0)
-//                    maze[i][j]=0;
-//            }
-//        }
-//        int sRow = 1;
-//        int sCol =0;
-//        while (maze[sRow][sCol]==1){
-//           sRow= rand.nextInt(row/2);
-//           sCol= rand.nextInt(col/2);
-//        }
-//        Position start = new Position(sRow,sCol); //start position
-//
-//        int eRow = rand.nextInt(row/2) + row/2-1;
-//        int eCol = rand.nextInt(col/2) + col/2-1;
-//        while ((maze[eRow][eCol]==1)
-////                ||(sRow==eRow && sCol==eCol)
-////                || (sCol==eCol && (sCol==0 || sCol==col-1))
-////                || (sRow==eRow && (sRow==0 || sRow==row-1))) { //make sure start!=end and not on same side
-//        ){
-//            eRow = rand.nextInt(row/2) + row/2-1;
-//            eCol =rand.nextInt(col/2) + col/2-1;
-//        }
-//        Position end = new Position(eRow,eCol); //end position
-//        return new Maze(start,end,maze);
-//    }
 
-//    @Override
+    @Override
     public Maze generate(int row, int col) {
+        steps=0;
         if (row<=1 && col<=1)
             return new Maze(new Position(0,0),new Position(0,0),new int[1][1]);
         Random rand = new Random();
@@ -58,7 +22,7 @@ public class MyMazeGenerator extends AMazeGenerator {
 
 //        printArray(maze); // Debug
 
-        int sRow,sCol,eRow,eCol;
+        int sRow,sCol,eRow,eCol; //create start and goal positions
         if (col>3 && row>3) { //sufficient size
             sRow = rand.nextInt(row / 2);
             sCol = rand.nextInt(col / 2);
@@ -82,14 +46,8 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         Position start = new Position(sRow,sCol); //start position
         Position end = new Position(eRow,eCol); //end position
-//        printArray(maze);
         return new Maze(start,end,maze);
     }
-
-    public int getSteps() {
-        return steps;
-    }
-
 
     private void BuildWalls (int[][] currMaze, int left, int right, int top, int bottom){
         if (left+1>=right || top+1>=bottom)
@@ -105,9 +63,9 @@ public class MyMazeGenerator extends AMazeGenerator {
         while (horizontal%2==0) // dont build walls on passage indices
             horizontal = rand.nextInt(bottom - top) + top;
 
-        for (int i=top; i<=bottom; i++)
+        for (int i=top; i<=bottom; i++) //partition vertically
             currMaze[i][vertical]=1;
-        for (int i = left; i <= right; i++)
+        for (int i = left; i <= right; i++) //partition horizontally
             currMaze[horizontal][i] = 1;
 
         passH = rand.nextInt(bottom-horizontal+1)+horizontal; // horizontal passage
@@ -127,7 +85,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         currMaze[passH][vertical]=0;
 
 //        printArray(currMaze); // debug
-        steps++;
+        steps++; //count steps for debugging
         BuildWalls(currMaze,left,vertical-1,top,horizontal-1);
         BuildWalls(currMaze,vertical+1,right,top,horizontal-1);
         BuildWalls(currMaze, left,vertical-1, horizontal+1, bottom);
@@ -146,4 +104,7 @@ public class MyMazeGenerator extends AMazeGenerator {
 
     }
 
+    public int getSteps() {
+        return steps;
+    }
 }
