@@ -46,9 +46,8 @@ public abstract class AState {
                 Objects.equals(state, aState.state) &&
                 Objects.equals(cameFrom, aState.cameFrom);
     }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(state, cost, ameFrom);
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(state, cost, cameFrom);
+    }
 }
