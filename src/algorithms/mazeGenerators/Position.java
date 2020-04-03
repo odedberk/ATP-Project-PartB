@@ -16,7 +16,9 @@ public class Position {
     public int getColIndex() {
         return col;
     }
-    public void print(){
-        System.out.println("Row: "+row+" col: "+col);
+
+    @Override
+    public String toString(){
+        return "{"+row+","+col+"}";
     }
 }

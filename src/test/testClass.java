@@ -22,10 +22,9 @@ public class testClass {
 
         IMazeGenerator my = new MyMazeGenerator();
         timeTaken(my,1000,1000);
-        Maze myMaze = my.generate(45,45);
+        Maze myMaze = my.generate(20,20);
         myMaze.print();
         System.out.println("Steps taken: "+my.getSteps());
-
 
     }
 }
