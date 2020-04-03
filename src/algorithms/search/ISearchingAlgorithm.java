@@ -1,6 +1,6 @@
 package algorithms.search;
 
 public interface ISearchingAlgorithm {
-    public AState solve(ISearchable s);
+    public Solution solve(ISearchable s);
     //int getNumberofVisitedNodes();
 }
