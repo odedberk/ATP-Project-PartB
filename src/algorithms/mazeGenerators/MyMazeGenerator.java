@@ -20,7 +20,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         BuildWalls(maze,0,col-1,0,row-1);
 
-//        printArray(maze); // Debug
+//      printArray(maze); // Debug
 
         int sRow,sCol,eRow,eCol; //create start and goal positions
         if (col>3 && row>3) { //sufficient size
