@@ -12,12 +12,6 @@ public class MyMazeGenerator extends AMazeGenerator {
         Random rand = new Random();
 
         int[][] maze = new int[row][col];
-
-        for(int i=0 ; i<row ; i++){
-            for (int j=0; j<col ; j++){
-                maze[i][j]=0;
-            }
-        }
         BuildWalls(maze,0,col-1,0,row-1);
 
 //      printArray(maze); // Debug

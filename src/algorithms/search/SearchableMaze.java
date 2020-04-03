@@ -61,10 +61,7 @@ public class SearchableMaze implements ISearchable {
 
         }
 
-        return null;
-    }
-
     public int getEdgeCost(Position from, Position to){
-        return 0;
+        return (from.getColIndex()!=to.getColIndex() && from.getRowIndex()!=to.getRowIndex()) ? move : crossMove;
     }
 }
