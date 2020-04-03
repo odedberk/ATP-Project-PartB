@@ -11,6 +11,7 @@ public class Maze {
         this.maze = maze;
     }
 
+
     public int[][] getMaze() {
         return maze;
     }
@@ -39,10 +40,10 @@ public class Maze {
         for (int i=0 ; i<maze.length ; i++) {
             for (int j = 0; j < maze[i].length; j++) {
                 if (i==start.getRowIndex()&&j==start.getColIndex())
-                    System.out.print("S ");
+                    System.out.print("S  ");
                 else if (i==goal.getRowIndex()&&j==goal.getColIndex())
-                    System.out.print("E ");
-                else System.out.print(maze[i][j]+" ");
+                    System.out.print("E  ");
+                else System.out.print(maze[i][j]+"  ");
             }
             System.out.println(); // print
         }

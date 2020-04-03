@@ -9,7 +9,7 @@ public class SimpleMazeGenerator extends AMazeGenerator {
             return new Maze(new Position(0,0),new Position(0,0),new int[1][1]);
         Random rand = new Random();
         int[][] maze = new int[row][col];
-        for (int i=1 ; i<row ; i+=2) {
+        for (int i=1 ; i<row ; i+=1) {
             for (int j = 0; j < col; j++)
                 maze[i][j] = rand.nextInt(2);
         }
@@ -27,5 +27,10 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         }
         Position end = new Position(eRow,eCol); //end position
         return new Maze(start,end,maze);
+    }
+
+
+    public int getSteps() {
+        return 0;
     }
 }
