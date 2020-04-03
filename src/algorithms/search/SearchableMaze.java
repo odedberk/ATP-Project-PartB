@@ -22,13 +22,13 @@ public class SearchableMaze implements ISearchable {
 
     @Override
     public AState getStartState() {
-        return null;
+        return new MazeState(0,maze.getStartPosition(),null);
     }
 
     @Override
     public AState getGoalState() {
 
-        return null;
+        return new MazeState(0,maze.getGoalPosition(),null);
     }
 
     @Override
