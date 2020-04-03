@@ -7,10 +7,10 @@ public abstract class AState {
     private double cost;
     private AState cameFrom;
 
-    public AState(String state, double cost, AState ameFrom) {
+    public AState(String state, double cost, AState cameFrom) {
         this.state = state;
         this.cost = cost;
-        this.cameFrom = ameFrom;
+        this.cameFrom = cameFrom;
     }
 
     public String getState() {
@@ -21,7 +21,7 @@ public abstract class AState {
         return cost;
     }
 
-    public AState getAmeFrom() {
+    public AState getCameFrom() {
         return cameFrom;
     }
 
@@ -33,8 +33,8 @@ public abstract class AState {
         this.cost = cost;
     }
 
-    public void setAmeFrom(AState ameFrom) {
-        this.cameFrom = ameFrom;
+    public void setCameFrom(AState cameFrom) {
+        this.cameFrom = cameFrom;
     }
 
     @Override
@@ -46,9 +46,8 @@ public abstract class AState {
                 Objects.equals(state, aState.state) &&
                 Objects.equals(cameFrom, aState.cameFrom);
     }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(state, cost, ameFrom);
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(state, cost, cameFrom);
+    }
 }
