@@ -5,9 +5,11 @@ import java.util.Random;
 public class SimpleMazeGenerator extends AMazeGenerator {
     @Override
     public Maze generate(int row, int col) {
+        if (row<=1 && col<=1)
+            return new Maze(new Position(0,0),new Position(0,0),new int[1][1]);
         Random rand = new Random();
         int[][] maze = new int[row][col];
-        for (int i=0 ; i<row ; i++) {
+        for (int i=1 ; i<row ; i+=1) {
             for (int j = 0; j < col; j++)
                 maze[i][j] = rand.nextInt(2);
         }
@@ -26,4 +28,5 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         Position end = new Position(eRow,eCol); //end position
         return new Maze(start,end,maze);
     }
+
 }
