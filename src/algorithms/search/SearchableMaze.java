@@ -7,9 +7,21 @@ import java.util.ArrayList;
 
 public class SearchableMaze implements ISearchable {
     private Maze maze;
+    private int move;
+    private int crossMove;
 
     public SearchableMaze(Maze maze) {
         this.maze = maze;
+        this.move = 10;
+        this.crossMove = 15;
+    }
+
+    public int getMove() {
+        return move;
+    }
+
+    public int getCrossMove() {
+        return crossMove;
     }
 
     public Maze getMaze() {
@@ -18,6 +30,14 @@ public class SearchableMaze implements ISearchable {
 
     public void setMaze(Maze maze) {
         this.maze = maze;
+    }
+
+    public void setMove(int move) {
+        this.move = move;
+    }
+
+    public void setCrossMove(int crossMove) {
+        this.crossMove = crossMove;
     }
 
     @Override
@@ -33,10 +53,18 @@ public class SearchableMaze implements ISearchable {
 
     @Override
     public ArrayList<AState> getAllSuccessors(AState s) {
+        if(s==null || s.getState()=="")
+            return null;
+        ArrayList<AState> neighbors=new ArrayList<AState>();
+        Position pos = ((MazeState)s).getPos();
+        if(pos.getRowIndex()>0 && pos.getColIndex()){
+
+        }
+
         return null;
     }
 
-    public double getEdgeCost(Position from, Position to){
+    public int getEdgeCost(Position from, Position to){
         return 0;
     }
 }
