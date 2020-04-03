@@ -5,12 +5,12 @@ import java.util.Objects;
 public abstract class AState {
     private String state;
     private double cost;
-    private AState ameFrom;
+    private AState cameFrom;
 
-    public AState(String state, double cost, AState ameFrom) {
+    public AState(String state, double cost, AState cameFrom) {
         this.state = state;
         this.cost = cost;
-        this.ameFrom = ameFrom;
+        this.cameFrom = cameFrom;
     }
 
     public String getState() {
@@ -21,8 +21,8 @@ public abstract class AState {
         return cost;
     }
 
-    public AState getAmeFrom() {
-        return ameFrom;
+    public AState getCameFrom() {
+        return cameFrom;
     }
 
     public void setState(String state) {
@@ -33,8 +33,8 @@ public abstract class AState {
         this.cost = cost;
     }
 
-    public void setAmeFrom(AState ameFrom) {
-        this.ameFrom = ameFrom;
+    public void setCameFrom(AState cameFrom) {
+        this.cameFrom = cameFrom;
     }
 
     @Override
@@ -44,7 +44,7 @@ public abstract class AState {
         AState aState = (AState) o;
         return Double.compare(aState.cost, cost) == 0 &&
                 Objects.equals(state, aState.state) &&
-                Objects.equals(ameFrom, aState.ameFrom);
+                Objects.equals(cameFrom, aState.cameFrom);
     }
 //
 //    @Override
