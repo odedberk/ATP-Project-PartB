@@ -98,10 +98,9 @@ public class MyMazeGenerator extends AMazeGenerator {
             for (int anInt : ints) {
                 System.out.print(anInt + "  ");
             }
-            System.out.println(); // print
+            System.out.println();
         }
-        System.out.println(); // print
-
+        System.out.println();
     }
 
     public int getSteps() {

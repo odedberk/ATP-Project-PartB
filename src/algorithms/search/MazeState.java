@@ -1,5 +1,6 @@
 package algorithms.search;
 
-public class MazeState {
-
+public class MazeState extends AState{
+    public MazeState() {
+    }
 }
