@@ -27,6 +27,7 @@ public class SearchableMaze implements ISearchable {
 
     @Override
     public AState getGoalState() {
+
         return null;
     }
 

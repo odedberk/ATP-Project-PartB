@@ -42,9 +42,7 @@ public abstract class AState {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AState aState = (AState) o;
-        return Double.compare(aState.cost, cost) == 0 &&
-                Objects.equals(state, aState.state) &&
-                Objects.equals(cameFrom, aState.cameFrom);
+        return state!=null && state.equals(aState.state);
     }
     @Override
     public int hashCode() {
