@@ -18,7 +18,7 @@ public class testClass {
 
         IMazeGenerator my = new MyMazeGenerator();
 //        System.out.println(my.measureAlgorithmTimeMillis(1000,1000));
-        Maze myMaze = my.generate(45,45);
+        Maze myMaze = my.generate(19,19);
         myMaze.print();
 //        System.out.println(my.getSteps());
 

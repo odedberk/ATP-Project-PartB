@@ -48,6 +48,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         Random rand = new Random();
 
         int[][] maze = new int[row][col];
+
         for(int i=0 ; i<row ; i++){
             for (int j=0; j<col ; j++){
                 maze[i][j]=0;
@@ -55,20 +56,31 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         BuildWalls(maze,0,col-1,0,row-1);
 
-        int sRow= rand.nextInt(row/3);
-        int sCol= rand.nextInt(col/3);
-        while (maze[sRow][sCol]==1){
-           sRow= rand.nextInt(row/3);
-           sCol= rand.nextInt(col/3);
+//        printArray(maze); // Debug
+
+        int sRow,sCol,eRow,eCol;
+        if (col>3 && row>3) { //sufficient size
+            sRow = rand.nextInt(row / 2);
+            sCol = rand.nextInt(col / 2);
+            while (maze[sRow][sCol] == 1) {
+                sRow = rand.nextInt(row / 2);
+                sCol = rand.nextInt(col / 2);
+            }
+
+            eRow = rand.nextInt(row / 2);
+            eCol = rand.nextInt(col / 2) + col / 2;
+            while (maze[eRow][eCol] == 1) {
+                eRow = rand.nextInt(row / 2);
+                eCol = rand.nextInt(col / 2) + col / 2;
+            }
+        }
+        else { //small mazes
+            sRow=0;
+            sCol=0;
+            eCol=col-1;
+            eRow=row-1;
         }
         Position start = new Position(sRow,sCol); //start position
-
-        int eRow = rand.nextInt(row/3) + 2*row/3-1;
-        int eCol = rand.nextInt(col/3) + 2*col/3-1;
-        while (maze[eRow][eCol]==1){
-            eRow = rand.nextInt(row/3) + 2*row/3-1;
-            eCol =rand.nextInt(col/3) + 2*col/3-1;
-        }
         Position end = new Position(eRow,eCol); //end position
 //        printArray(maze);
         return new Maze(start,end,maze);
@@ -134,42 +146,4 @@ public class MyMazeGenerator extends AMazeGenerator {
 
     }
 
-//    @Override
-//    public Maze generate (int row, int col){
-//        Random rand=new Random();
-//        ArrayList<Position> walls = new ArrayList<Position>();
-//        int[][] maze = new int[row][col];
-//        for (int i=0 ; i<maze.length; i++) {
-//            for (int j=0; j<maze[0].length; j++)
-//                maze[i][j] = 1;
-//        }
-//        printArray(maze);
-//        maze[0][0]=0;
-//        walls.add(new Position(1,0));
-//        walls.add(new Position(0,1));
-//
-//
-//
-//
-//
-//
-//        return new Maze(new Position(0,0),new Position(0,0),new int[1][1]);
-//    }
-//
-//    public Position oneUnvisitedNeighbor(int[][] maze, Position p){
-//        if (p.getRowIndex()<0 || p.getRowIndex()>=maze.length || p.getColIndex()<0 || p.getColIndex()>=maze[0].length)
-//            return null;
-//        int count=0;
-//        int row=p.getRowIndex(), col=p.getColIndex();
-//        int nRow, nCol;
-//        if(col>=1 && col<maze[0].length-1 && row>=1 && row<maze.length-1 ){ //not in ends - 4 neighbors
-//           count+= maze[row][col-1]==0 ? 1 : 0;
-//           count+= maze[row][col+1]==0 ? 1 : 0 ;
-//           count+= maze[row-1][col]==0 ? 1 : 0 ;
-//           count+= maze[row+1][col]==0 ? 1 : 0 ;
-//           return count==1 ? new Position(0,0), new Position(0,0);
-//        }
-//        return null;
-//
-//    }
 }
