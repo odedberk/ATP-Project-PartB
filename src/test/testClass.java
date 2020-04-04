@@ -12,7 +12,7 @@ public class testClass {
     }
     public static void main(String[] args) {
 
-        ISearchingAlgorithm bfs = new BreadthFirstSearch();
+        ISearchingAlgorithm dfs = new DepthFirstSearch();
 
         IMazeGenerator empty = new EmptyMazeGenerator();
         Maze testEmpty = empty.generate(10,10);
@@ -20,13 +20,14 @@ public class testClass {
         testEmpty.print();
         System.out.println();
         ISearchable SMaze = new SearchableMaze(testEmpty);
-        Solution sol = bfs.solve(SMaze);
+        Solution sol = dfs.solve(SMaze);
         ArrayList<AState> solutionPath = sol.getSolutionPath();
         for (int i = solutionPath.size()-1; i >=0 ; i--) {
             System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
         }
         System.out.println();
-
+        System.out.println();
+        System.out.println(testEmpty.getGoalPosition().toString());
         IMazeGenerator simple = new SimpleMazeGenerator();
         Maze testSimple = simple.generate(10,10);
         timeTaken(simple,1000,1000);
@@ -48,9 +49,9 @@ public class testClass {
 //        myMaze.print();
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
-        sol = bfs.solve(SMaze);
+        sol = dfs.solve(SMaze);
         System.out.println(String.format("Time taken to solve a %dx%d maze : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
-        System.out.println("nodes visited : "+ bfs.getNumberOfNodesEvaluated());
+        System.out.println("nodes visited : "+ dfs.getNumberOfNodesEvaluated());
 
 
         solutionPath = sol.getSolutionPath();
@@ -59,7 +60,7 @@ public class testClass {
 //                System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
 //            }
         System.out.println();
-
+        System.out.println(myMaze.getGoalPosition().toString());
 //        AState a = new MazeState(1,new Position(0,0), null);
 //        AState b = new MazeState(1,new Position(0,1), null);
 //        AState c = new MazeState(1,new Position(1,0), null);
