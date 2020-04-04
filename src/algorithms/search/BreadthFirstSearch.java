@@ -4,9 +4,14 @@ import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
-    Set<AState> que=new LinkedHashSet<>();
+   // Set<AState> que=new LinkedHashSet<>();
+    Collection<AState> que;
     Set<AState> visited=new HashSet<>();
     int nodesVisit=0;
+
+    public BreadthFirstSearch() {
+        this.que = new LinkedHashSet<>();
+    }
 
     @Override
     public int getNumberOfNodesEvaluated(){
