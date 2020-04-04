@@ -3,30 +3,32 @@ package algorithms.search;
 import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
-//    Queue<AState> que = new LinkedList<AState>();
-    Set<AState> que1;
-    Set<AState> visited;
+
+    Set<AState> que=new LinkedHashSet<>();
+    Set<AState> visited=new HashSet<>();
     int nodesVisit=0;
+
+    @Override
     public int getNumberOfNodesEvaluated(){
         return  nodesVisit;
     }
 
+    @Override
     public String getName(){ return "BFS";}
 
     @Override
     public Solution solve(ISearchable s) {
+        que.clear();
+        visited.clear();
         nodesVisit=0;
-        que1 = new LinkedHashSet<>();
-        visited = new HashSet<>();
         AState goal = s.getGoalState();
         AState current = s.getStartState();
         current.setVisited(true);
-        que1.add(current);
+        que.add(current);
         visited.add(current);
-        while (!que1.isEmpty()) {
+        while (!que.isEmpty()) {
             nodesVisit++;
-            current= que1.iterator().next();
-            que1.remove(current);
+            current= getFirstInQue();
             ArrayList<AState> successors = s.getAllSuccessors(current);
             for (AState successor : successors) {
                 if(!visited.contains(successor)){
@@ -35,12 +37,18 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     if(successor.equals(goal)){
                         return new Solution(successor);
                     }
-                    que1.add(successor);
+                    que.add(successor);
                     visited.add(successor);
 
                 }
             }
         }
         return new Solution(null);
+    }
+
+    private AState getFirstInQue(){
+        AState first = que.iterator().next();
+        que.remove(first);
+        return first;
     }
 }

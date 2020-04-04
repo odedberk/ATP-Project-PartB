@@ -1,16 +1,22 @@
 package algorithms.search;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public abstract class AState {
+public abstract class AState implements Comparable<AState> {
     private String state;
     private double cost;
     private AState cameFrom;
     private boolean visited=false;
     private boolean finished=false;
 
-    public boolean isVisited() {
-        return visited;
+    @Override
+    public int compareTo(AState o) {
+        if (cost>o.getCost())
+            return 1;
+        else if (cost==o.getCost())
+            return 0;
+        else return -1;
     }
 
     public void setVisited(boolean visited) {
@@ -24,7 +30,7 @@ public abstract class AState {
     }
     @Override
     public String toString() {
-        return state;
+        return state+" "+cost;
     }
 
     public double getCost() {
@@ -63,4 +69,6 @@ public abstract class AState {
     public int hashCode() {
         return state.hashCode();
     }
+
+
 }

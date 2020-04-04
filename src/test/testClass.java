@@ -42,10 +42,10 @@ public class testClass {
 
         IMazeGenerator my = new MyMazeGenerator();
         timeTaken(my,1000,1000);
-        Maze myMaze = my.generate(300,300);
+        Maze myMaze = my.generate(200  ,200);
         System.out.println("Steps taken to generate: "+my.getSteps());
 
-        myMaze.print();
+//        myMaze.print();
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
         sol = bfs.solve(SMaze);
@@ -54,9 +54,10 @@ public class testClass {
 
 
         solutionPath = sol.getSolutionPath();
-        for (int i = solutionPath.size()-1; i >=0 ; i--) {
-            System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
-        }
+//        if (solutionPath!=null)
+//            for (int i = solutionPath.size()-1; i >=0 ; i--) {
+//                System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
+//            }
         System.out.println();
 
 //        AState a = new MazeState(1,new Position(0,0), null);
@@ -80,8 +81,16 @@ public class testClass {
 //        System.out.println(firstState.toString());
 //        System.out.println(firstState==null);
 //        System.out.println(q1.contains(a));
-
-
+//        Queue<AState> que =  new PriorityQueue<AState>();
+//        AState one = new MazeState(10,new Position(0,0),null);
+//        AState two = new MazeState(1,new Position(0,0),null);
+//        AState three = new MazeState(90,new Position(0,0),null);
+//        que.add(one);
+//        que.add(two);
+//        que.add(three);
+//        while (!que.isEmpty()) {
+//            System.out.println(que.poll().toString());
+//        }
 
     }
 }
