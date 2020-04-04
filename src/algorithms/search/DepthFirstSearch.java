@@ -54,4 +54,14 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
     public int getNumberOfNodesEvaluated() {
         return nodesVisit;
     }
+
+    @Override
+    public int getNumberOfNodesEvaluated() {
+        return 0;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }
