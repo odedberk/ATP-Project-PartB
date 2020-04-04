@@ -12,6 +12,10 @@ public class testClass {
     }
     public static void main(String[] args) {
 
+        AMazeGenerator mm =new  SimpleMazeGenerator();
+        Maze tt = mm.generate(1000,1000);
+        tt.print();
+
         ISearchingAlgorithm Bestfs = new BreadthFirstSearch();
 
         IMazeGenerator empty = new EmptyMazeGenerator();
