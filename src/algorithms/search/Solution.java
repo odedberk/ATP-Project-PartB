@@ -6,6 +6,8 @@ public class Solution {
     ArrayList<AState> solutionPath;
 
     public Solution(AState goal) {
+        if (goal!=null)
+            solutionPath= new ArrayList<>();
         while(goal!=null){
             solutionPath.add(goal);
             goal=goal.getCameFrom();

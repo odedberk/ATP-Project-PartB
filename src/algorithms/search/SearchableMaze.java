@@ -58,7 +58,8 @@ public class SearchableMaze implements ISearchable {
         ArrayList<AState> neighbors = new ArrayList<AState>();
         Position pos = ((MazeState) s).getPos();
         Position n =null;
-        if(pos.getRowIndex()-1>=0 && pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex() - 1]==0) {
+        if(pos.getRowIndex()-1>=0 && pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex() - 1]==0
+            && (maze.getMaze()[pos.getRowIndex()][pos.getColIndex() - 1]==0 || maze.getMaze()[pos.getRowIndex()-1 ][pos.getColIndex()]==0)) {
              n=new Position(pos.getRowIndex() - 1, pos.getColIndex() - 1);
            // if (!n.equals(((MazeState) s.getCameFrom()).getPos()))
             neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
@@ -67,7 +68,8 @@ public class SearchableMaze implements ISearchable {
             n = new Position(pos.getRowIndex() - 1, pos.getColIndex());
             neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getRowIndex()-1>=0 && pos.getColIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex() + 1]==0){
+        if(pos.getRowIndex()-1>=0 && pos.getColIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex() + 1]==0
+                && (maze.getMaze()[pos.getRowIndex()][pos.getColIndex() + 1]==0 || maze.getMaze()[pos.getRowIndex()-1 ][pos.getColIndex()]==0)){
             n = new Position(pos.getRowIndex() - 1, pos.getColIndex()+1);
             neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
@@ -75,7 +77,8 @@ public class SearchableMaze implements ISearchable {
             n = new Position(pos.getRowIndex() , pos.getColIndex()+1);
             neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() + 1][pos.getColIndex() + 1]==0){
+        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() + 1][pos.getColIndex() + 1]==0
+                && (maze.getMaze()[pos.getRowIndex()+1][pos.getColIndex()]==0 || maze.getMaze()[pos.getRowIndex() ][pos.getColIndex()+1]==0)){
             n = new Position(pos.getRowIndex()+1 , pos.getColIndex()+1);
             neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
@@ -83,7 +86,8 @@ public class SearchableMaze implements ISearchable {
             n = new Position(pos.getRowIndex()+1 , pos.getColIndex());
             neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() + 1][pos.getColIndex() - 1]==0){
+        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() + 1][pos.getColIndex() - 1]==0
+                && (maze.getMaze()[pos.getRowIndex()+1][pos.getColIndex()]==0 || maze.getMaze()[pos.getRowIndex() ][pos.getColIndex()-1]==0)){
             n = new Position(pos.getRowIndex()+1 , pos.getColIndex()-1);
             neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
