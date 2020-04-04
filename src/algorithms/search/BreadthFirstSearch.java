@@ -10,6 +10,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     int nodesVisit=0;
 
     public BreadthFirstSearch() {
+        name="BFS";
         this.que = new LinkedHashSet<>();
     }
 
@@ -17,9 +18,6 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     public int getNumberOfNodesEvaluated(){
         return  nodesVisit;
     }
-
-    @Override
-    public String getName(){ return "BFS";}
 
     @Override
     public Solution solve(ISearchable s) {
