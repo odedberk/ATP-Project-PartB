@@ -6,14 +6,24 @@ public abstract class AState {
     private String state;
     private double cost;
     private AState cameFrom;
+    private boolean visited=false;
+    private boolean finished=false;
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 
     public AState(String state, double cost, AState cameFrom) {
         this.state = state;
         this.cost = cost;
         this.cameFrom = cameFrom;
     }
-
-    public String getState() {
+    @Override
+    public String toString() {
         return state;
     }
 
@@ -46,6 +56,6 @@ public abstract class AState {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(state, cost, cameFrom);
+        return state.hashCode();
     }
 }

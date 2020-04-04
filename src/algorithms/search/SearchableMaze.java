@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class SearchableMaze implements ISearchable {
     private Maze maze;
+    int move;
+    int crossMove;
 
     public SearchableMaze(Maze maze) {
         this.maze = maze;

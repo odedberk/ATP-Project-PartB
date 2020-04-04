@@ -2,7 +2,7 @@ package algorithms.search;
 
 public class BestFirstSearch extends BreadthFirstSearch {
     @Override
-    public AState solve(ISearchable s) {
+    public Solution solve(ISearchable s) {
         return null;
     }
 }
