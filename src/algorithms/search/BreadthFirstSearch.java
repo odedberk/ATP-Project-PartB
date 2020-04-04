@@ -4,7 +4,7 @@ import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
-    Set<AState> que=new LinkedHashSet<>();
+    Collection<AState> que=new LinkedHashSet<>();
     Set<AState> visited=new HashSet<>();
     int nodesVisit=0;
 

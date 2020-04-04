@@ -4,7 +4,7 @@ import java.util.*;
 
 public class BestFirstSearch extends BreadthFirstSearch {
     Set<AState> visited = new HashSet<>();
-    Queue<AState> que =  new PriorityQueue<>();
+    Collection<AState> que =  new PriorityQueue<>();
 
     @Override
     public String getName(){ return "Best First Search";}
@@ -38,6 +38,7 @@ public class BestFirstSearch extends BreadthFirstSearch {
         }
         return new Solution(null);
     }
+
 
     private AState getFirstInQue(){
         return que.poll();
