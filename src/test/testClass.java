@@ -12,7 +12,7 @@ public class testClass {
     }
     public static void main(String[] args) {
 
-        ISearchingAlgorithm dfs = new DepthFirstSearch();
+        ISearchingAlgorithm Bestfs = new BreadthFirstSearch();
 
         IMazeGenerator empty = new EmptyMazeGenerator();
         Maze testEmpty = empty.generate(10,10);
@@ -20,7 +20,7 @@ public class testClass {
         testEmpty.print();
         System.out.println();
         ISearchable SMaze = new SearchableMaze(testEmpty);
-        Solution sol = dfs.solve(SMaze);
+        Solution sol = Bestfs.solve(SMaze);
         ArrayList<AState> solutionPath = sol.getSolutionPath();
         for (int i = solutionPath.size()-1; i >=0 ; i--) {
             System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
@@ -49,9 +49,9 @@ public class testClass {
 //        myMaze.print();
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
-        sol = dfs.solve(SMaze);
+        sol = Bestfs.solve(SMaze);
         System.out.println(String.format("Time taken to solve a %dx%d maze : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
-        System.out.println("nodes visited : "+ dfs.getNumberOfNodesEvaluated());
+        System.out.println("nodes visited : "+ Bestfs.getNumberOfNodesEvaluated());
 
 
         solutionPath = sol.getSolutionPath();
