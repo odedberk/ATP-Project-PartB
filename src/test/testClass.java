@@ -47,24 +47,34 @@ public class testClass {
 
         IMazeGenerator my = new MyMazeGenerator();
         timeTaken(my,1000,1000);
-        Maze myMaze = my.generate(200  ,200);
+        Maze myMaze = my.generate(1000  ,1000);
         System.out.println("Steps taken to generate: "+my.getSteps());
 
 //        myMaze.print();
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
-        sol = Bestfs.solve(SMaze);
-        System.out.println(String.format("Time taken to solve a %dx%d maze : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
+        Bestfs.solve(SMaze);
+        System.out.println(String.format("Time taken to solve a %dx%d maze with BFS : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
+        System.out.println("nodes visited : "+ Bestfs.getNumberOfNodesEvaluated());
+        start=System.currentTimeMillis();
+        Bestfs=new BestFirstSearch();
+        Bestfs.solve(SMaze);
+        System.out.println(String.format("Time taken to solve a %dx%d maze with Best First Search : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
+        System.out.println("nodes visited : "+ Bestfs.getNumberOfNodesEvaluated());
+        Bestfs=new DepthFirstSearch();
+        Bestfs.solve(SMaze);
+        System.out.println(String.format("Time taken to solve a %dx%d maze with DFS : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
         System.out.println("nodes visited : "+ Bestfs.getNumberOfNodesEvaluated());
 
-
-        solutionPath = sol.getSolutionPath();
+//        solutionPath = sol.getSolutionPath();
 //        if (solutionPath!=null)
 //            for (int i = solutionPath.size()-1; i >=0 ; i--) {
 //                System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
 //            }
-        System.out.println();
-        System.out.println(myMaze.getGoalPosition().toString());
+//        System.out.println();
+
+//        System.out.println(myMaze.getGoalPosition().toString());
+
 //        AState a = new MazeState(1,new Position(0,0), null);
 //        AState b = new MazeState(1,new Position(0,1), null);
 //        AState c = new MazeState(1,new Position(1,0), null);
@@ -96,6 +106,24 @@ public class testClass {
 //        while (!que.isEmpty()) {
 //            System.out.println(que.poll().toString());
 //        }
+    }
+
+    public void whosTheBest(IMazeGenerator generator, int numberOfTest, int size){ //test out number of test and decides whos the fastes on average
+        int bfs, best, dfs;
+        double bfsAVG, bestAVG, dfsAVG;
+        ASearchingAlgorithm searcher;
+        ISearchable maze;
+        System.out.println("Running "+" number of random Mazes solving:");
+        for (int i=0; i<numberOfTest; i++){
+            Maze m = generator.generate(size,size);
+            maze=new SearchableMaze(m);
+            searcher=new BreadthFirstSearch();
+            long start=System.currentTimeMillis();
+            searcher.solve(maze);
+            System.out.println(String.format("Time taken to solve a %dx%d maze with %s : %d mills",size,size ,searcher.getName(), ((System.currentTimeMillis()-start))));
+            System.out.println("nodes visited : "+ searcher.getNumberOfNodesEvaluated());
+            start=System.currentTimeMillis();
+        }
 
     }
 }

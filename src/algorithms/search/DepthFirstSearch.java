@@ -6,15 +6,20 @@ import java.util.Stack;
 
 public class DepthFirstSearch extends ASearchingAlgorithm {
     private HashSet<AState> visited;
+    Stack<AState> rStack ;
     private int nodesVisit;
+
+    public DepthFirstSearch() {
+        name="DFS";
+        rStack = new Stack<>();
+    }
 
     @Override
     public Solution solve(ISearchable s) {
         if(s.getStartState().equals(s.getGoalState()))
             return new Solution(s.getStartState());
-        visited= new HashSet<AState>();
+        visited= new HashSet<>();
         nodesVisit=0;
-        Stack<AState> rStack = new Stack<AState>();
         rStack.push(s.getStartState());
         while (!rStack.empty()){
             AState state = rStack.pop();
@@ -39,9 +44,4 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         return nodesVisit;
     }
 
-
-    @Override
-    public String getName() {
-        return "DFS";
-    }
 }
