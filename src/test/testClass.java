@@ -42,13 +42,14 @@ public class testClass {
 
         IMazeGenerator my = new MyMazeGenerator();
         timeTaken(my,1000,1000);
-        Maze myMaze = my.generate(300,300);
+        Maze myMaze = my.generate(1000,1000);
 //        myMaze.print();
         System.out.println("Steps taken: "+my.getSteps());
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
         sol = bfs.solve(SMaze);
         System.out.println(String.format("Time taken to solve a %dx%d maze : %d seconds",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start)/1000)));
+        System.out.println("nodes visited : "+ bfs.getNumberOfNodesEvaluated());
 
 
 //        solutionPath = sol.getSolutionPath();

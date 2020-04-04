@@ -7,4 +7,9 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         //if(s.)
         return null;
     }
+
+    @Override
+    public int getNumberOfNodesEvaluated() {
+        return 0;
+    }
 }
