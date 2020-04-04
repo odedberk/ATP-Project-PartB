@@ -10,6 +10,9 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     public int getNumberOfNodesEvaluated(){
         return  nodesVisit;
     }
+
+    public String getName(){ return "BFS";};
+
     @Override
     public Solution solve(ISearchable s) {
         nodesVisit=0;

@@ -42,20 +42,21 @@ public class testClass {
 
         IMazeGenerator my = new MyMazeGenerator();
         timeTaken(my,1000,1000);
-        Maze myMaze = my.generate(1000,1000);
-//        myMaze.print();
-        System.out.println("Steps taken: "+my.getSteps());
+        Maze myMaze = my.generate(300,300);
+        System.out.println("Steps taken to generate: "+my.getSteps());
+
+        myMaze.print();
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
         sol = bfs.solve(SMaze);
-        System.out.println(String.format("Time taken to solve a %dx%d maze : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start)/)));
+        System.out.println(String.format("Time taken to solve a %dx%d maze : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
         System.out.println("nodes visited : "+ bfs.getNumberOfNodesEvaluated());
 
 
-//        solutionPath = sol.getSolutionPath();
-//        for (int i = solutionPath.size()-1; i >=0 ; i--) {
-//            System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
-//        }
+        solutionPath = sol.getSolutionPath();
+        for (int i = solutionPath.size()-1; i >=0 ; i--) {
+            System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
+        }
         System.out.println();
 
 //        AState a = new MazeState(1,new Position(0,0), null);
