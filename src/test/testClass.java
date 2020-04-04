@@ -48,7 +48,7 @@ public class testClass {
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
         sol = bfs.solve(SMaze);
-        System.out.println(String.format("Time taken to solve a %dx%d maze : %d seconds",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start)/1000)));
+        System.out.println(String.format("Time taken to solve a %dx%d maze : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start)/)));
         System.out.println("nodes visited : "+ bfs.getNumberOfNodesEvaluated());
 
 
