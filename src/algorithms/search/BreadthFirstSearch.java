@@ -11,7 +11,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         return  nodesVisit;
     }
 
-    public String getName(){ return "BFS";};
+    public String getName(){ return "BFS";}
 
     @Override
     public Solution solve(ISearchable s) {
