@@ -12,6 +12,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
     public DepthFirstSearch() {
         name="DFS";
         rStack = new Stack<>();
+        visited= new HashSet<>();
     }
 
     @Override
@@ -20,7 +21,8 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
             return null;
         if(s.getStartState().equals(s.getGoalState()))
             return new Solution(s.getStartState());
-        visited= new HashSet<>();
+        visited.clear();
+        rStack.clear();
         nodesVisit=0;
         rStack.push(s.getStartState());
         while (!rStack.empty()){

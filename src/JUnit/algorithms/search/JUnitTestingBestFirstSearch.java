@@ -1,7 +1,6 @@
 package algorithms.search;
 
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.Position;
+import algorithms.mazeGenerators.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,4 +31,53 @@ class JUnitTestingBestFirstSearch {
         assertEquals("Best First Search",test.getName());
 
     }
+
+    @Test
+    void solve() {
+        BestFirstSearch test = new BestFirstSearch();
+        //no solution
+        AMazeGenerator mg = new SimpleMazeGenerator();
+        Maze tester = mg.generate(100,100);
+        for(int i=-1; i<=1;i++)
+            for (int j=-1 ; j<=1; j++)
+                if(i != 0 || j != 0 )
+                    tester.getMaze()[50+i][50+j]=1;
+        tester.getMaze()[50][50]=0;
+        tester.setGoal(new Position(50,50));
+        //tester.print();
+        ISearchable s = new SearchableMaze(tester);
+        Solution sol =test.solve(s);
+//        if(sol == null)
+        assertEquals(sol.getSolutionPath(),null);
+
+        //goal at start point
+        tester.setGoal(tester.getStartPosition());
+        ((SearchableMaze)s).setMaze(tester);
+        sol = test.solve(s);
+        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+
+        //solution for simple maze
+        mg = new SimpleMazeGenerator();
+        tester=mg.generate(1000,1000);
+        ((SearchableMaze)s).setMaze(tester);
+        sol = test.solve(s);
+        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+
+        //solution for empty maze
+        mg = new EmptyMazeGenerator();
+        tester=mg.generate(1000,1000);
+        ((SearchableMaze)s).setMaze(tester);
+        sol = test.solve(s);
+        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+
+        //solution for myGenerator maze
+        mg = new MyMazeGenerator();
+        tester=mg.generate(1000,1000);
+        ((SearchableMaze)s).setMaze(tester);
+        sol = test.solve(s);
+        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+
+
+    }
+
 }
