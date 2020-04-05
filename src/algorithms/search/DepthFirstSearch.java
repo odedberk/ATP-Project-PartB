@@ -16,6 +16,8 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public Solution solve(ISearchable s) {
+        if (s==null)
+            return null;
         if(s.getStartState().equals(s.getGoalState()))
             return new Solution(s.getStartState());
         visited= new HashSet<>();

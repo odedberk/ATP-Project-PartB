@@ -7,8 +7,7 @@ import java.util.*;
 
 public class testClass {
     public static void timeTaken (IMazeGenerator gen, int row, int col){
-        System.out.println(String.format("Time taken to generate a %dx%d maze : %d mills",row,col,gen.measureAlgorithmTimeMillis(row,col)));
-
+        System.out.println(String.format("Time taken to generate a %dx%d %s maze : %d mills",row,col,gen.getClass(), gen.measureAlgorithmTimeMillis(row,col)));
     }
 
     public static void whosTheBest(IMazeGenerator generator, int numberOfTest, int size){ //test out number of test and decides whos the fastes on average
@@ -17,7 +16,7 @@ public class testClass {
         int min=0;
         ISearchable maze;
         ASearchingAlgorithm fastest=new BreadthFirstSearch();
-        ASearchingAlgorithm[] searchers= {new BreadthFirstSearch(), new BestFirstSearch(), new DepthFirstSearch()};
+        ASearchingAlgorithm[] searchers= {new DepthFirstSearch(), new BreadthFirstSearch(), new BestFirstSearch()};
         System.out.println("Running "+numberOfTest+" random Maze solving for each algorithm\n-------------------");
         for (int j=1; j<=numberOfTest ; j++) {
             Maze m = generator.generate(size, size);
@@ -44,9 +43,10 @@ public class testClass {
 
     public static void main(String[] args) {
 
-        AMazeGenerator mm =new  SimpleMazeGenerator();
-        Maze tt = mm.generate(30,30);
-        tt.print();
+        AMazeGenerator mm =new SimpleMazeGenerator();
+        Maze tt = mm.generate(20,20);
+//        tt.print();
+        whosTheBest(mm,5,1000);
 
         ISearchingAlgorithm Bestfs = new BreadthFirstSearch();
 
@@ -85,7 +85,7 @@ public class testClass {
 
 
         timeTaken(my,1000,1000);
-        Maze myMaze = my.generate(20  ,20);
+        Maze myMaze = my.generate(1000  ,1000);
         System.out.println("Steps taken to generate: "+my.getSteps());
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();

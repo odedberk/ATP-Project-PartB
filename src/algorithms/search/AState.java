@@ -12,11 +12,7 @@ public abstract class AState implements Comparable<AState> {
 
     @Override
     public int compareTo(AState o) {
-        if (cost>o.getCost())
-            return 1;
-        else if (cost==o.getCost())
-            return 0;
-        else return -1;
+        return Double.compare(cost,o.cost);
     }
 
     public void setVisited(boolean visited) {
@@ -30,7 +26,7 @@ public abstract class AState implements Comparable<AState> {
     }
     @Override
     public String toString() {
-        return state+" "+cost;
+        return state;
     }
 
     public double getCost() {
