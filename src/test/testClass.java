@@ -10,6 +10,39 @@ public class testClass {
         System.out.println(String.format("Time taken to generate a %dx%d maze : %d mills",row,col,gen.measureAlgorithmTimeMillis(row,col)));
 
     }
+
+    public static void whosTheBest(IMazeGenerator generator, int numberOfTest, int size){ //test out number of test and decides whos the fastes on average
+        int sum;
+        int avg;
+        int min=0;
+        ISearchable maze;
+        ASearchingAlgorithm fastest=new BreadthFirstSearch();
+        ASearchingAlgorithm[] searchers= {new BreadthFirstSearch(), new BestFirstSearch(), new DepthFirstSearch()};
+        System.out.println("Running "+numberOfTest+" random Maze solving for each algorithm:");
+        for (ASearchingAlgorithm searcher : searchers){
+            sum=0;
+            System.out.println(searcher.getName()+ " algorithm\n-------------------");
+            for (int j=0; j<numberOfTest ; j++) {
+                Maze m = generator.generate(size, size);
+                maze = new SearchableMaze(m);
+                long start = System.currentTimeMillis();
+                searcher.solve(maze);
+                long length=System.currentTimeMillis()-start;
+                sum+=length;
+                System.out.println(length+" mills");
+//                System.out.println("nodes visited : " + searcher.getNumberOfNodesEvaluated());
+            }
+            avg=sum/numberOfTest;
+            if (min==0 || avg<min) {
+                min=avg;
+                fastest=searcher;
+            }
+            System.out.println(String.format("Average time taken to solve a %dx%d maze with %s : %d mills\n-------------------", size, size, searcher.getName(), avg ));
+
+        }
+        System.out.println("Fastest algorithm was "+ fastest.getName()+" with "+ min+ " mills\n");
+    }
+
     public static void main(String[] args) {
 
         AMazeGenerator mm =new  SimpleMazeGenerator();
@@ -46,11 +79,15 @@ public class testClass {
 //        System.out.println();
 
         IMazeGenerator my = new MyMazeGenerator();
+
+
+        whosTheBest(my, 5,1000);
+//        myMaze.print();
+
+
         timeTaken(my,1000,1000);
         Maze myMaze = my.generate(1000  ,1000);
         System.out.println("Steps taken to generate: "+my.getSteps());
-
-//        myMaze.print();
         SMaze = new SearchableMaze(myMaze);
         long start=System.currentTimeMillis();
         Bestfs.solve(SMaze);
@@ -65,6 +102,8 @@ public class testClass {
         Bestfs.solve(SMaze);
         System.out.println(String.format("Time taken to solve a %dx%d maze with DFS : %d mills",myMaze.getMaze().length,myMaze.getMaze()[0].length,((System.currentTimeMillis()-start))));
         System.out.println("nodes visited : "+ Bestfs.getNumberOfNodesEvaluated());
+
+
 
 //        solutionPath = sol.getSolutionPath();
 //        if (solutionPath!=null)
@@ -108,22 +147,5 @@ public class testClass {
 //        }
     }
 
-    public void whosTheBest(IMazeGenerator generator, int numberOfTest, int size){ //test out number of test and decides whos the fastes on average
-        int bfs, best, dfs;
-        double bfsAVG, bestAVG, dfsAVG;
-        ASearchingAlgorithm searcher;
-        ISearchable maze;
-        System.out.println("Running "+" number of random Mazes solving:");
-        for (int i=0; i<numberOfTest; i++){
-            Maze m = generator.generate(size,size);
-            maze=new SearchableMaze(m);
-            searcher=new BreadthFirstSearch();
-            long start=System.currentTimeMillis();
-            searcher.solve(maze);
-            System.out.println(String.format("Time taken to solve a %dx%d maze with %s : %d mills",size,size ,searcher.getName(), ((System.currentTimeMillis()-start))));
-            System.out.println("nodes visited : "+ searcher.getNumberOfNodesEvaluated());
-            start=System.currentTimeMillis();
-        }
 
-    }
 }
