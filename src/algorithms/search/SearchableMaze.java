@@ -42,20 +42,19 @@ public class SearchableMaze implements ISearchable {
 
     @Override
     public AState getStartState() {
-        return new MazeState(0,maze.getStartPosition(),null);
+        return maze!=null ? new MazeState(0,maze.getStartPosition(),null): null;
     }
 
     @Override
     public AState getGoalState() {
-
-        return new MazeState(0,maze.getGoalPosition(),null);
+        return maze!=null ? new MazeState(0,maze.getGoalPosition(),null): null;
     }
 
     @Override
     public ArrayList<AState> getAllSuccessors(AState s) {
-        if (s == null || s.getState() == "")
+        if (s == null || s.getState().equals(""))
             return null;
-        ArrayList<AState> neighbors = new ArrayList<AState>();
+        ArrayList<AState> neighbors = new ArrayList<>();
         Position pos = ((MazeState) s).getPos();
         Position n =null;
         if(pos.getRowIndex()-1>=0 && pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex() - 1]==0
