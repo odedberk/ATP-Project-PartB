@@ -13,6 +13,8 @@ class JUnitTestingBestFirstSearch {
         SearchableMaze maze = new SearchableMaze(new Maze(new Position(0,0), new Position(0,0),new int[0][0]));
         BestFirstSearch test = new BestFirstSearch();
 
+        assertEquals(0, test.getNumberOfNodesEvaluated());
+
         test.solve(maze); //empty maze
         assertEquals(0, test.getNumberOfNodesEvaluated());
 
@@ -21,7 +23,6 @@ class JUnitTestingBestFirstSearch {
 
         test.solve(new SearchableMaze(new Maze(new Position(-1,0), new Position(0,0),new int[0][0])));
         assertEquals(0, test.getNumberOfNodesEvaluated());
-
 
     }
 
