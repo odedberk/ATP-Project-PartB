@@ -21,11 +21,15 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public Solution solve(ISearchable s) {
+        if (s==null)
+            return null;
         que.clear();
         visited.clear();
         nodesVisit=0;
         AState goal = s.getGoalState();
         AState current = s.getStartState();
+        if (current.equals(goal))
+            return new Solution(current);
         current.setVisited(true);
         que.add(current);
         visited.add(current);

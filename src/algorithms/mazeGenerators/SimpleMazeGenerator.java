@@ -30,7 +30,7 @@ public class SimpleMazeGenerator extends AMazeGenerator {
             eRow = rand.nextInt(row);
             eCol = rand.nextInt(col);
         }
-        System.out.println(""+sRow+" "+sCol+ " " + eRow + " "+eCol);
+//        System.out.println(""+sRow+" "+sCol+ " " + eRow + " "+eCol);
         if(sRow<eRow){
             int r=rand.nextInt(eRow-sRow+1)+sRow;
             if(sCol<eCol){

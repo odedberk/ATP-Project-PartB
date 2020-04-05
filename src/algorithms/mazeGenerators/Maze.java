@@ -11,7 +11,6 @@ public class Maze {
         this.maze = maze;
     }
 
-
     public int[][] getMaze() {
         return maze;
     }
