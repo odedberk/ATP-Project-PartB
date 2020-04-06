@@ -22,8 +22,8 @@ class JUnitTestingBestFirstSearch {
 
         test.solve(new SearchableMaze(new Maze(new Position(-1,0), new Position(0,0),new int[0][0])));
         assertEquals(0, test.getNumberOfNodesEvaluated());
-
     }
+
 
     @Test
     void getName() {

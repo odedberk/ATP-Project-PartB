@@ -31,7 +31,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
                 continue;
             nodesVisit++;
             //System.out.println(nodesVisit);
-            for(AState son : s.getAllSuccessors(state)) {
+            for(AState son : s.getAllPossibleStates(state)) {
                 if(son.equals(s.getGoalState()))
                     return new Solution(son);
                 if (!visited.contains(son))

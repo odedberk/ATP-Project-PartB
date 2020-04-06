@@ -35,12 +35,12 @@ public class Maze {
         return goal;
     }
 
-    public void print(){
+    public void Print(){
         for (int i=0 ; i<maze.length ; i++) {
             for (int j = 0; j < maze[i].length; j++) {
-                if (i==start.getRowIndex()&&j==start.getColIndex())
+                if (i==start.getRowIndex()&&j==start.getColumnlIndex())
                     System.out.print("S  ");
-                else if (i==goal.getRowIndex()&&j==goal.getColIndex())
+                else if (i==goal.getRowIndex()&&j==goal.getColumnlIndex())
                     System.out.print("E  ");
                 else System.out.print(maze[i][j]+"  ");
             }

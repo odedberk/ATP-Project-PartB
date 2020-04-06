@@ -51,65 +51,65 @@ public class SearchableMaze implements ISearchable {
     }
 
     @Override
-    public ArrayList<AState> getAllSuccessors(AState s) {
+    public ArrayList<AState> getAllPossibleStates(AState s) {
         if (s == null || s.getState().equals(""))
             return null;
         ArrayList<AState> neighbors = new ArrayList<>();
         Position pos = ((MazeState) s).getPos();
         Position n =null;
-        if(pos.getRowIndex()-1>=0 && pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex() - 1]==0
-            && (maze.getMaze()[pos.getRowIndex()][pos.getColIndex() - 1]==0 || maze.getMaze()[pos.getRowIndex()-1 ][pos.getColIndex()]==0)) {
-             n=new Position(pos.getRowIndex() - 1, pos.getColIndex() - 1);
+        if(pos.getRowIndex()-1>=0 && pos.getColumnlIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() - 1][pos.getColumnlIndex() - 1]==0
+            && (maze.getMaze()[pos.getRowIndex()][pos.getColumnlIndex() - 1]==0 || maze.getMaze()[pos.getRowIndex()-1 ][pos.getColumnlIndex()]==0)) {
+             n=new Position(pos.getRowIndex() - 1, pos.getColumnlIndex() - 1);
             if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getRowIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex()]==0){
-            n = new Position(pos.getRowIndex() - 1, pos.getColIndex());
-            if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
-                neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
-            else if (((MazeState)s.getCameFrom())==null)
-                neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
-        }
-        if(pos.getRowIndex()-1>=0 && pos.getColIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() - 1][pos.getColIndex() + 1]==0
-                && (maze.getMaze()[pos.getRowIndex()][pos.getColIndex() + 1]==0 || maze.getMaze()[pos.getRowIndex()-1 ][pos.getColIndex()]==0)){
-            n = new Position(pos.getRowIndex() - 1, pos.getColIndex()+1);
+        if(pos.getRowIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() - 1][pos.getColumnlIndex()]==0){
+            n = new Position(pos.getRowIndex() - 1, pos.getColumnlIndex());
             if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
             else if (((MazeState)s.getCameFrom())==null)
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getColIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex()][pos.getColIndex() + 1]==0){
-            n = new Position(pos.getRowIndex() , pos.getColIndex()+1);
+        if(pos.getRowIndex()-1>=0 && pos.getColumnlIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() - 1][pos.getColumnlIndex() + 1]==0
+                && (maze.getMaze()[pos.getRowIndex()][pos.getColumnlIndex() + 1]==0 || maze.getMaze()[pos.getRowIndex()-1 ][pos.getColumnlIndex()]==0)){
+            n = new Position(pos.getRowIndex() - 1, pos.getColumnlIndex()+1);
             if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
             else if (((MazeState)s.getCameFrom())==null)
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() + 1][pos.getColIndex() + 1]==0
-                && (maze.getMaze()[pos.getRowIndex()+1][pos.getColIndex()]==0 || maze.getMaze()[pos.getRowIndex() ][pos.getColIndex()+1]==0)){
-            n = new Position(pos.getRowIndex()+1 , pos.getColIndex()+1);
+        if(pos.getColumnlIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex()][pos.getColumnlIndex() + 1]==0){
+            n = new Position(pos.getRowIndex() , pos.getColumnlIndex()+1);
             if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
             else if (((MazeState)s.getCameFrom())==null)
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getRowIndex()+1<maze.getMaze().length && maze.getMaze()[pos.getRowIndex() + 1][pos.getColIndex()]==0){
-            n = new Position(pos.getRowIndex()+1 , pos.getColIndex());
+        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColumnlIndex()+1<maze.getMaze()[0].length && maze.getMaze()[pos.getRowIndex() + 1][pos.getColumnlIndex() + 1]==0
+                && (maze.getMaze()[pos.getRowIndex()+1][pos.getColumnlIndex()]==0 || maze.getMaze()[pos.getRowIndex() ][pos.getColumnlIndex()+1]==0)){
+            n = new Position(pos.getRowIndex()+1 , pos.getColumnlIndex()+1);
             if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
             else if (((MazeState)s.getCameFrom())==null)
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() + 1][pos.getColIndex() - 1]==0
-                && (maze.getMaze()[pos.getRowIndex()+1][pos.getColIndex()]==0 || maze.getMaze()[pos.getRowIndex() ][pos.getColIndex()-1]==0)){
-            n = new Position(pos.getRowIndex()+1 , pos.getColIndex()-1);
+        if(pos.getRowIndex()+1<maze.getMaze().length && maze.getMaze()[pos.getRowIndex() + 1][pos.getColumnlIndex()]==0){
+            n = new Position(pos.getRowIndex()+1 , pos.getColumnlIndex());
             if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
             else if (((MazeState)s.getCameFrom())==null)
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
         }
-        if(pos.getColIndex()-1>=0 && maze.getMaze()[pos.getRowIndex()][pos.getColIndex() - 1]==0){
-            n = new Position(pos.getRowIndex(), pos.getColIndex()-1);
+        if(pos.getRowIndex()+1<maze.getMaze().length && pos.getColumnlIndex()-1>=0 && maze.getMaze()[pos.getRowIndex() + 1][pos.getColumnlIndex() - 1]==0
+                && (maze.getMaze()[pos.getRowIndex()+1][pos.getColumnlIndex()]==0 || maze.getMaze()[pos.getRowIndex() ][pos.getColumnlIndex()-1]==0)){
+            n = new Position(pos.getRowIndex()+1 , pos.getColumnlIndex()-1);
+            if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
+                neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
+            else if (((MazeState)s.getCameFrom())==null)
+                neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
+        }
+        if(pos.getColumnlIndex()-1>=0 && maze.getMaze()[pos.getRowIndex()][pos.getColumnlIndex() - 1]==0){
+            n = new Position(pos.getRowIndex(), pos.getColumnlIndex()-1);
             if (((MazeState)s.getCameFrom())!=null && !n.equals(((MazeState)s.getCameFrom()).getPos()))
                 neighbors.add(new MazeState(s.getCost() + getEdgeCost(pos, n), n, s));
             else if (((MazeState)s.getCameFrom())==null)
@@ -119,7 +119,7 @@ public class SearchableMaze implements ISearchable {
     }
 
     public int getEdgeCost(Position from, Position to){
-        return (from.getColIndex()!=to.getColIndex() && from.getRowIndex()!=to.getRowIndex()) ? move : crossMove;
+        return (from.getColumnlIndex()!=to.getColumnlIndex() && from.getRowIndex()!=to.getRowIndex()) ? move : crossMove;
     }
 
 }

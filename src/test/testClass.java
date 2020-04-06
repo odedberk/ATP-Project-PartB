@@ -53,7 +53,7 @@ public class testClass {
         IMazeGenerator empty = new EmptyMazeGenerator();
         Maze testEmpty = empty.generate(10,10);
         timeTaken(empty,1000,1000);
-        testEmpty.print();
+        testEmpty.Print();
         System.out.println();
         ISearchable SMaze = new SearchableMaze(testEmpty);
         Solution sol = Bestfs.solve(SMaze);
@@ -67,7 +67,7 @@ public class testClass {
         IMazeGenerator simple = new SimpleMazeGenerator();
         Maze testSimple = simple.generate(20,20);
         timeTaken(simple,1000,1000);
-        testSimple.print();
+        testSimple.Print();
         System.out.println();
 //        SMaze = new SearchableMaze(testSimple);
 //        sol = bfs.solve(SMaze);

@@ -36,7 +36,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         while (!que.isEmpty()) {
             nodesVisit++;
             current= getFirstInQue();
-            ArrayList<AState> successors = s.getAllSuccessors(current);
+            ArrayList<AState> successors = s.getAllPossibleStates(current);
             for (AState successor : successors) {
                 if(!visited.contains(successor)){
                     successor.setVisited(true);
