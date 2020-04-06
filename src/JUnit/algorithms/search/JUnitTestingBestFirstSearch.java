@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JUnitTestingBestFirstSearch {
 
+    static BestFirstSearch test = new BestFirstSearch();
     @Test
     void getNumberOfNodesEvaluated() {
         SearchableMaze maze = new SearchableMaze(new Maze(new Position(0,0), new Position(0,0),new int[0][0]));
-        BestFirstSearch test = new BestFirstSearch();
 
         assertEquals(0, test.getNumberOfNodesEvaluated());
 
@@ -27,14 +27,12 @@ class JUnitTestingBestFirstSearch {
 
     @Test
     void getName() {
-        BestFirstSearch test = new BestFirstSearch();
         assertEquals("Best First Search",test.getName());
 
     }
 
     @Test
     void solve() {
-        BestFirstSearch test = new BestFirstSearch();
         //no solution
         AMazeGenerator mg = new SimpleMazeGenerator();
         Maze tester = mg.generate(100,100);
@@ -48,34 +46,34 @@ class JUnitTestingBestFirstSearch {
         ISearchable s = new SearchableMaze(tester);
         Solution sol =test.solve(s);
 //        if(sol == null)
-        assertEquals(sol.getSolutionPath(),null);
+        assertNull(sol.getSolutionPath());
 
         //goal at start point
         tester.setGoal(tester.getStartPosition());
         ((SearchableMaze)s).setMaze(tester);
         sol = test.solve(s);
-        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+        assertEquals(tester.getGoalPosition().toString(), sol.getSolutionPath().get(0).getState());
 
         //solution for simple maze
         mg = new SimpleMazeGenerator();
         tester=mg.generate(1000,1000);
         ((SearchableMaze)s).setMaze(tester);
         sol = test.solve(s);
-        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+        assertEquals(tester.getGoalPosition().toString(), sol.getSolutionPath().get(0).getState());
 
         //solution for empty maze
         mg = new EmptyMazeGenerator();
         tester=mg.generate(1000,1000);
         ((SearchableMaze)s).setMaze(tester);
         sol = test.solve(s);
-        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+        assertEquals(tester.getGoalPosition().toString(),sol.getSolutionPath().get(0).getState() );
 
         //solution for myGenerator maze
         mg = new MyMazeGenerator();
         tester=mg.generate(1000,1000);
         ((SearchableMaze)s).setMaze(tester);
         sol = test.solve(s);
-        assertEquals(sol.getSolutionPath().get(0).getState(),tester.getGoalPosition().toString());
+        assertEquals(tester.getGoalPosition().toString(),sol.getSolutionPath().get(0).getState());
 
 
     }
