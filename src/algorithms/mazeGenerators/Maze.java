@@ -35,7 +35,7 @@ public class Maze {
         return goal;
     }
 
-    public void Print(){
+    public void print(){
         for (int i=0 ; i<maze.length ; i++) {
             for (int j = 0; j < maze[i].length; j++) {
                 if (i==start.getRowIndex()&&j==start.getColumnIndex())
