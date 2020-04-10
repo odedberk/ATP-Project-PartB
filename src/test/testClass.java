@@ -1,14 +1,14 @@
-//package test;
-//
-//import algorithms.mazeGenerators.*;
-//import algorithms.search.*;
-//
-//import java.util.*;
-//
-//public class testClass {
-//    public static void timeTaken (IMazeGenerator gen, int row, int col){
-//        System.out.println(String.format("Time taken to generate a %dx%d %s maze : %d mills",row,col,gen.getClass(), gen.measureAlgorithmTimeMillis(row,col)));
-//    }
+package test;
+
+import algorithms.mazeGenerators.*;
+import algorithms.search.*;
+
+import java.util.*;
+
+public class testClass {
+    public static void timeTaken (IMazeGenerator gen, int row, int col){
+        System.out.println(String.format("Time taken to generate a %dx%d %s maze : %d mills",row,col,gen.getClass(), gen.measureAlgorithmTimeMillis(row,col)));
+    }
 //
 //    public static void whosTheBest(IMazeGenerator generator, int numberOfTest, int size){ //test out number of test and decides whos the fastes on average
 //        int[] sum = new int[3];
@@ -41,27 +41,27 @@
 //        System.out.println("Fastest algorithm was "+ fastest.getName()+" with "+ min+ " mills\n");
 //    }
 //
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //
 //        AMazeGenerator mm =new SimpleMazeGenerator();
 //        Maze tt = mm.generate(20,20);
 ////        tt.print();
 //        whosTheBest(mm,5,1000);
 //
-//        ISearchingAlgorithm Bestfs = new BreadthFirstSearch();
-//
-//        IMazeGenerator empty = new EmptyMazeGenerator();
-//        Maze testEmpty = empty.generate(10,10);
-//        timeTaken(empty,1000,1000);
-//        testEmpty.Print();
-//        System.out.println();
-//        ISearchable SMaze = new SearchableMaze(testEmpty);
-//        Solution sol = Bestfs.solve(SMaze);
-//        ArrayList<AState> solutionPath = sol.getSolutionPath();
-//        for (int i = solutionPath.size()-1; i >=0 ; i--) {
-//            System.out.println(String.format("%s.%s", (solutionPath.size()-i), solutionPath.get(i)));
-//        }
-//        System.out.println();
+        ISearchingAlgorithm Bestfs = new BreadthFirstSearch();
+
+        IMazeGenerator my = new MyMazeGenerator();
+        Maze testEmpty = my.generate(20,30);
+//        timeTaken(my,1000,1000);
+        testEmpty.print();
+        System.out.println();
+        ISearchable SMaze = new SearchableMaze(testEmpty);
+        Solution sol = Bestfs.solve(SMaze);
+        ArrayList<AState> solutionPath = sol.getSolutionPath();
+        for (int i = 0; i < solutionPath.size(); i++) {
+            System.out.println(String.format("%s.   %s",i,solutionPath.get(i)));
+        }
+        System.out.println();
 //        System.out.println();
 //        System.out.println(testEmpty.getGoalPosition().toString());
 //        IMazeGenerator simple = new SimpleMazeGenerator();
@@ -143,8 +143,8 @@
 ////        que.add(three);
 ////        while (!que.isEmpty()) {
 ////            System.out.println(que.poll().toString());
-////        }
+        }
 //    }
 //
 //
-//}
+}

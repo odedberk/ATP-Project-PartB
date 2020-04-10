@@ -9,7 +9,7 @@ public class Solution {
         if (goal!=null)
             solutionPath= new ArrayList<>();
         while(goal!=null){
-            solutionPath.add(goal);
+            solutionPath.add(0,goal);
             goal=goal.getCameFrom();
         }
     }
