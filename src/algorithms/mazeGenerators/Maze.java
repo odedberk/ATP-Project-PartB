@@ -63,7 +63,7 @@ public class Maze {
 //            for(int i=0; i<(8-binary.length()); i++)
 //                binary+=0;
         //}
-
+        return 0;
     }
     private String intToBinary(int a){
         String binary ="";
