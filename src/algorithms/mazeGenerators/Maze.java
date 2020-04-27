@@ -73,7 +73,7 @@ public class Maze {
             binary="0"+binary;
         return binary;
     }
-    public int binaryToint(String binary){
+    public int binaryToInt(String binary){
         int l = binary.length();
         int val=0;
         while (l>0){
