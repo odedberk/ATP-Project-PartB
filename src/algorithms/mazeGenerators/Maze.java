@@ -21,8 +21,8 @@ public class Maze {
         int pos=12;
         for(int i=0 ; i<rowSize; i++)
             for (int j=0; j<colSize; j++) {
-                maze[i][j]=byteMaze[pos];
-                pos++;
+                maze[i][j]=byteMaze[pos++];
+
             }
     }
 
