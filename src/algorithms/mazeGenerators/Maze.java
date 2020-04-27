@@ -53,17 +53,7 @@ public class Maze {
             System.out.println(); // print
         }
     }
-    private int margeTwoBytes(int a, int b){
-        String binary = intToBinary(a,8)+intToBinary(b,8);
-        int l = binary.length();
-        int val=0;
-        while (l>=0){
-            if(binary.charAt(l-1)=='1')
-                val+=Math.pow(2,binary.length()-l);
-            l--;
-        }
-        return 0;
-    }
+
     private String intToBinary(int a,int stringLength){
         String binary ="";
         while (a!=0){
@@ -75,6 +65,16 @@ public class Maze {
                 binary=0+binary;
         }
         return binary;
+    }
+    public int binaryToint(String binary){
+        int l = binary.length();
+        int val=0;
+        while (l>=0){
+            if(binary.charAt(l-1)=='1')
+                val+=Math.pow(2,binary.length()-l);
+            l--;
+        }
+        return val;
     }
 
 }
