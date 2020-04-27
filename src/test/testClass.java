@@ -56,34 +56,40 @@ public class testClass {
 //            e.printStackTrace();
 //        }
 
+        byte b[] = {2,0,3,0,0,0,2,0,1,0,1,0,0,1,0,1,0,0};
+        Maze test = new Maze(b);
+        test.print();
+
+
+
 //        byte a = 2;
 //        int b=a;
 //        System.out.println(b);
-        int a =10;
-        String binary ="";
-        while (a!=0){
-            binary=a%2+binary;
-            a=a/2;
-        }
-
-        while (binary.length()<8)
-            binary="0"+binary;
-        System.out.println(binary);
-
-        int sum =0, i=0;
-        while (sum<400000){
-            sum+=i*Math.pow(2,i);
-            i++;
-        }
-        System.out.println(sum+" "+i);
-
-        sum =0;
-        int j=0;
-        while (j<i){
-            sum+=Math.pow(2,j);
-            j++;
-        }
-        System.out.println(sum);
+//        int a =10;
+//        String binary ="";
+//        while (a!=0){
+//            binary=a%2+binary;
+//            a=a/2;
+//        }
+//
+//        while (binary.length()<8)
+//            binary="0"+binary;
+//        System.out.println(binary);
+//
+//        int sum =0, i=0;
+//        while (sum<400000){
+//            sum+=i*Math.pow(2,i);
+//            i++;
+//        }
+//        System.out.println(sum+" "+i);
+//
+//        sum =0;
+//        int j=0;
+//        while (j<i){
+//            sum+=Math.pow(2,j);
+//            j++;
+//        }
+//        System.out.println(sum);
 
 
 //

@@ -10,11 +10,18 @@ public class Maze {
         this.goal = goal;
         this.maze = maze;
     }
-    public Maze(byte [] maze){
-        int x = maze[0];
-
-
-
+    public Maze(byte [] byteMaze){
+        int rowSize = binaryToInt(intToBinary(byteMaze[1],8)+intToBinary(byteMaze[0],8));
+        int colSize = binaryToInt(intToBinary(byteMaze[3],8)+intToBinary(byteMaze[2],8));
+        start=new Position(binaryToInt(intToBinary(byteMaze[5],8)+intToBinary(byteMaze[4],8)),binaryToInt(intToBinary(byteMaze[7],8)+intToBinary(byteMaze[6],8)));
+        goal = new Position(binaryToInt(intToBinary(byteMaze[9],8)+intToBinary(byteMaze[8],8)),binaryToInt(intToBinary(byteMaze[11],8)+intToBinary(byteMaze[10],8)));
+        maze = new int[rowSize][colSize];
+        int pos=12;
+        for(int i=0 ; i<rowSize; i++)
+            for (int j=0; j<colSize; j++) {
+                maze[i][j]=byteMaze[pos];
+                pos++;
+            }
     }
 
     public int[][] getMaze() {
@@ -57,17 +64,18 @@ public class Maze {
     private String intToBinary(int a,int stringLength){
         String binary ="";
         while (a!=0){
-            binary+=a%2;
-            a=a/10;
+            binary=a%2+binary;
+            a=a/2;
         }
         while (binary.length()<stringLength)
             binary="0"+binary;
         return binary;
     }
-    public int binaryToint(String binary){
+
+    public int binaryToInt(String binary){
         int l = binary.length();
         int val=0;
-        while (l>=0){
+        while (l>0){
             if(binary.charAt(l-1)=='1')
                 val+=Math.pow(2,binary.length()-l);
             l--;
