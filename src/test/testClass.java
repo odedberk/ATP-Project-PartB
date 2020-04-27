@@ -43,7 +43,17 @@ public class testClass {
 //    }
 //
     public static void main(String[] args) {
-//
+
+        MyMazeGenerator maze = new MyMazeGenerator();
+        Maze m = maze.generate(280,10);
+        m.setGoal(new Position(260,8));
+        m.setStart(new Position(2,4));
+        byte[] bytes = m.toByteArray();
+        for (byte b : bytes) {
+            System.out.print(b+", ");
+        }
+
+
 //        AMazeGenerator mm =new SimpleMazeGenerator();
 //        Maze tt = mm.generate(20,20);
 ////        tt.print();
@@ -56,28 +66,29 @@ public class testClass {
 //            e.printStackTrace();
 //        }
 
-        byte b[] = {2,0,3,0,0,0,2,0,1,0,1,0,0,1,0,1,0,0};
-        Maze test = new Maze(b);
-        test.print();
-
-
-
-//        byte a = 2;
-//        int b=a;
+//        int a = 2;
+//        byte b=(int)a;
 //        System.out.println(b);
+
 //        int a =10;
 //        String binary ="";
 //        while (a!=0){
 //            binary=a%2+binary;
 //            a=a/2;
 //        }
-//
-//        while (binary.length()<8)
-//            binary="0"+binary;
-//        System.out.println(binary);
-//
+
+//        String binary = "110101";
+//        int l = binary.length();
+//        byte val=0;
+//        while (l>0){
+//            if(binary.charAt(l-1)=='1')
+//                val+=Math.pow(2,binary.length()-l);
+//            l--;
+//        }
+//        System.out.println(val );
+
 //        int sum =0, i=0;
-//        while (sum<400000){
+//        while (sum<900000){
 //            sum+=i*Math.pow(2,i);
 //            i++;
 //        }
