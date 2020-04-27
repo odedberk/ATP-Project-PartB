@@ -65,17 +65,27 @@ public class Maze {
         //}
         return 0;
     }
-    private String intToBinary(int a){
+    private String intToBinary(int a, int max){
+
         String binary ="";
         while (a!=0){
-            binary+=a%2;
-            a=a/10;
+            binary=a%2+binary;
+            a=a/2;
         }
-        if(binary.length()<8){
-            for(int i=0; i<(8-binary.length()); i++)
-                binary+=0;
-        }
+        while (binary.length()<max)
+            binary="0"+binary;
         return binary;
+    }
+
+    public byte[] toByteArray(){
+        byte r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2;
+        return null;
+    }
+
+    private byte[] splitInt(int input){
+        String binary = intToBinary(input,16);
+
+        return null;
     }
 
 }
