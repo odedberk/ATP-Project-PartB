@@ -13,10 +13,10 @@ public class Maze {
         this.maze = maze;
     }
     public Maze(byte [] byteMaze){
-        int rowSize = binaryToInt(intToBinary(byteMaze[1],8)+intToBinary(byteMaze[0],8));
-        int colSize = binaryToInt(intToBinary(byteMaze[3],8)+intToBinary(byteMaze[2],8));
-        start=new Position(binaryToInt(intToBinary(byteMaze[5],8)+intToBinary(byteMaze[4],8)),binaryToInt(intToBinary(byteMaze[7],8)+intToBinary(byteMaze[6],8)));
-        goal = new Position(binaryToInt(intToBinary(byteMaze[9],8)+intToBinary(byteMaze[8],8)),binaryToInt(intToBinary(byteMaze[11],8)+intToBinary(byteMaze[10],8)));
+        int rowSize = binaryToInt(intToBinary(byteMaze[0],8)+intToBinary(byteMaze[1],8));
+        int colSize = binaryToInt(intToBinary(byteMaze[2],8)+intToBinary(byteMaze[3],8));
+        start=new Position(binaryToInt(intToBinary(byteMaze[4],8)+intToBinary(byteMaze[5],8)),binaryToInt(intToBinary(byteMaze[6],8)+intToBinary(byteMaze[7],8)));
+        goal = new Position(binaryToInt(intToBinary(byteMaze[8],8)+intToBinary(byteMaze[9],8)),binaryToInt(intToBinary(byteMaze[10],8)+intToBinary(byteMaze[11],8)));
         maze = new int[rowSize][colSize];
         int pos=12;
         for(int i=0 ; i<rowSize; i++)
@@ -116,7 +116,25 @@ public class Maze {
         gc1=splitInt(getGoalPosition().getColumnIndex())[0];
         gc2=splitInt(getGoalPosition().getColumnIndex())[1];
 
-        byte[] bytes = {r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2};
+        byte[] bytes = new byte[12+ maze.length*maze[0].length];
+        bytes[0] = r1;
+        bytes[1] = r2;
+        bytes[2]= c1;
+        bytes[3] = c2;
+        bytes[4] = sr1;
+        bytes[5] = sr2;
+        bytes[6] = sc1;
+        bytes[7] = sc2;
+        bytes[8] = gr1;
+        bytes[9] = gr2;
+        bytes[10] = gc1;
+        bytes[11] = gc2;
+        int k=12;
+        for (int i =0 ; i<maze.length; i++){
+            for (int j =0 ; j<maze[0].length; j++){
+                bytes[k++]= (byte) maze[i][j];
+            }
+        }
 
         return bytes;
     }
