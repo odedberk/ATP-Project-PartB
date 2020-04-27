@@ -45,10 +45,18 @@ public class testClass {
     public static void main(String[] args) {
 
         MyMazeGenerator maze = new MyMazeGenerator();
-        Maze m = maze.generate(280,10);
-        m.setGoal(new Position(260,8));
+        Maze m = maze.generate(250,10);
+        m.setGoal(new Position(30,8));
         m.setStart(new Position(2,4));
         byte[] bytes = m.toByteArray();
+        for (byte b : bytes) {
+            System.out.print(b+", ");
+        }
+
+        System.out.println();
+        m= new Maze(bytes);
+        bytes=m.toByteArray();
+
         for (byte b : bytes) {
             System.out.print(b+", ");
         }

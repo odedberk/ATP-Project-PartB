@@ -15,10 +15,10 @@ public class Maze {
         this.maze = maze;
     }
     public Maze(byte [] byteMaze){
-        int rowSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[1]),8)+intToBinary(byteMaze[0],8));
-        int colSize = binaryToInt(intToBinary(byteMaze[3],8)+intToBinary(byteMaze[2],8));
-        start=new Position(binaryToInt(intToBinary(byteMaze[5],8)+intToBinary(byteMaze[4],8)),binaryToInt(intToBinary(byteMaze[7],8)+intToBinary(byteMaze[6],8)));
-        goal = new Position(binaryToInt(intToBinary(byteMaze[9],8)+intToBinary(byteMaze[8],8)),binaryToInt(intToBinary(byteMaze[11],8)+intToBinary(byteMaze[10],8)));
+        int rowSize = binaryToInt(intToBinary(byteMaze[0],8)+intToBinary(byteMaze[1],8));
+        int colSize = binaryToInt(intToBinary(byteMaze[2],8)+intToBinary(byteMaze[3],8));
+        start=new Position(binaryToInt(intToBinary(byteMaze[4],8)+intToBinary(byteMaze[5],8)),binaryToInt(intToBinary(byteMaze[6],8)+intToBinary(byteMaze[7],8)));
+        goal = new Position(binaryToInt(intToBinary(byteMaze[8],8)+intToBinary(byteMaze[9],8)),binaryToInt(intToBinary(byteMaze[10],8)+intToBinary(byteMaze[11],8)));
         maze = new int[rowSize][colSize];
         int pos=12;
         for(int i=0 ; i<rowSize; i++)
