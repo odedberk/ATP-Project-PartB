@@ -1,6 +1,8 @@
 package algorithms.mazeGenerators;
 
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Maze {
     private Position start;
@@ -13,7 +15,7 @@ public class Maze {
         this.maze = maze;
     }
     public Maze(byte [] byteMaze){
-        int rowSize = binaryToInt(intToBinary(byteMaze[1],8)+intToBinary(byteMaze[0],8));
+        int rowSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[1]),8)+intToBinary(byteMaze[0],8));
         int colSize = binaryToInt(intToBinary(byteMaze[3],8)+intToBinary(byteMaze[2],8));
         start=new Position(binaryToInt(intToBinary(byteMaze[5],8)+intToBinary(byteMaze[4],8)),binaryToInt(intToBinary(byteMaze[7],8)+intToBinary(byteMaze[6],8)));
         goal = new Position(binaryToInt(intToBinary(byteMaze[9],8)+intToBinary(byteMaze[8],8)),binaryToInt(intToBinary(byteMaze[11],8)+intToBinary(byteMaze[10],8)));
@@ -130,6 +132,25 @@ public class Maze {
         return bytes;
     }
 
+    private int convertByteToInt(byte b){
+        if(b>=0)
+            return b;
+        return  (int)Math.pow(2,8)+b;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Maze maze1 = (Maze) o;
+        if((maze.length != maze1.maze.length) || (maze[0].length != maze1.maze[0].length))
+            return false;
+        for(int i=0; i<maze.length; i++)
+            for(int j=0; j<maze[0].length; j++)
+                if(maze[i][j] != maze1.maze[i][j])
+                    return false;
+        return (start.equals(maze1.start)) && (goal.equals(maze1.goal));
+    }
 
 
 }
