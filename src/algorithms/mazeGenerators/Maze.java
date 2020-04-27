@@ -118,8 +118,25 @@ public class Maze {
         gc1=splitInt(getGoalPosition().getColumnIndex())[0];
         gc2=splitInt(getGoalPosition().getColumnIndex())[1];
 
-        byte[] bytes = {r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2};
-
+        byte[] bytes = new byte[12+ maze.length*maze[0].length];
+        bytes[0] = r1;
+        bytes[1] = r2;
+        bytes[2]= c1;
+        bytes[3] = c2;
+        bytes[4] = sr1;
+        bytes[5] = sr2;
+        bytes[6] = sc1;
+        bytes[7] = sc2;
+        bytes[8] = gr1;
+        bytes[9] = gr2;
+        bytes[10] = gc1;
+        bytes[11] = gc2;
+        int k=12;
+        for (int i =0 ; i<maze.length; i++){
+            for (int j =0 ; j<maze[0].length; j++){
+                bytes[k++]= (byte) maze[i][j];
+            }
+        }
         return bytes;
     }
 
