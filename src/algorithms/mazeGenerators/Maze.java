@@ -84,8 +84,11 @@ public class Maze {
 
     private byte[] splitInt(int input){
         String binary = intToBinary(input,16);
+        String L = binary.substring(0,8), R=binary.substring(9);
 
         return null;
     }
+
+
 
 }
