@@ -15,10 +15,10 @@ public class Maze {
         this.maze = maze;
     }
     public Maze(byte [] byteMaze){
-        int rowSize = binaryToInt(intToBinary(byteMaze[0],8)+intToBinary(byteMaze[1],8));
-        int colSize = binaryToInt(intToBinary(byteMaze[2],8)+intToBinary(byteMaze[3],8));
-        start=new Position(binaryToInt(intToBinary(byteMaze[4],8)+intToBinary(byteMaze[5],8)),binaryToInt(intToBinary(byteMaze[6],8)+intToBinary(byteMaze[7],8)));
-        goal = new Position(binaryToInt(intToBinary(byteMaze[8],8)+intToBinary(byteMaze[9],8)),binaryToInt(intToBinary(byteMaze[10],8)+intToBinary(byteMaze[11],8)));
+        int rowSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[0]),8)+intToBinary(convertByteToInt(byteMaze[1]),8));
+        int colSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[2]),8)+intToBinary(convertByteToInt(byteMaze[3]),8));
+        start=new Position(binaryToInt(intToBinary(convertByteToInt(byteMaze[4]),8)+intToBinary(convertByteToInt(byteMaze[5]),8)),binaryToInt(intToBinary(convertByteToInt(byteMaze[6]),8)+intToBinary(convertByteToInt(byteMaze[7]),8)));
+        goal = new Position(binaryToInt(intToBinary(convertByteToInt(byteMaze[8]),8)+intToBinary(convertByteToInt(byteMaze[9]),8)),binaryToInt(intToBinary(convertByteToInt(byteMaze[10]),8)+intToBinary(convertByteToInt(byteMaze[11]),8)));
         maze = new int[rowSize][colSize];
         int pos=12;
         for(int i=0 ; i<rowSize; i++)
