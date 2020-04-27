@@ -3,6 +3,7 @@ package test;
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 
+import java.io.*;
 import java.util.*;
 
 public class testClass {
@@ -48,20 +49,75 @@ public class testClass {
 ////        tt.print();
 //        whosTheBest(mm,5,1000);
 //
-        ISearchingAlgorithm Bestfs = new BreadthFirstSearch();
+//        File file = new File("C:\\Users\\User\\IdeaProjects\\ATP-Project-PartA\\test.txt");
+//        try {
+//            file.createNewFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        IMazeGenerator my = new MyMazeGenerator();
-        Maze testEmpty = my.generate(20,30);
-//        timeTaken(my,1000,1000);
-        testEmpty.print();
-        System.out.println();
-        ISearchable SMaze = new SearchableMaze(testEmpty);
-        Solution sol = Bestfs.solve(SMaze);
-        ArrayList<AState> solutionPath = sol.getSolutionPath();
-        for (int i = 0; i < solutionPath.size(); i++) {
-            System.out.println(String.format("%s.   %s",i,solutionPath.get(i)));
+        int sum =0, i=0;
+        while (sum<400000){
+            sum+=i*Math.pow(2,i);
+            i++;
         }
-        System.out.println();
+        System.out.println(sum+" "+i);
+
+        sum =0;
+        int j=0;
+        while (j<i){
+            sum+=Math.pow(2,j);
+            j++;
+        }
+        System.out.println(sum);
+
+
+
+//        FileOutputStream f=null;
+//        try {
+//         f= new FileOutputStream("C:\\Users\\User\\IdeaProjects\\ATP-Project-PartA\\test.txt");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        byte byte1 = 127;
+//        try {
+//            f.write(byte1);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        FileInputStream f1=null;
+//        try {
+//           f1 = new FileInputStream("C:\\Users\\User\\IdeaProjects\\ATP-Project-PartA\\test.txt");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        int byte2=0;
+//        try {
+//            byte2 = f1.read();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(byte2);
+
+
+//
+//        ISearchingAlgorithm Bestfs = new BreadthFirstSearch();
+//
+//        IMazeGenerator my = new MyMazeGenerator();
+//        Maze testEmpty = my.generate(20,30);
+////        timeTaken(my,1000,1000);
+//        testEmpty.print();
+//        System.out.println();
+//        ISearchable SMaze = new SearchableMaze(testEmpty);
+//        Solution sol = Bestfs.solve(SMaze);
+//        ArrayList<AState> solutionPath = sol.getSolutionPath();
+//        for (int i = 0; i < solutionPath.size(); i++) {
+//            System.out.println(String.format("%s.   %s",i,solutionPath.get(i)));
+//        }
+//        System.out.println();
+
+
 //        System.out.println();
 //        System.out.println(testEmpty.getGoalPosition().toString());
 //        IMazeGenerator simple = new SimpleMazeGenerator();
