@@ -56,6 +56,20 @@ public class testClass {
 //            e.printStackTrace();
 //        }
 
+//        byte a = 2;
+//        int b=a;
+//        System.out.println(b);
+        int a =10;
+        String binary ="";
+        while (a!=0){
+            binary=a%2+binary;
+            a=a/2;
+        }
+
+        while (binary.length()<8)
+            binary="0"+binary;
+        System.out.println(binary);
+
         int sum =0, i=0;
         while (sum<400000){
             sum+=i*Math.pow(2,i);
@@ -72,7 +86,7 @@ public class testClass {
         System.out.println(sum);
 
 
-
+//
 //        FileOutputStream f=null;
 //        try {
 //         f= new FileOutputStream("C:\\Users\\User\\IdeaProjects\\ATP-Project-PartA\\test.txt");
@@ -85,13 +99,14 @@ public class testClass {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+//
 //        FileInputStream f1=null;
 //        try {
 //           f1 = new FileInputStream("C:\\Users\\User\\IdeaProjects\\ATP-Project-PartA\\test.txt");
 //        } catch (FileNotFoundException e) {
 //            e.printStackTrace();
 //        }
-//
+////
 //        int byte2=0;
 //        try {
 //            byte2 = f1.read();

@@ -57,13 +57,11 @@ public class Maze {
     private String intToBinary(int a,int stringLength){
         String binary ="";
         while (a!=0){
-            binary=a%2+binary;
-            a=a/2;
+            binary+=a%2;
+            a=a/10;
         }
-        if(binary.length()<stringLength){
-            for(int i=0; i<(stringLength-binary.length()); i++)
-                binary=0+binary;
-        }
+        while (binary.length()<max)
+            binary="0"+binary;
         return binary;
     }
     public int binaryToint(String binary){
@@ -76,5 +74,19 @@ public class Maze {
         }
         return val;
     }
+
+    public byte[] toByteArray(){
+        byte r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2;
+        return null;
+    }
+
+    private byte[] splitInt(int input){
+        String binary = intToBinary(input,16);
+        String L = binary.substring(0,8), R=binary.substring(9);
+
+        return null;
+    }
+
+
 
 }
