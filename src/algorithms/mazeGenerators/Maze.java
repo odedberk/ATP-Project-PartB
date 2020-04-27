@@ -60,7 +60,7 @@ public class Maze {
             binary+=a%2;
             a=a/10;
         }
-        while (binary.length()<max)
+        while (binary.length()<stringLength)
             binary="0"+binary;
         return binary;
     }
