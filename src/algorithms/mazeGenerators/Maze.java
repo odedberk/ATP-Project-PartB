@@ -17,10 +17,10 @@ public class Maze {
     }
     public Maze(byte [] byteMaze){
 //        int rowSize = ((byteMaze[0] >0 ? byteMaze[0] : byteMaze[0]+256) << 8) | (byteMaze[1]>0? byteMaze[1] : byteMaze[1]+256);
-        int rowSize = ((byteMaze[0] & 0xFF) << 8) | (byteMaze[1]& 0xFF);
-        int colSize = ((byteMaze[2] & 0xFF) << 8) | (byteMaze[3]& 0xFF);
-        start = new Position( (((byteMaze[4]&0xFF)<<8)| (byteMaze[5]&0xFF)), (((byteMaze[6]&0xFF)<<8)| (byteMaze[7]&0xFF)));
-        goal = new Position( (((byteMaze[8]&0xFF)<<8)| (byteMaze[9]&0xFF)), (((byteMaze[10]&0xFF)<<8)| (byteMaze[11]&0xFF)));
+        int rowSize = ((byteMaze[0] & 0xFF) <<8) | (byteMaze[1] & 0xFF);
+        int colSize = ((byteMaze[2] & 0xFF) <<8) | (byteMaze[3] & 0xFF);
+        start = new Position( (((byteMaze[4] & 0xFF) <<8) | (byteMaze[5] & 0xFF)), (((byteMaze[6] & 0xFF) <<8) | (byteMaze[7] & 0xFF)));
+        goal = new Position( (((byteMaze[8] & 0xFF) <<8) | (byteMaze[9] & 0xFF)), (((byteMaze[10] & 0xFF) <<8) | (byteMaze[11] & 0xFF)));
 //        int rowSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[0]),8)+intToBinary(convertByteToInt(byteMaze[1]),8));
 //        int colSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[2]),8)+intToBinary(convertByteToInt(byteMaze[3]),8));
 //        start=new Position(binaryToInt(intToBinary(convertByteToInt(byteMaze[4]),8)+intToBinary(convertByteToInt(byteMaze[5]),8)),binaryToInt(intToBinary(convertByteToInt(byteMaze[6]),8)+intToBinary(convertByteToInt(byteMaze[7]),8)));
