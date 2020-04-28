@@ -170,6 +170,7 @@ public class Maze {
 
     @Override
     public boolean equals(Object o) {
+//        return this.toByteArray().equals(((Maze)o).toByteArray());
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Maze maze1 = (Maze) o;
