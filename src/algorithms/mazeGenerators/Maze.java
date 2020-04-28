@@ -19,8 +19,8 @@ public class Maze {
 //        int rowSize = ((byteMaze[0] >0 ? byteMaze[0] : byteMaze[0]+256) << 8) | (byteMaze[1]>0? byteMaze[1] : byteMaze[1]+256);
         int rowSize = ((byteMaze[0] & 0xFF) <<8) | (byteMaze[1] & 0xFF);
         int colSize = ((byteMaze[2] & 0xFF) <<8) | (byteMaze[3] & 0xFF);
-        start = new Position( ((byteMaze[4] & 0xFF) <<8) | (byteMaze[5] & 0xFF), ((byteMaze[6] & 0xFF) <<8) | (byteMaze[7] & 0xFF));
-        goal = new Position( ((byteMaze[8] & 0xFF) <<8) | (byteMaze[9] & 0xFF), ((byteMaze[10] & 0xFF) <<8) | (byteMaze[11] & 0xFF));
+        start = new Position(((byteMaze[4] & 0xFF) <<8) | (byteMaze[5] & 0xFF), ((byteMaze[6] & 0xFF) <<8) | (byteMaze[7] & 0xFF));
+        goal = new Position(((byteMaze[8] & 0xFF) <<8) | (byteMaze[9] & 0xFF), ((byteMaze[10] & 0xFF) <<8) | (byteMaze[11] & 0xFF));
         maze = new int[rowSize][colSize];
         int pos=12;
         for(int i=0 ; i<rowSize; i++)
