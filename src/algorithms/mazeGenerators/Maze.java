@@ -107,31 +107,30 @@ public class Maze {
         byte r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2;
         ArrayList<Byte> list = new ArrayList<>();
 
-
         r1 = (byte)(maze.length >>8);
         r2 = (byte)(maze.length);
-
         c1=(byte)(maze[0].length>>8);
         c2=(byte)(maze[0].length);
-
+        sr1=(byte)(getStartPosition().getRowIndex()>>8);
+        sr2=(byte)(getStartPosition().getRowIndex());
+        sc1=(byte)(getStartPosition().getColumnIndex()>>8);
+        sc2=(byte)(getStartPosition().getColumnIndex());
+        gr1=(byte)(getGoalPosition().getRowIndex()>>8);
+        gr2=(byte)(getGoalPosition().getRowIndex());
+        gc1=(byte)(getGoalPosition().getColumnIndex()>>8);
+        gc2=(byte)(getGoalPosition().getColumnIndex());
 //        r1=splitInt(maze.length)[0];
 //        r2=splitInt(maze.length)[1];
-
 //        c1=splitInt(maze[0].length)[0];
 //        c2=splitInt(maze[0].length)[1];
-
-        sr1=splitInt(getStartPosition().getRowIndex())[0];
-        sr2=splitInt(getStartPosition().getRowIndex())[1];
-
-        sc1=splitInt(getStartPosition().getColumnIndex())[0];
-        sc2=splitInt(getStartPosition().getColumnIndex())[1];
-
-        gr1=splitInt(getGoalPosition().getRowIndex())[0];
-        gr2=splitInt(getGoalPosition().getRowIndex())[1];
-
-        gc1=splitInt(getGoalPosition().getColumnIndex())[0];
-        gc2=splitInt(getGoalPosition().getColumnIndex())[1];
-
+//        sr1=splitInt(getStartPosition().getRowIndex())[0];
+//        sr2=splitInt(getStartPosition().getRowIndex())[1];
+//        sc1=splitInt(getStartPosition().getColumnIndex())[0];
+//        sc2=splitInt(getStartPosition().getColumnIndex())[1];
+//        gr1=splitInt(getGoalPosition().getRowIndex())[0];
+//        gr2=splitInt(getGoalPosition().getRowIndex())[1];
+//        gc1=splitInt(getGoalPosition().getColumnIndex())[0];
+//        gc2=splitInt(getGoalPosition().getColumnIndex())[1];
 
         byte[] bytes = new byte[12+ maze.length*maze[0].length];
         bytes[0] = r1;
@@ -148,8 +147,8 @@ public class Maze {
         bytes[11] = gc2;
         int k=12;
         for (int[] row : maze) {
-            for (int j = 0; j < maze[0].length; j++) {
-                bytes[k++] = (byte) row[j];
+            for (int cell : row) {
+                bytes[k++] = (byte) cell;
             }
         }
         return bytes;
