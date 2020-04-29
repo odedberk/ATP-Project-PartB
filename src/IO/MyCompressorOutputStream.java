@@ -56,6 +56,7 @@ public class MyCompressorOutputStream extends OutputStream {
 
         for (int i=0 ; i<array.size(); i++){ //send array
             write(array.get(i).getKey());
+            //write(1);
             for (int j=pointerSize-1 ; j>=0 ; j--)
                 write((byte)(array.get(i).getValue() >> 8*j) );
         }
