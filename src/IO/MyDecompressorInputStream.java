@@ -42,17 +42,14 @@ public class MyDecompressorInputStream extends InputStream {
                temp.add(dictionary.get(i).getKey());
             int p = dictionary.get(i).getValue();
             while (p>=1){
-
                 temp.add(dictionary.get(p).getKey());
                 p=dictionary.get(p).getValue();
             }
             while (!temp.isEmpty()) {
-                if(temp.peek()==2){
+                if (temp.peek() == 2)
                     temp.pop();
-                }
-                else {
+                else
                     unCompressMaze.add(temp.pop());
-                }
             }
         }
         //byte []newByteMaze = new byte[byteArr.size()];
@@ -66,14 +63,18 @@ public class MyDecompressorInputStream extends InputStream {
 
     private LinkedList<Pair<Integer,Integer>>getDictionary(ArrayList<Integer> array ,int sizeOfUnit)throws IOException{
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
-        int pos=13;
-        while(pos<array.size()-1){
+        int pos=16;
+//        in.read();
+//        in.read();
+//        in.read();
+        dictionary.add(new Pair<>(0,0));
+        while(pos<array.size()){
                 int val=array.get(pos++);
                 if(val==-1)
                     break;
                 int p=array.get(pos++) & 0xFF;
                 for(int i=sizeOfUnit-2; i>=1; i--)
-                    p = (p << 8) | (array.get(pos++) & 0xFF);
+                    p = (p <<(8)) | (array.get(pos++) & 0xFF);
                 dictionary.add(new Pair<>(val,p));
         }
         return dictionary;

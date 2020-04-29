@@ -27,8 +27,8 @@ public class MyCompressorOutputStream extends OutputStream {
         int arrIndex=0;
         array.add(arrIndex++,new Pair<>(0,0));
         int k=12;
-        codes.put(String.valueOf(b[k++]),arrIndex);
-        array.add(arrIndex++,new Pair((int)b[k],0));
+        codes.put(String.valueOf(b[k]),arrIndex);
+        array.add(arrIndex++,new Pair((int)b[k++],0));
 
         for (; k<b.length; k++){
             int pointer=0;
