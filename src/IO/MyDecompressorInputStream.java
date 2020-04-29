@@ -4,6 +4,7 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -53,6 +54,9 @@ public class MyDecompressorInputStream extends InputStream {
     private LinkedList<Pair<Integer,Integer>>getDictionary(int sizeOfUnit)throws IOException{
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
         int pos=13;
+        in.read();
+        in.read();
+        in.read();
         while(true){
                 int val=in.read();
                 if(val==-1)
@@ -60,7 +64,7 @@ public class MyDecompressorInputStream extends InputStream {
                // int p=in.read() & 0xFF;
                 int p=(in.read()  & 0xFF);
                 for(int i=sizeOfUnit-1; i>=1; i--)
-                    p = (p <<(8)) | (in.read() & 0xFF);
+                    p = (p & 0xFF<<(8)) | (in.read() & 0xFF);
                 dictionary.add(new Pair<>(val,p));
         }
         return dictionary;
