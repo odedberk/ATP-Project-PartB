@@ -107,8 +107,8 @@ public class Maze {
         byte r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2;
         ArrayList<Byte> list = new ArrayList<>();
 
-        r1 = (byte)(maze.length >>8);
-        r2 = (byte)(maze.length);
+        r1=(byte)(maze.length >>8);
+        r2=(byte)(maze.length);
         c1=(byte)(maze[0].length>>8);
         c2=(byte)(maze[0].length);
         sr1=(byte)(getStartPosition().getRowIndex()>>8);
