@@ -23,12 +23,12 @@ public class MyDecompressorInputStream extends InputStream {
         //byte []newByteArray = new byte[12];
         //byte []compressedMaze = new byte[1000000000];
         //in.read(compressedMaze);
-        LinkedList<Integer> byteArr= new LinkedList<>();
+        LinkedList<Integer> unCompressMaze= new LinkedList<>();
         for(int i=0; i<12 ; i++)
-            byteArr.add(in.read());
+            unCompressMaze.add(in.read());
         int sizeOfPair =in.read();
         LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(sizeOfPair);
-        byteArr.add(dictionary.get(0).getKey());
+        unCompressMaze.add(dictionary.get(0).getKey());
         for(int i=1; i<dictionary.size(); i++){
             Stack<Integer> temp = new Stack<>();
             if(i != dictionary.size()-1)
@@ -39,14 +39,14 @@ public class MyDecompressorInputStream extends InputStream {
                 p=dictionary.get(p).getValue();
             }
             while (!temp.isEmpty())
-                byteArr.add(temp.pop());
+                unCompressMaze.add(temp.pop());
         }
-        byte []newByteMaze = new byte[byteArr.size()];
-        for(int i=0; i<newByteMaze.length; i++){
-            int temp =byteArr.get(i);
-            newByteMaze[i]=(byte)temp;
+        //byte []newByteMaze = new byte[byteArr.size()];
+        for(int i=0; i<byteArray.length && i<unCompressMaze.size(); i++){
+            int temp =unCompressMaze.get(i);
+            byteArray[i]=(byte)temp;
         }
-        byteArray=newByteMaze;
+        //byteArray=newByteMaze;
         return 0;
     }
 
