@@ -118,11 +118,11 @@ public class Maze {
         gr1=(byte)(getGoalPosition().getRowIndex()>>8);
         gr2=(byte)(getGoalPosition().getRowIndex());
         gc1=(byte)(getGoalPosition().getColumnIndex()>>8);
-        gc2=(byte)(getGoalPosition().getColumnIndex());
-//        r1=splitInt(maze.length)[0];
-//        r2=splitInt(maze.length)[1];
-//        c1=splitInt(maze[0].length)[0];
-//        c2=splitInt(maze[0].length)[1];
+        gc2=(byte)(getGoalPosition().getColumnIndex ());
+////        r1=splitInt(maze.length)[0];
+////        r2=splitInt(maze.length)[1];
+////        c1=splitInt(maze[0].length)[0];
+////       c2=splitInt(maze[0].length)[1];
 //        sr1=splitInt(getStartPosition().getRowIndex())[0];
 //        sr2=splitInt(getStartPosition().getRowIndex())[1];
 //        sc1=splitInt(getStartPosition().getColumnIndex())[0];
