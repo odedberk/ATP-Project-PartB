@@ -22,13 +22,12 @@ public class MyCompressorOutputStream extends OutputStream {
         if (b.length<12 || b==null)
             throw new IOException();
 
-        Map<String,Integer> codes = new HashMap();
+        Map<String,Integer> codes = new LinkedHashMap<>();
         ArrayList<Pair<Integer,Integer>> array = new ArrayList<>();
         int arrIndex=0;
         int k=12;
         codes.put(String.valueOf(b[k++]),arrIndex);
-        int temp=b[k];
-        array.add(arrIndex++,new Pair(temp,-2));
+        array.add(arrIndex++,new Pair((int)b[k],-2));
 
         for (; k<b.length; k++){
             int pointer=-2;
@@ -43,8 +42,7 @@ public class MyCompressorOutputStream extends OutputStream {
                 codes.put(current,arrIndex);
             }
             else{
-                temp=b[k];
-                array.add(arrIndex,new Pair(temp,pointer));
+                array.add(arrIndex,new Pair((int)b[k],pointer));
                 codes.put(current,arrIndex++);
             }
         }
@@ -56,9 +54,8 @@ public class MyCompressorOutputStream extends OutputStream {
         int pointerSize= array.size()>256 ? (array.size()>65536 ? 3 : 2) : 1; // how many bytes to represent pointer
         write(pointerSize+1); //pointer + val {0/1}
 
-        for (int i=0 ; i<array.size(); i++){//send array
+        for (int i=0 ; i<array.size(); i++){ //send array
             write(array.get(i).getKey());
-            //write(1);
             for (int j=pointerSize-1 ; j>=0 ; j--)
                 write((byte)(array.get(i).getValue() >> 8*j) );
         }
