@@ -32,12 +32,12 @@ public class MyCompressorOutputStream extends OutputStream {
         for (; k<b.length; k++){
             int pointer=-2;
             String current = String.valueOf(b[k]);
-            while (codes.containsKey(current) && k<b.length-2){ // 0 00 01 010
+            while (codes.containsKey(current) && k<b.length-1){ // 0 00 01 010
                 pointer=codes.get(current);
                 k++;
                 current+=String.valueOf(b[k]);
             }
-            if (codes.containsKey(current) && k==b.length-2) {
+            if (codes.containsKey(current) && k==b.length-1) {
                 array.add(arrIndex, new Pair(2, codes.get(current)));
                 codes.put(current,arrIndex);
             }
