@@ -30,7 +30,7 @@ public class MyCompressorOutputStream extends OutputStream {
         array.add(arrIndex++,new Pair(b[k],-2));
 
         for (; k<b.length; k++){
-            int pointer=-1;
+            int pointer=-2;
             String current = String.valueOf(b[k]);
             while (codes.containsKey(current) && k<b.length-2){ // 0 00 01 010
                 pointer=codes.get(current);
