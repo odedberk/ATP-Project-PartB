@@ -22,13 +22,17 @@ public class MyDecompressorInputStream extends InputStream {
     }
     public int read(byte[] byteArray)throws IOException{
         //byte []newByteArray = new byte[12];
-       // byte []compressedMaze = new byte[1000000000];
-
+        //byte []compressedMaze = new byte[1000000000];
         //in.read(compressedMaze);
-        //ArrayList<Integer> temp =
+        ArrayList<Integer> array = new ArrayList<>();
+        int next = in.read();
+        while (next!=-1) {
+            array.add(next);
+            next=in.read();
+        }
+
         LinkedList<Integer> unCompressMaze= new LinkedList<>();
         for(int i=0; i<12 ; i++)
-            //byteArray[i]=(byte)compressedMaze[i];
             unCompressMaze.add(in.read());
         int sizeOfPair =in.read();
         LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(sizeOfPair);
@@ -39,7 +43,7 @@ public class MyDecompressorInputStream extends InputStream {
                temp.add(dictionary.get(i).getKey());
             int p = dictionary.get(i).getValue();
             while (p>=1){
-                temp.add(dictionary.get(p-1).getKey());
+                temp.add(dictionary.get(p).getKey());
                 p=dictionary.get(p).getValue();
             }
             while (!temp.isEmpty())
@@ -64,8 +68,7 @@ public class MyDecompressorInputStream extends InputStream {
                 int val=in.read();
                 if(val==-1)
                     break;
-               // int p=in.read() & 0xFF;
-                int p=(in.read()  & 0xFF);
+                int p=in.read() & 0xFF;
                 for(int i=sizeOfUnit-1; i>=1; i--)
                     p = (p & 0xFF<<(8)) | (in.read() & 0xFF);
                 dictionary.add(new Pair<>(val,p));
