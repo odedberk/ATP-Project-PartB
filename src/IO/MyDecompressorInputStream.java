@@ -28,13 +28,13 @@ public class MyDecompressorInputStream extends InputStream {
             unCompressMaze.add(in.read());
         int sizeOfPair =in.read();
         LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(sizeOfPair);
-        unCompressMaze.add(dictionary.get(0).getKey());
+       // unCompressMaze.add(dictionary.get(0).getKey());
         for(int i=1; i<dictionary.size(); i++){
             Stack<Integer> temp = new Stack<>();
             if(i != dictionary.size()-1)
                temp.add(dictionary.get(i).getKey());
             int p = dictionary.get(i).getValue();
-            while (p>=0){
+            while (p>=1){
                 temp.add(dictionary.get(p).getKey());
                 p=dictionary.get(p).getValue();
             }
@@ -57,7 +57,8 @@ public class MyDecompressorInputStream extends InputStream {
                 int val=in.read();
                 if(val==-1)
                     break;
-                int p=in.read() & 0xFF;
+               // int p=in.read() & 0xFF;
+                int p=(in.read()  & 0xFF);
                 for(int i=sizeOfUnit-1; i>=1; i--)
                     p = (p <<(8)) | (in.read() & 0xFF);
                 dictionary.add(new Pair<>(val,p));
