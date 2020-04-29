@@ -22,21 +22,24 @@ public class MyDecompressorInputStream extends InputStream {
     }
     public int read(byte[] byteArray)throws IOException{
         //byte []newByteArray = new byte[12];
-        //byte []compressedMaze = new byte[1000000000];
+       // byte []compressedMaze = new byte[1000000000];
+
         //in.read(compressedMaze);
+        //ArrayList<Integer> temp =
         LinkedList<Integer> unCompressMaze= new LinkedList<>();
         for(int i=0; i<12 ; i++)
+            //byteArray[i]=(byte)compressedMaze[i];
             unCompressMaze.add(in.read());
         int sizeOfPair =in.read();
         LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(sizeOfPair);
-       // unCompressMaze.add(dictionary.get(0).getKey());
+        unCompressMaze.add(dictionary.get(0).getKey());
         for(int i=1; i<dictionary.size(); i++){
             Stack<Integer> temp = new Stack<>();
             if(i != dictionary.size()-1)
                temp.add(dictionary.get(i).getKey());
             int p = dictionary.get(i).getValue();
             while (p>=1){
-                temp.add(dictionary.get(p).getKey());
+                temp.add(dictionary.get(p-1).getKey());
                 p=dictionary.get(p).getValue();
             }
             while (!temp.isEmpty())
