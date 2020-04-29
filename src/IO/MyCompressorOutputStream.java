@@ -25,12 +25,13 @@ public class MyCompressorOutputStream extends OutputStream {
         Map<String,Integer> codes = new LinkedHashMap<>();
         ArrayList<Pair<Integer,Integer>> array = new ArrayList<>();
         int arrIndex=0;
+        array.add(arrIndex++,new Pair<>(0,0));
         int k=12;
         codes.put(String.valueOf(b[k++]),arrIndex);
-        array.add(arrIndex++,new Pair((int)b[k],-2));
+        array.add(arrIndex++,new Pair((int)b[k],0));
 
         for (; k<b.length; k++){
-            int pointer=-2;
+            int pointer=0;
             String current = String.valueOf(b[k]);
             while (codes.containsKey(current) && k<b.length-1){ // 0 00 01 010
                 pointer=codes.get(current);
