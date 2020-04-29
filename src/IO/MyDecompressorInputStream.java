@@ -34,8 +34,8 @@ public class MyDecompressorInputStream extends InputStream {
         LinkedList<Integer> unCompressMaze= new LinkedList<>();
         for(int i=0; i<12 ; i++)
             unCompressMaze.add(in.read());
-        int sizeOfPair =in.read();
-        LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(sizeOfPair);
+        //int sizeOfPair =in.read();
+        LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(array,array.indexOf(12));
         unCompressMaze.add(dictionary.get(0).getKey());
         for(int i=1; i<dictionary.size(); i++){
             Stack<Integer> temp = new Stack<>();
@@ -58,19 +58,19 @@ public class MyDecompressorInputStream extends InputStream {
         return 0;
     }
 
-    private LinkedList<Pair<Integer,Integer>>getDictionary(int sizeOfUnit)throws IOException{
+    private LinkedList<Pair<Integer,Integer>>getDictionary(ArrayList<Integer> array ,int sizeOfUnit)throws IOException{
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
-        int pos=13;
-        in.read();
-        in.read();
-        in.read();
-        while(true){
-                int val=in.read();
+        int pos=16;
+//        in.read();
+//        in.read();
+//        in.read();
+        while(pos<array.size()){
+                int val=array.indexOf(pos++);
                 if(val==-1)
                     break;
-                int p=in.read() & 0xFF;
+                int p=array.indexOf(pos++) & 0xFF;
                 for(int i=sizeOfUnit-1; i>=1; i--)
-                    p = (p & 0xFF<<(8)) | (in.read() & 0xFF);
+                    p = (p & 0xFF<<(8)) | (array.indexOf(pos++) & 0xFF);
                 dictionary.add(new Pair<>(val,p));
         }
         return dictionary;
