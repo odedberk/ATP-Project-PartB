@@ -24,6 +24,13 @@ public class MyDecompressorInputStream extends InputStream {
         //byte []newByteArray = new byte[12];
         //byte []compressedMaze = new byte[1000000000];
         //in.read(compressedMaze);
+        ArrayList<Integer> array = new ArrayList<>();
+        int next = in.read();
+        while (next!=-1) {
+            array.add(next);
+            next=in.read();
+        }
+
         LinkedList<Integer> unCompressMaze= new LinkedList<>();
         for(int i=0; i<12 ; i++)
             unCompressMaze.add(in.read());
