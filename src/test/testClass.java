@@ -2,6 +2,7 @@ package test;
 
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
+import javafx.util.Pair;
 
 import java.io.*;
 import java.util.*;
@@ -44,24 +45,53 @@ public class testClass {
 //
     public static void main(String[] args) {
 
-        MyMazeGenerator maze = new MyMazeGenerator();
-        Maze m = maze.generate(900 ,200);
-//        m.setGoal(new Position(30,8));
-//        m.setStart(new Position(2,4));
-        byte[] bytes = m.toByteArray();
-//        for (byte b : bytes) {
-//            System.out.print(b+", ");
-//        }
-        System.out.println();
-//        m.print();
+        byte[] b = {0,0,1,1,1,0,0,1,1};
+        Map<String,Integer> codes = new HashMap();
+        ArrayList<Pair<Integer,Integer>> array = new ArrayList<>();
+        int arrIndex=0;
+        int k=0;
+        codes.put(String.valueOf(b[k++]),arrIndex);
+        array.add(arrIndex++,new Pair(b[k],-1));
+        for (; k<b.length; k++){
+            int pointer=-1;
+            String current = String.valueOf(b[k]);
+            while (codes.containsKey(current) && k<b.length-1){ // 0 00 01 010
+                pointer=codes.get(current);
+                k++;
+                current+=String.valueOf(b[k]);
+            }
+            if (codes.containsKey(current) && k==b.length-1) {
+                array.add(arrIndex, new Pair(2, codes.get(current)));
+                codes.put(current,arrIndex);
+            }
+            else{
+                array.add(arrIndex,new Pair(b[k],pointer));
+                codes.put(current,arrIndex++);
+            }
+        }
 
-        System.out.println();
-        Maze m1= new Maze(bytes);
-        System.out.println(m.equals(m1));
-        bytes=m1.toByteArray();
-//        for (byte b : bytes) {
-//            System.out.print(b+", ");
-//        }
+//        byte b = 12;
+//        System.out.println(String.valueOf(b));
+//
+//
+//        MyMazeGenerator maze = new MyMazeGenerator();
+//        Maze m = maze.generate(900 ,200);
+////        m.setGoal(new Position(30,8));
+////        m.setStart(new Position(2,4));
+//        byte[] bytes = m.toByteArray();
+////        for (byte b : bytes) {
+////            System.out.print(b+", ");
+////        }
+//        System.out.println();
+////        m.print();
+//
+//        System.out.println();
+//        Maze m1= new Maze(bytes);
+//        System.out.println(m.equals(m1));
+//        bytes=m1.toByteArray();
+////        for (byte b : bytes) {
+////            System.out.print(b+", ");
+////        }
 
 
 //        AMazeGenerator mm =new SimpleMazeGenerator();
@@ -98,7 +128,7 @@ public class testClass {
 //        System.out.println(val );
 
 //        int sum =0, i=0;
-//        while (sum<900000){
+//        while (sum<1000000){
 //            sum+=i*Math.pow(2,i);
 //            i++;
 //        }
