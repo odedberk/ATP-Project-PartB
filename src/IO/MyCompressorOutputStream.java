@@ -27,7 +27,8 @@ public class MyCompressorOutputStream extends OutputStream {
         int arrIndex=0;
         int k=12;
         codes.put(String.valueOf(b[k++]),arrIndex);
-        array.add(arrIndex++,new Pair(b[k],-2));
+        int temp=b[k];
+        array.add(arrIndex++,new Pair(temp,-2));
 
         for (; k<b.length; k++){
             int pointer=-2;
@@ -42,7 +43,8 @@ public class MyCompressorOutputStream extends OutputStream {
                 codes.put(current,arrIndex);
             }
             else{
-                array.add(arrIndex,new Pair(b[k],pointer));
+                temp=b[k];
+                array.add(arrIndex,new Pair(temp,pointer));
                 codes.put(current,arrIndex++);
             }
         }
@@ -54,7 +56,7 @@ public class MyCompressorOutputStream extends OutputStream {
         int pointerSize= array.size()>256 ? (array.size()>65536 ? 3 : 2) : 1; // how many bytes to represent pointer
         write(pointerSize+1); //pointer + val {0/1}
 
-        for (int i=0 ; i<array.size(); i++){ //send array
+        for (int i=0 ; i<array.size(); i++){//send array
             write(array.get(i).getKey());
             //write(1);
             for (int j=pointerSize-1 ; j>=0 ; j--)
