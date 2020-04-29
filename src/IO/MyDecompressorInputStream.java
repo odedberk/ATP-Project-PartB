@@ -10,21 +10,24 @@ import java.util.Stack;
 
 public class MyDecompressorInputStream extends InputStream {
     private InputStream in;
+
+    public MyDecompressorInputStream(InputStream in) {
+        this.in = in;
+    }
+
     @Override
     public int read() throws IOException {
         return in.read();
     }
     public int read(byte[] byteArray)throws IOException{
         //byte []newByteArray = new byte[12];
-        byte []compressedMaze = new byte[0];
-        in.read(compressedMaze);
+        //byte []compressedMaze = new byte[1000000000];
+        //in.read(compressedMaze);
         LinkedList<Integer> byteArr= new LinkedList<>();
-        for(int i=0; i<12 ; i++){
-                int temp = compressedMaze[i];
-                byteArr.add(temp);
-        }
-        int sizeOfPair =compressedMaze[12];
-        LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(compressedMaze, sizeOfPair);
+        for(int i=0; i<12 ; i++)
+            byteArr.add(in.read());
+        int sizeOfPair =in.read();
+        LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(sizeOfPair);
         byteArr.add(dictionary.get(0).getKey());
         for(int i=1; i<dictionary.size(); i++){
             Stack<Integer> temp = new Stack<>();
@@ -47,17 +50,18 @@ public class MyDecompressorInputStream extends InputStream {
         return 0;
     }
 
-    private LinkedList<Pair<Integer,Integer>>getDictionary(byte []arr ,int sizeOfUnit){
+    private LinkedList<Pair<Integer,Integer>>getDictionary(int sizeOfUnit)throws IOException{
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
         int pos=13;
-        while(pos<arr.length){
-            int val=arr[pos++];
-            int p=arr[pos++] & 0xFF;
-            for(int i=1; i<sizeOfUnit-1; i++){
-                p = ((arr[pos++] & 0xFF) <<(8*i)) | p;
-            }
-            dictionary.add(new Pair<>(val,p));
-            }
+        while(true){
+                int val=in.read();
+                if(val==-1)
+                    break;
+                int p=in.read() & 0xFF;
+                for(int i=sizeOfUnit-1; i>=1; i--)
+                    p = (p <<(8)) | (in.read() & 0xFF);
+                dictionary.add(new Pair<>(val,p));
+        }
         return dictionary;
     }
 }
