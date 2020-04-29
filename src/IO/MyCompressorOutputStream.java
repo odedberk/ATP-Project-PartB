@@ -22,12 +22,12 @@ public class MyCompressorOutputStream extends OutputStream {
         if (b.length<12 || b==null)
             throw new IOException();
 
-        Map<String,Integer> codes = new HashMap();
+        Map<String,Integer> codes = new LinkedHashMap<>();
         ArrayList<Pair<Integer,Integer>> array = new ArrayList<>();
         int arrIndex=0;
         int k=12;
         codes.put(String.valueOf(b[k++]),arrIndex);
-        array.add(arrIndex++,new Pair(b[k],-2));
+        array.add(arrIndex++,new Pair((int)b[k],-2));
 
         for (; k<b.length; k++){
             int pointer=-2;
@@ -42,7 +42,7 @@ public class MyCompressorOutputStream extends OutputStream {
                 codes.put(current,arrIndex);
             }
             else{
-                array.add(arrIndex,new Pair(b[k],pointer));
+                array.add(arrIndex,new Pair((int)b[k],pointer));
                 codes.put(current,arrIndex++);
             }
         }
