@@ -60,7 +60,7 @@ public class MyDecompressorInputStream extends InputStream {
 
     private LinkedList<Pair<Integer,Integer>>getDictionary(ArrayList<Integer> array ,int sizeOfUnit)throws IOException{
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
-        int pos=13;
+        int pos=16;
 //        in.read();
 //        in.read();
 //        in.read();
