@@ -45,7 +45,7 @@ public class testClass {
 //
     public static void main(String[] args) {
 
-        byte[] b = {0,0,1,1,1,0,0,1,1};
+        byte[] b = {0,0,1,1,1,0,0,1,1,2};
         Map<String,Integer> codes = new HashMap();
         ArrayList<Pair<Integer,Integer>> array = new ArrayList<>();
         int arrIndex=0;
