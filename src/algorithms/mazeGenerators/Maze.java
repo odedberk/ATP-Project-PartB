@@ -16,7 +16,6 @@ public class Maze {
         this.maze = maze;
     }
     public Maze(byte [] byteMaze){
-//        int rowSize = ((byteMaze[0] >0 ? byteMaze[0] : byteMaze[0]+256) << 8) | (byteMaze[1]>0? byteMaze[1] : byteMaze[1]+256);
         int rowSize = ((byteMaze[0] & 0xFF) <<8) | (byteMaze[1] & 0xFF);
         int colSize = ((byteMaze[2] & 0xFF) <<8) | (byteMaze[3] & 0xFF);
         start = new Position(((byteMaze[4] & 0xFF) <<8) | (byteMaze[5] & 0xFF), ((byteMaze[6] & 0xFF) <<8) | (byteMaze[7] & 0xFF));
@@ -170,17 +169,7 @@ public class Maze {
 
     @Override
     public boolean equals(Object o) {
-//        return this.toByteArray().equals(((Maze)o).toByteArray());
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Maze maze1 = (Maze) o;
-        if((maze.length != maze1.maze.length) || (maze[0].length != maze1.maze[0].length))
-            return false;
-        for(int i=0; i<maze.length; i++)
-            for(int j=0; j<maze[0].length; j++)
-                if(maze[i][j] != maze1.maze[i][j])
-                    return false;
-        return (start.equals(maze1.start)) && (goal.equals(maze1.goal));
+        return Arrays.equals(this.toByteArray(),((Maze)o).toByteArray());
     }
 
 

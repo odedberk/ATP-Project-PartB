@@ -9,16 +9,25 @@ import java.util.Arrays;
 
 public class RunCompressDecompressMaze {
     public static void main(String[] args) {
-        String mazeFileName = "savedMaze.maze";
+        int row = 1000; int col = 1000;
+        String mazeFileName = "compresseddMaze"+row+"x"+col+".maze";
+        String uncompressed = "rawMaze"+row+"x"+col+".maze"; //TESTING
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
-        Maze maze = mazeGenerator.generate(500, 500); //Generate new maze
+        Maze maze = mazeGenerator.generate(row, col); //Generate new maze
         try {
             // save maze to a file
-            OutputStream out = new MyCompressorOutputStream(new
-                    FileOutputStream(mazeFileName));
-            out.write(maze.toByteArray());
-            out.flush();
-            out.close();
+            OutputStream compressed = new MyCompressorOutputStream(new FileOutputStream(mazeFileName));
+            //TESTING
+//            ObjectOutputStream raw = new ObjectOutputStream(new FileOutputStream(uncompressed));
+//            raw.writeObject(maze.getMaze());
+            OutputStream raw = new FileOutputStream(uncompressed);
+            raw.write(maze.toByteArray());
+            raw.flush();
+            raw.close();
+            //TESTING
+            compressed.write(maze.toByteArray());
+            compressed.flush();
+            compressed.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
