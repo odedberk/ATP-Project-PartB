@@ -36,7 +36,7 @@ public class MyDecompressorInputStream extends InputStream {
         //unCompressMaze.add(array.get(i));
         //int sizeOfPair =in.read();
         LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(array,array.get(12));
-        HashSet<Pair<Integer,String>> set = new HashSet<>();
+//        HashSet<Pair<Integer,String>> set = new HashSet<>();
         ArrayList<String> deCompress = new ArrayList<>();
         deCompress.add("");
         for(int i=1; i<dictionary.size(); i++){
@@ -93,7 +93,7 @@ public class MyDecompressorInputStream extends InputStream {
     }
     private LinkedList<Pair<Integer,Integer>>getDictionary(ArrayList<Integer> array ,int sizeOfUnit)throws IOException{
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
-        int pos=16;
+        int pos=13+sizeOfUnit;
 //        in.read();
 //        in.read();
 //        in.read();
