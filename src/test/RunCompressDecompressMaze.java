@@ -9,8 +9,8 @@ import java.util.Arrays;
 
 public class RunCompressDecompressMaze {
     public static void main(String[] args) {
-        int row = 1000; int col = 100;
-        String mazeFileName = "compresseddMaze"+row+"x"+col+".maze";
+        int row = 500; int col = 500;
+        String mazeFileName = "compressedMaze"+row+"x"+col+".maze";
         String uncompressed = "rawMaze"+row+"x"+col+".maze"; //TESTING
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
         Maze maze = mazeGenerator.generate(row, col); //Generate new maze
@@ -46,11 +46,18 @@ public class RunCompressDecompressMaze {
         boolean areMazesEquals =
                 Arrays.equals(loadedMaze.toByteArray(),maze.toByteArray());
         System.out.println(String.format("Mazes equal: %s",areMazesEquals));
-        File rawFile = new File(uncompressed);
-        File compressedFile = new File(mazeFileName);
-        System.out.println("Uncompressed file size :"+ rawFile.length()+" bytes");
-        System.out.println("Compressed file size :"+compressedFile.length()+" bytes");
-        System.out.println("Compression Ratio : "+ (100-((double)compressedFile.length()/rawFile.length())*100)+" %" );
+
+        long uncompressedSize = new File(uncompressed).length();
+        long compressedSize = new File(mazeFileName).length();
+        System.out.println("----------------------------");
+        System.out.println("Compression Summary for "+row+"x"+col+" maze :");
+        System.out.println("Uncompressed file size :"+ uncompressedSize+" bytes");
+        System.out.println("Compressed file size :"+compressedSize+" bytes");
+        System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
+        System.out.println("----------------------------");
+
+        new File(uncompressed).delete();
+        new File(mazeFileName).delete();
 //maze should be equal to loadedMaze
     }
 }

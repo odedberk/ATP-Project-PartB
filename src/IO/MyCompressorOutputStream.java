@@ -55,12 +55,12 @@ public class MyCompressorOutputStream extends OutputStream {
         int pointerSize= array.size()>256 ? (array.size()>65536 ? 3 : 2) : 1; // how many bytes to represent pointer
         write(pointerSize+1); //pointer + val {0/1}
 
-        for (int i=0 ; i<array.size(); i++){ //send array
-            write(array.get(i).getKey());
-            for (int j=pointerSize-1 ; j>=0 ; j--)
-                write((byte)(array.get(i).getValue() >> 8*j) );
+        for (Pair<Integer, Integer> Pair : array) { //send array
+            write(Pair.getKey());
+            for (int j = pointerSize - 1; j >= 0; j--)
+                write((byte) (Pair.getValue() >> 8 * j));
         }
-//        out.flush();
+        out.close();
         //Finish writing compressed array//
     }
 }
