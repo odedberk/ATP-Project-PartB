@@ -60,7 +60,7 @@ public class MyCompressorOutputStream extends OutputStream {
             for (int j = pointerSize - 1; j >= 0; j--)
                 write((byte) (Pair.getValue() >> 8 * j));
         }
-        out.close();
+//        out.close();
         //Finish writing compressed array//
     }
 }
