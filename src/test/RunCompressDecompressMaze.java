@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class RunCompressDecompressMaze {
     public static void main(String[] args) {
-        int row = 1000; int col = 1000;
+        int row = 1000; int col = 100;
         String mazeFileName = "compresseddMaze"+row+"x"+col+".maze";
         String uncompressed = "rawMaze"+row+"x"+col+".maze"; //TESTING
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
@@ -46,6 +46,11 @@ public class RunCompressDecompressMaze {
         boolean areMazesEquals =
                 Arrays.equals(loadedMaze.toByteArray(),maze.toByteArray());
         System.out.println(String.format("Mazes equal: %s",areMazesEquals));
+        File rawFile = new File(uncompressed);
+        File compressedFile = new File(mazeFileName);
+        System.out.println("Uncompressed file size :"+ rawFile.length()+" bytes");
+        System.out.println("Compressed file size :"+compressedFile.length()+" bytes");
+        System.out.println("Compression Ratio : "+ (100-((double)compressedFile.length()/rawFile.length())*100)+" %" );
 //maze should be equal to loadedMaze
     }
 }
