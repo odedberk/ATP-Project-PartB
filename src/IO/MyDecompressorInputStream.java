@@ -36,28 +36,42 @@ public class MyDecompressorInputStream extends InputStream {
             unCompressMaze.add(array.get(i));
         //int sizeOfPair =in.read();
         LinkedList<Pair<Integer,Integer>> dictionary = getDictionary(array,array.get(12));
+//        for(int i=1; i<dictionary.size(); i++){
+//            Stack<Integer> temp = new Stack<>();
+//            if(i != dictionary.size()-1)
+//               temp.add(dictionary.get(i).getKey());
+//            int p = dictionary.get(i).getValue();
+//            while (p>=1){
+//                temp.add(dictionary.get(p).getKey());
+//                p=dictionary.get(p).getValue();
+//            }
+//            while (!temp.isEmpty()) {
+//                if (temp.peek() == 2)
+//                    temp.pop();
+//                else
+//                    unCompressMaze.add(temp.pop());
+//            }
+//        }
+
         for(int i=1; i<dictionary.size(); i++){
-            Stack<Integer> temp = new Stack<>();
-            if(i != dictionary.size()-1)
-               temp.add(dictionary.get(i).getKey());
+            int temp = dictionary.get(i).getKey();
+            int last = unCompressMaze.size();
+            if (temp!=2)
+                unCompressMaze.add(last,temp);
+
             int p = dictionary.get(i).getValue();
             while (p>=1){
-                temp.add(dictionary.get(p).getKey());
+                unCompressMaze.add(last,dictionary.get(p).getKey());
                 p=dictionary.get(p).getValue();
             }
-            while (!temp.isEmpty()) {
-                if (temp.peek() == 2)
-                    temp.pop();
-                else
-                    unCompressMaze.add(temp.pop());
-            }
+
         }
+
         //byte []newByteMaze = new byte[byteArr.size()];
         for(int i=0; i<byteArray.length && i<unCompressMaze.size(); i++){
             int temp =unCompressMaze.get(i);
             byteArray[i]=(byte)temp;
         }
-        //byteArray=newByteMaze;
         return 0;
     }
 
