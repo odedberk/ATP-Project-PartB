@@ -9,26 +9,16 @@ import java.util.Arrays;
 
 public class RunCompressDecompressMaze {
     public static void main(String[] args) {
-        int row = 500; int col = 500;
-
-        String mazeFileName = "compressedMaze"+row+"x"+col+".maze";
-        String uncompressed = "rawMaze"+row+"x"+col+".maze"; //TESTING
+        String mazeFileName = "savedMaze.maze";
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
-        Maze maze = mazeGenerator.generate(row, col); //Generate new maze
+        Maze maze = mazeGenerator.generate(100, 100); //Generate new maze
         try {
             // save maze to a file
-            OutputStream compressed = new MyCompressorOutputStream(new FileOutputStream(mazeFileName));
-            //TESTING
-//            ObjectOutputStream raw = new ObjectOutputStream(new FileOutputStream(uncompressed));
-//            raw.writeObject(maze.getMaze());
-            OutputStream raw = new FileOutputStream(uncompressed);
-            raw.write(maze.toByteArray());
-            raw.flush();
-            raw.close();
-            //TESTING
-            compressed.write(maze.toByteArray());
-            compressed.flush();
-            compressed.close();
+            OutputStream out = new MyCompressorOutputStream(new
+                    FileOutputStream(mazeFileName));
+            out.write(maze.toByteArray());
+            out.flush();
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,20 +37,6 @@ public class RunCompressDecompressMaze {
         boolean areMazesEquals =
                 Arrays.equals(loadedMaze.toByteArray(),maze.toByteArray());
         System.out.println(String.format("Mazes equal: %s",areMazesEquals));
-
-        long uncompressedSize = new File(uncompressed).length();
-        long compressedSize = new File(mazeFileName).length();
-        System.out.println("----------------------------");
-        System.out.println("Compression Summary for "+row+"x"+col+" maze :");
-        System.out.println("Uncompressed file size :"+ uncompressedSize+" bytes");
-        System.out.println("Compressed file size :"+compressedSize+" bytes");
-        System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
-        System.out.println("----------------------------");
-
-        if (new File(uncompressed).delete())
-            System.out.println("uncompressed deleted");
-        if (new File(mazeFileName).delete())
-            System.out.println("compressed deleted");
 //maze should be equal to loadedMaze
     }
 }
