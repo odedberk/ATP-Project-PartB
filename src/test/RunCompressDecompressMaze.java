@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class RunCompressDecompressMaze {
     public static void main(String[] args) {
         int row = 500; int col = 500;
+
         String mazeFileName = "compressedMaze"+row+"x"+col+".maze";
         String uncompressed = "rawMaze"+row+"x"+col+".maze"; //TESTING
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
@@ -56,8 +57,10 @@ public class RunCompressDecompressMaze {
         System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
         System.out.println("----------------------------");
 
-        new File(uncompressed).delete();
-        new File(mazeFileName).delete();
+        if (new File(uncompressed).delete())
+            System.out.println("uncompressed deleted");
+        if (new File(mazeFileName).delete())
+            System.out.println("compressed deleted");
 //maze should be equal to loadedMaze
     }
 }

@@ -18,6 +18,11 @@ public class MyCompressorOutputStream extends OutputStream {
     }
 
     @Override
+    public void close() throws IOException {
+        out.close();
+    }
+
+    @Override
     public void write(byte[] b) throws IOException {
         if (b.length<12 || b==null)
             throw new IOException();
