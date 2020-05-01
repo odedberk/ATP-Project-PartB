@@ -1,16 +1,14 @@
 package test;
 import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
-import algorithms.mazeGenerators.AMazeGenerator;
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
+import algorithms.mazeGenerators.*;
+
 import java.io.*;
 import java.util.Arrays;
 
 public class CompressionTests {
     public static void main(String[] args) {
-        int[] size = new int[100];
-
+        int[] size = new int[50];
         double[] ratios = new double[size.length];
         String output = "output.csv";
         FileWriter file =null ;
@@ -22,7 +20,7 @@ public class CompressionTests {
         PrintWriter printer = new PrintWriter(file);
 
         for (int i =0 ; i <size.length; i++) {
-            size[i]=10*(i+1);
+            size[i]=20*(i+1);
             ratios[i]=test(size[i]);
             System.out.println("---------------------------");
             System.out.println("Maze size: "+size[i]+"x"+size[i]);
@@ -39,38 +37,21 @@ public class CompressionTests {
     public static double test (int row){
         String mazeFileName = "compressedMaze"+row+"x"+row+".maze";
         String uncompressed = "rawMaze"+row+"x"+row+".maze"; //TESTING
-        AMazeGenerator mazeGenerator = new MyMazeGenerator();
+        AMazeGenerator mazeGenerator = new EmptyMazeGenerator();
         Maze maze = mazeGenerator.generate(row, row); //Generate new maze
         try {
             // save maze to a file
             OutputStream compressed = new MyCompressorOutputStream(new FileOutputStream(mazeFileName));
-            //TESTING
             OutputStream raw = new FileOutputStream(uncompressed);
             raw.write(maze.toByteArray());
             raw.flush();
             raw.close();
-            //TESTING
             compressed.write(maze.toByteArray());
             compressed.flush();
             compressed.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        byte savedMazeBytes[] = new byte[0];
-        try {
-            //read maze from file
-            InputStream in = new MyDecompressorInputStream(new
-                    FileInputStream(mazeFileName));
-            savedMazeBytes = new byte[maze.toByteArray().length];
-            in.read(savedMazeBytes);
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Maze loadedMaze = new Maze(savedMazeBytes);
-        boolean areMazesEquals =
-                Arrays.equals(loadedMaze.toByteArray(),maze.toByteArray());
-//        System.out.println(String.format("Mazes equal: %s",areMazesEquals));
 
         long uncompressedSize = new File(uncompressed).length();
         long compressedSize = new File(mazeFileName).length();
@@ -80,10 +61,9 @@ public class CompressionTests {
 //        System.out.println("Compressed file size :"+compressedSize+" bytes");
 //        System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
 //        System.out.println("----------------------------");
-        if (new File(uncompressed).delete());
-//            System.out.println("uncompressed deleted");
-        if (new File(mazeFileName).delete());
-//            System.out.println("compressed deleted");
+
+        new File(uncompressed).delete();
+        new File(mazeFileName).delete();
 
         return (100-((double)compressedSize/uncompressedSize)*100);
 

@@ -17,6 +17,12 @@ public class MyDecompressorInputStream extends InputStream {
     public int read() throws IOException {
         return in.read();
     }
+
+    @Override
+    public void close() throws IOException {
+        in.close();
+    }
+
     public int read(byte[] byteArray)throws IOException{
 
         ArrayList<Integer> array = new ArrayList<>();
