@@ -1,11 +1,11 @@
 package algorithms.search;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.BitSet;
-
+    /**
+     * abstract class for searching algorithms,
+     * implementing the ISearchingAlgorithm interface
+    */
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
-    String name;
+    String name; //algorithm name
     public String getName(){return name;}
     public abstract int getNumberOfNodesEvaluated();
 

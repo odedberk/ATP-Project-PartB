@@ -70,37 +70,37 @@ public class Maze {
         }
     }
 
-    private String intToBinary(int a,int stringLength){
-        String binary ="";
-        while (a!=0){
-            binary=a%2+binary;
-            a=a/2;
-        }
-        while (binary.length()<stringLength)
-            binary="0"+binary;
-        return binary;
-    }
-    public int binaryToInt(String binary){
-        int l = binary.length();
-        int val=0;
-        while (l>0){
-            if(binary.charAt(l-1)=='1')
-                val+=Math.pow(2,binary.length()-l);
-            l--;
-        }
-        return val;
-    }
-
-    public byte binaryToByte(String binary){
-        int l = binary.length();
-        byte val=0;
-        while (l>0){
-            if(binary.charAt(l-1)=='1')
-                val+=Math.pow(2,binary.length()-l);
-            l--;
-        }
-        return val;
-    }
+//    private String intToBinary(int a,int stringLength){
+//        String binary ="";
+//        while (a!=0){
+//            binary=a%2+binary;
+//            a=a/2;
+//        }
+//        while (binary.length()<stringLength)
+//            binary="0"+binary;
+//        return binary;
+//    }
+//    public int binaryToInt(String binary){
+//        int l = binary.length();
+//        int val=0;
+//        while (l>0){
+//            if(binary.charAt(l-1)=='1')
+//                val+=Math.pow(2,binary.length()-l);
+//            l--;
+//        }
+//        return val;
+//    }
+//
+//    public byte binaryToByte(String binary){
+//        int l = binary.length();
+//        byte val=0;
+//        while (l>0){
+//            if(binary.charAt(l-1)=='1')
+//                val+=Math.pow(2,binary.length()-l);
+//            l--;
+//        }
+//        return val;
+//    }
 
     public byte[] toByteArray(){
         byte r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2;
@@ -153,19 +153,19 @@ public class Maze {
         return bytes;
     }
 
-    private byte[] splitInt(int input){
-        String binary = intToBinary(input,16);
-        String L = binary.substring(0,8), R=binary.substring(8);
-        byte left = binaryToByte(L);
-        byte right = binaryToByte(R);
-        return new byte[]{left,right};
-    }
-
-    private int convertByteToInt(byte b){
-        if(b>=0)
-            return b;
-        return  (int)Math.pow(2,8)+b;
-    }
+//    private byte[] splitInt(int input){
+//        String binary = intToBinary(input,16);
+//        String L = binary.substring(0,8), R=binary.substring(8);
+//        byte left = binaryToByte(L);
+//        byte right = binaryToByte(R);
+//        return new byte[]{left,right};
+//    }
+//
+//    private int convertByteToInt(byte b){
+//        if(b>=0)
+//            return b;
+//        return  (int)Math.pow(2,8)+b;
+//    }
 
     @Override
     public boolean equals(Object o) {

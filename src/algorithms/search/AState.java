@@ -1,22 +1,17 @@
 package algorithms.search;
 
-import java.util.Comparator;
-import java.util.Objects;
-
+    /**
+     * abstract class for a generic state
+     * in a searchable problem
+     */
 public abstract class AState implements Comparable<AState> {
     private String state;
     private double cost;
     private AState cameFrom;
-    private boolean visited=false;
-    private boolean finished=false;
 
     @Override
     public int compareTo(AState o) {
         return Double.compare(cost,o.cost);
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
     }
 
     public AState(String state, double cost, AState cameFrom) {

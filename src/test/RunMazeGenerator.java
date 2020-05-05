@@ -1,19 +1,10 @@
 package test;
 import algorithms.mazeGenerators.*;
 public class RunMazeGenerator {
-    public static void help(int [] arr){
-        int [] l={5};
-        arr[0]=5;
-        arr=l;
-    }
+
+
     public static void main(String[] args) {
-        int []arr= {1};
-        help(arr);
-        System.out.println(arr[0]);
-        System.out.println("newnew");
-//        testMazeGenerator(new EmptyMazeGenerator());
-//        testMazeGenerator(new SimpleMazeGenerator());
-//        testMazeGenerator(new MyMazeGenerator());
+
     }
     private static void testMazeGenerator(IMazeGenerator mazeGenerator) {
         // prints the time it takes the algorithm to run
