@@ -8,6 +8,10 @@ import java.util.Arrays;
 
 public class CompressionTests {
     public static void main(String[] args) {
+        runStatistics();
+        test(500,true);
+    }
+    public static void runStatistics (){
         int[] size = new int[50];
         double[] ratios = new double[size.length];
         String output = "output.csv";
@@ -21,7 +25,7 @@ public class CompressionTests {
 
         for (int i =0 ; i <size.length; i++) {
             size[i]=20*(i+1);
-            ratios[i]=test(size[i]);
+            ratios[i]=test(size[i],false);
             System.out.println("---------------------------");
             System.out.println("Maze size: "+size[i]+"x"+size[i]);
             System.out.println("Compression Ration: "+ratios[i]);
@@ -29,12 +33,8 @@ public class CompressionTests {
             printer.write(size[i]+", "+ratios[i]+"\n");
         }
         printer.close();
-
-
-//maze should be equal to loadedMaze
     }
-
-    public static double test (int row){
+    public static double test (int row, boolean debug){
         String mazeFileName = "compressedMaze"+row+"x"+row+".maze";
         String uncompressed = "rawMaze"+row+"x"+row+".maze"; //TESTING
         AMazeGenerator mazeGenerator = new EmptyMazeGenerator();
@@ -55,13 +55,14 @@ public class CompressionTests {
 
         long uncompressedSize = new File(uncompressed).length();
         long compressedSize = new File(mazeFileName).length();
-//        System.out.println("----------------------------");
-//        System.out.println("Compression Summary for "+row+"x"+row+" maze :");
-//        System.out.println("Uncompressed file size :"+ uncompressedSize+" bytes");
-//        System.out.println("Compressed file size :"+compressedSize+" bytes");
-//        System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
-//        System.out.println("----------------------------");
-
+        if (debug) {
+        System.out.println("----------------------------");
+        System.out.println("Compression Summary for "+row+"x"+row+" maze :");
+        System.out.println("Uncompressed file size :"+ uncompressedSize+" bytes");
+        System.out.println("Compressed file size :"+compressedSize+" bytes");
+        System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
+        System.out.println("----------------------------");
+        }
         new File(uncompressed).delete();
         new File(mazeFileName).delete();
 
