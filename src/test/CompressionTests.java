@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class CompressionTests {
     public static void main(String[] args) {
-        runStatistics();
+//        runStatistics();
         test(500,true);
     }
     public static void runStatistics (){
@@ -37,7 +37,7 @@ public class CompressionTests {
     public static double test (int row, boolean debug){
         String mazeFileName = "compressedMaze"+row+"x"+row+".maze";
         String uncompressed = "rawMaze"+row+"x"+row+".maze"; //TESTING
-        AMazeGenerator mazeGenerator = new EmptyMazeGenerator();
+        AMazeGenerator mazeGenerator = new MyMazeGenerator();
         Maze maze = mazeGenerator.generate(row, row); //Generate new maze
         try {
             // save maze to a file
