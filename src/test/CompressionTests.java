@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class CompressionTests {
     public static void main(String[] args) {
 //        runStatistics();
-        test(500,true);
+        test(50,true);
     }
     public static void runStatistics (){
         int[] size = new int[50];
