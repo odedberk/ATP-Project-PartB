@@ -31,6 +31,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             int [] sizes = (int[]) input.readObject();
             Maze newMaze = generator.generate(sizes[0],sizes[1]);
             out.write(newMaze.toByteArray());
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
