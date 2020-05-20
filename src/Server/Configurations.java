@@ -25,5 +25,6 @@ public class Configurations {
 
     public static void main(String[] args) {
         System.out.println(getProperty("test"));
+        System.out.println(System.getProperty("java.io.tmpdir"));
     }
 }
