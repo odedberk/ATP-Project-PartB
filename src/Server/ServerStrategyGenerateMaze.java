@@ -1,27 +1,27 @@
 package Server;
 
 import IO.MyCompressorOutputStream;
-import algorithms.mazeGenerators.AMazeGenerator;
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
+import algorithms.mazeGenerators.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
+import java.util.Collection;
 
 public class ServerStrategyGenerateMaze implements IServerStrategy {
-    private AMazeGenerator generator = new MyMazeGenerator();
+    //private AMazeGenerator generator;
 
-    public ServerStrategyGenerateMaze() {}
-
-    public AMazeGenerator getGenerator() {
-        return generator;
-    }
-
-    public void setGenerator(AMazeGenerator generator) {
-        this.generator = generator;
-    }
+//    public ServerStrategyGenerateMaze() {
+//    }
+//
+//    public AMazeGenerator getGenerator() {
+//        return generator;
+//    }
+//
+//    public void setGenerator(AMazeGenerator generator) {
+//        this.generator = generator;
+//    }
 
     @Override
     public void handleClient(InputStream inputStream, OutputStream outputStream) {
@@ -29,6 +29,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
         try {
             ObjectInputStream input= new ObjectInputStream(inputStream);
             int [] sizes = (int[]) input.readObject();
+            AMazeGenerator generator=fGenerator();
             Maze newMaze = generator.generate(sizes[0],sizes[1]);
             out.write(newMaze.toByteArray());
             out.flush();
@@ -37,6 +38,21 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
+
+    private AMazeGenerator fGenerator(){
+        String generatorType = Configurations.getProperty("generator");
+        AMazeGenerator generator;
+        if(generatorType.equals("MyMazeGenerato")){
+            generator = new MyMazeGenerator();
+        }
+        else if(generatorType.equals("SimpleMazeGenerator")){
+            generator = new SimpleMazeGenerator();
+        }
+        else {
+            generator = new EmptyMazeGenerator();
+        }
+        return generator;
+    }
+
 }
