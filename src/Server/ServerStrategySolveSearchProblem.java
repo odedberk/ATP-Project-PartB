@@ -1,10 +1,7 @@
 package Server;
 
-import algorithms.mazeGenerators.Maze;
-import algorithms.search.BreadthFirstSearch;
-import algorithms.search.ISearchingAlgorithm;
-import algorithms.search.SearchableMaze;
-import algorithms.search.Solution;
+import algorithms.mazeGenerators.*;
+import algorithms.search.*;
 
 import java.io.*;
 
@@ -20,7 +17,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        ISearchingAlgorithm solver = new BreadthFirstSearch(); //change to config.getProperty("algorithm")
+        ISearchingAlgorithm solver = getSolver();
         Solution sol = solver.solve(new SearchableMaze(toSolve));
         try {
                 toClient.writeObject(sol);
@@ -28,5 +25,20 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private ISearchingAlgorithm getSolver(){
+        String algorithm = Configurations.getProperty("algorithm");
+        ISearchingAlgorithm solver=new BreadthFirstSearch();
+        if(algorithm.equals("BreadthFirstSearch")){
+            solver = new BreadthFirstSearch();
+        }
+        else if(algorithm.equals("BestFirstSearch")){
+            solver = new BestFirstSearch();
+        }
+        else if (algorithm.equals("DepthFirstSearch")) {
+            solver = new DepthFirstSearch();
+        }
+        return solver;
     }
 }
