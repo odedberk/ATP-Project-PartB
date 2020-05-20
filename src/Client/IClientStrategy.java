@@ -1,5 +1,7 @@
 package Client;
 
-public interface IClientStrategy {
+import java.io.*;
 
+public interface IClientStrategy {
+    void clientStrategy(InputStream inFromServer, OutputStream outToServer);
 }
