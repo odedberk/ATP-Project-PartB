@@ -10,19 +10,12 @@ import java.io.OutputStream;
 import java.util.Collection;
 
 public class ServerStrategyGenerateMaze implements IServerStrategy {
-    //private AMazeGenerator generator;
 
-//    public ServerStrategyGenerateMaze() {
-//    }
-//
-//    public AMazeGenerator getGenerator() {
-//        return generator;
-//    }
-//
-//    public void setGenerator(AMazeGenerator generator) {
-//        this.generator = generator;
-//    }
-
+    /**
+     * get maze size from client and return the a compressed maze to the client
+     * @param inputStream
+     * @param outputStream
+     */
     @Override
     public void handleClient(InputStream inputStream, OutputStream outputStream) {
         MyCompressorOutputStream out = new MyCompressorOutputStream(outputStream);
@@ -40,10 +33,14 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
         }
     }
 
+    /**
+     * function to get the most update AMazeGenerator from the Configurations file
+     * @return AMazeGenerator
+     */
     private AMazeGenerator fGenerator(){
         String generatorType = Configurations.getProperty("generator");
         AMazeGenerator generator;
-        if(generatorType.equals("MyMazeGenerato")){
+        if(generatorType.equals("MyMazeGenerator")){
             generator = new MyMazeGenerator();
         }
         else if(generatorType.equals("SimpleMazeGenerator")){
