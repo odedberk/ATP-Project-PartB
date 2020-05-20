@@ -1,8 +1,8 @@
 package Server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 public class Configurations {
@@ -17,15 +17,13 @@ public class Configurations {
             e.printStackTrace();
         }
     }
-    public static void setProperty(String name, String val) {
-        if (prop==null)
-            initProp();
-        prop.setProperty(name,val);
-    }
-
-    public static String getProperty(String name){
+        public static String getProperty(String name){
         if (prop==null)
             initProp();
         return prop.getProperty(name);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getProperty("test"));
     }
 }
