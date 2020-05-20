@@ -1,6 +1,8 @@
 package Server;
 
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.BreadthFirstSearch;
+import algorithms.search.ISearchingAlgorithm;
 
 import java.io.*;
 
@@ -15,6 +17,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        ISearchingAlgorithm solver = new BreadthFirstSearch(); //change to config
         String phrase;
         try {
             String reversedPhrase;
