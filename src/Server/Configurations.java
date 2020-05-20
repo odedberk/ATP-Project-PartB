@@ -18,11 +18,14 @@ public class Configurations {
         }
     }
     public static void setProperty(String name, String val) {
-        initProp();
+        if (prop==null)
+            initProp();
         prop.setProperty(name,val);
     }
 
     public static String getProperty(String name){
+        if (prop==null)
+            initProp();
         return prop.getProperty(name);
     }
 }
