@@ -26,7 +26,7 @@ public class Server {
     public void start() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            serverSocket.setSoTimeout(1000);
+            //serverSocket.setSoTimeout(1000);
             String poolMax = Configurations.getProperty("pool");
             ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(Integer.parseInt(poolMax));
             while (!stop)
