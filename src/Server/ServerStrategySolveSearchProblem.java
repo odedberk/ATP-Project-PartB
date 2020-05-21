@@ -21,7 +21,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             e.printStackTrace();
         }
         SearchableMaze searchableMaze = new SearchableMaze(toSolve);
-        ISearchingAlgorithm solver = getSolver();
+//        ISearchingAlgorithm solver = getSolver();
+        ISearchingAlgorithm solver = new BreadthFirstSearch();  //DEBUG
         Solution sol = getOrSolve(searchableMaze,solver);
         try {
                 toClient.writeObject(sol);
@@ -62,6 +63,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             }
         }
         if (!exists) {
+            System.out.println("This maze wasnt solved before"); // DEBUG
             solution=solver.solve(toSearch);
             saveToFile(toSearch.getMaze(), solution);
         }

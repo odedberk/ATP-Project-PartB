@@ -3,7 +3,7 @@ package Client;
 import java.io.IOException;
 import java.net.*;
 
-public class Client {
+public class Client extends Thread {
     private InetAddress address;
     private int serverPort;
     private IClientStrategy clientStrategy;
@@ -15,10 +15,10 @@ public class Client {
     }
 
     public void communicateWithServer() {
-        start();
+        run();
     }
 
-    public void start()
+    public void run()
     {
         try {
             Socket socket = new Socket(address,serverPort);

@@ -1,10 +1,12 @@
 package algorithms.search;
 
-    /**
+import java.io.Serializable;
+
+/**
      * abstract class for a generic state
      * in a searchable problem
      */
-public abstract class AState implements Comparable<AState> {
+public abstract class AState implements Comparable<AState>, Serializable {
     private String state;
     private double cost;
     private AState cameFrom;

@@ -3,10 +3,7 @@ package Server;
 import IO.MyCompressorOutputStream;
 import algorithms.mazeGenerators.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Collection;
 
 public class ServerStrategyGenerateMaze implements IServerStrategy {
@@ -18,14 +15,27 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
      */
     @Override
     public void handleClient(InputStream inputStream, OutputStream outputStream) {
-        MyCompressorOutputStream out = new MyCompressorOutputStream(outputStream);
         try {
+            ObjectOutputStream out = new ObjectOutputStream(outputStream);
             ObjectInputStream input= new ObjectInputStream(inputStream);
+
+            ByteArrayOutputStream compressed = new ByteArrayOutputStream();
+            MyCompressorOutputStream compress = new MyCompressorOutputStream(compressed);
+
+            System.out.println("received streams in server strategy"); //DEBUG
             int [] sizes = (int[]) input.readObject();
-            AMazeGenerator generator=fGenerator();
+            System.out.println(sizes[0]+" "+sizes[1]); //DEBUG
+//            AMazeGenerator generator=fGenerator();
+            AMazeGenerator generator=new MyMazeGenerator(); //DEBUG
             Maze newMaze = generator.generate(sizes[0],sizes[1]);
-            out.write(newMaze.toByteArray());
+//            newMaze.print(); //DEBUG
+
+            compress.write(newMaze.toByteArray());
+            compress.flush();
+
+            out.writeObject(compressed.toByteArray());
             out.flush();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
