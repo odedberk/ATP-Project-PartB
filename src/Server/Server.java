@@ -1,7 +1,5 @@
 package Server;
 
-import org.junit.jupiter.api.parallel.Execution;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,18 +31,18 @@ public class Server implements Runnable{
         try {
             InputStream inputClient = clientSocket.getInputStream();
             OutputStream outputClient = clientSocket.getOutputStream();
-            System.out.println("recieved streams"); //DEBUG
+//            System.out.println("Server : connected to client"); // DEBUG
+            Thread.sleep(0); // DEBUG
             this.serverStrategy.handleClient(inputClient, outputClient);
             inputClient.close();
             outputClient.close();
             clientSocket.close();
-        } catch (IOException  e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public void stop() {
-        System.out.println("The server has stopped!");
         this.stop = true;
     }
 
@@ -55,12 +53,11 @@ public class Server implements Runnable{
             serverSocket.setSoTimeout(interval);
 //            String poolMax = Configurations.getProperty("pool"); //DEBUG
 //            ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(Integer.parseInt(poolMax)); //DEBUG
-            ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(10);
+            ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(2);
             while (!stop)
             {
                 try {
                     Socket clientSocket = serverSocket.accept();
-                    System.out.println("Server : connected to client");
                     threadPoolExecutor.execute(() ->{
                         clientHandle(clientSocket);
                     });
@@ -71,6 +68,7 @@ public class Server implements Runnable{
             }
             serverSocket.close();
             threadPoolExecutor.shutdown();
+            System.out.println("The server has stopped!");
         } catch (IOException e) {
             e.printStackTrace();
         }

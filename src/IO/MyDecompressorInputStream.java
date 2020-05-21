@@ -14,24 +14,38 @@ public class MyDecompressorInputStream extends InputStream {
     }
 
     @Override
-    public int read() throws IOException {
-        return in.read();
+    public int read() {
+        try {
+            return in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
-    public void close() throws IOException {
-        in.close();
+    public void close() {
+        try {
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public int read(byte[] byteArray)throws IOException{
+    public int read(byte[] byteArray){
 
         ArrayList<Integer> array = new ArrayList<>();
-        int next = in.read();
+        int next = 0;
+        try {
+            next = in.read();
+
         while (next!=-1) { // read received array
             array.add(next);
             next=in.read();
         }
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         for(int i=0; i<12 ; i++) { // get dimensions
             int temp = array.get(i);
             byteArray[i] =(byte)temp;

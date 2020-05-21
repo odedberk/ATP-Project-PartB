@@ -13,19 +13,31 @@ public class MyCompressorOutputStream extends OutputStream {
         this.out = out;
     }
     @Override
-    public void write(int b) throws IOException {
-        out.write(b);
+    public void write(int b) {
+        try {
+            out.write(b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void close() throws IOException {
-        out.close();
+    public void close() {
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void write(byte[] b) throws IOException {
+    public void write(byte[] b) {
         if (b.length<12 || b==null)
-            throw new IOException();
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         Map<String,Integer> codes = new LinkedHashMap<>();
         ArrayList<Pair<Integer,Integer>> array = new ArrayList<>();

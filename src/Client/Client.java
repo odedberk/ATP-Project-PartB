@@ -3,7 +3,7 @@ package Client;
 import java.io.IOException;
 import java.net.*;
 
-public class Client extends Thread {
+public class Client implements Runnable {
     private InetAddress address;
     private int serverPort;
     private IClientStrategy clientStrategy;
@@ -15,7 +15,7 @@ public class Client extends Thread {
     }
 
     public void communicateWithServer() {
-        run();
+        new Thread(this).start();
     }
 
     public void run()

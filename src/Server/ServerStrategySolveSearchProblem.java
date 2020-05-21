@@ -8,7 +8,7 @@ import java.util.Hashtable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
-    public static Hashtable<byte[],String> solvedMazes= new Hashtable<>(); //<Maze,filePath>
+    public static Hashtable<String, String> solvedMazes= new Hashtable<>(); //<Maze,filePath>
     private static AtomicInteger fileID = new AtomicInteger(0);
     @Override
     public void handleClient(InputStream inputStream, OutputStream outputStream) throws IOException {
@@ -24,6 +24,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
 //        ISearchingAlgorithm solver = getSolver();
         ISearchingAlgorithm solver = new BreadthFirstSearch();  //DEBUG
         Solution sol = getOrSolve(searchableMaze,solver);
+        Solution sol2 = getOrSolve(searchableMaze,solver);
+
         try {
                 toClient.writeObject(sol);
                 toClient.flush();
@@ -35,14 +37,16 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
     private ISearchingAlgorithm getSolver(){
         String algorithm = Configurations.getProperty("algorithm");
         ISearchingAlgorithm solver=new BreadthFirstSearch();
-        if(algorithm.equals("BreadthFirstSearch")){
-            solver = new BreadthFirstSearch();
-        }
-        else if(algorithm.equals("BestFirstSearch")){
-            solver = new BestFirstSearch();
-        }
-        else if (algorithm.equals("DepthFirstSearch")) {
-            solver = new DepthFirstSearch();
+        switch (algorithm) {
+            case "BreadthFirstSearch":
+                solver = new BreadthFirstSearch();
+                break;
+            case "BestFirstSearch":
+                solver = new BestFirstSearch();
+                break;
+            case "DepthFirstSearch":
+                solver = new DepthFirstSearch();
+                break;
         }
         return solver;
     }
@@ -51,10 +55,11 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         boolean exists=false;
         Solution solution=null;
         byte[] maze = toSearch.getMaze().toByteArray();
-        if (solvedMazes.contains(maze)){
+        if (solvedMazes.contains(maze.toString())){
             exists=true;
             try {
                 FileInputStream fileInputStream = new FileInputStream(System.getProperty("java.io.tmpdir")+"\\"+solvedMazes.get(maze));
+//                FileInputStream fileInputStream = new FileInputStream(System.getProperty("java.io.tmpdir")+"\\mazeSol_0"); //DEBUG
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 solution = (Solution)objectInputStream.readObject();
                 objectInputStream.close();
@@ -78,12 +83,9 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             objectOutput.writeObject(sol);
             objectOutput.flush();
             objectOutput.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        solvedMazes.put(toSave.toByteArray(),fileName);
+        solvedMazes.put(toSave.toByteArray().toString(),fileName);
     }
 }
