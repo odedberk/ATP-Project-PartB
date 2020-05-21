@@ -1,6 +1,8 @@
 package algorithms.mazeGenerators;
 
-public abstract class AMazeGenerator implements IMazeGenerator {
+import java.io.Serializable;
+
+public abstract class AMazeGenerator implements IMazeGenerator, Serializable {
     public int steps=0; //Debug - recursions taken to create the maze
 
     @Override
