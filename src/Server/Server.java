@@ -13,12 +13,14 @@ import java.util.concurrent.Executors;
 public class Server {
 
     private int port;//The port
+    private int interval;
     private IServerStrategy serverStrategy;//The strategy for handling clients
     private volatile boolean stop;
 
 
-    public Server(int i, int i1, IServerStrategy strategy) {
+    public Server(int i, int inter, IServerStrategy strategy) {
         port = i;
+        interval=inter;
         serverStrategy = strategy;
         stop = false;
     }
@@ -26,7 +28,7 @@ public class Server {
     public void start() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            serverSocket.setSoTimeout(1000);
+            serverSocket.setSoTimeout(interval);
             String poolMax = Configurations.getProperty("pool");
             ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(Integer.parseInt(poolMax));
             while (!stop)
