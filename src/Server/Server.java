@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server extends Thread{
+public class Server implements Runnable{
 
     private int port;//The port
     private int interval;
@@ -25,10 +25,34 @@ public class Server extends Thread{
         stop = false;
     }
 
+    public void start() {
+       new Thread(this).start();
+    }
+
+    private void clientHandle(Socket clientSocket) {
+        try {
+            InputStream inputClient = clientSocket.getInputStream();
+            OutputStream outputClient = clientSocket.getOutputStream();
+            System.out.println("recieved streams"); //DEBUG
+            this.serverStrategy.handleClient(inputClient, outputClient);
+            inputClient.close();
+            outputClient.close();
+            clientSocket.close();
+        } catch (IOException  e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stop() {
+        System.out.println("The server has stopped!");
+        this.stop = true;
+    }
+
+    @Override
     public void run() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            serverSocket.setSoTimeout(1000);
+            serverSocket.setSoTimeout(interval);
 //            String poolMax = Configurations.getProperty("pool"); //DEBUG
 //            ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(Integer.parseInt(poolMax)); //DEBUG
             ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(10);
@@ -51,23 +75,4 @@ public class Server extends Thread{
             e.printStackTrace();
         }
     }
-
-    private void clientHandle(Socket clientSocket) {
-        try {
-            InputStream inputClient = clientSocket.getInputStream();
-            OutputStream outputClient = clientSocket.getOutputStream();
-            System.out.println("recieved streams"); //DEBUG
-            this.serverStrategy.handleClient(inputClient, outputClient);
-            inputClient.close();
-            outputClient.close();
-            clientSocket.close();
-        } catch (IOException  e) {
-            e.printStackTrace();
-        }
-    }
-
-//    public void stop() {
-//        System.out.println("The server has stopped!");
-//        this.stop = true;
-//    }
 }
