@@ -22,9 +22,9 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             ByteArrayOutputStream compressed = new ByteArrayOutputStream();
             MyCompressorOutputStream compress = new MyCompressorOutputStream(compressed);
 
-            System.out.println("received streams in server strategy"); //DEBUG
+//            System.out.println("received streams in server strategy"); //DEBUG
             int [] sizes = (int[]) input.readObject();
-            System.out.println(sizes[0]+" "+sizes[1]); //DEBUG
+//            System.out.println(sizes[0]+" "+sizes[1]); //DEBUG
 //            AMazeGenerator generator=fGenerator();
             AMazeGenerator generator=new MyMazeGenerator(); //DEBUG
             Maze newMaze = generator.generate(sizes[0],sizes[1]);

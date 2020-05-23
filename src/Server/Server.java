@@ -32,12 +32,12 @@ public class Server implements Runnable{
             InputStream inputClient = clientSocket.getInputStream();
             OutputStream outputClient = clientSocket.getOutputStream();
 //            System.out.println("Server : connected to client"); // DEBUG
-            Thread.sleep(0); // DEBUG
+//            Thread.sleep(0); // DEBUG
             this.serverStrategy.handleClient(inputClient, outputClient);
             inputClient.close();
             outputClient.close();
             clientSocket.close();
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -53,14 +53,12 @@ public class Server implements Runnable{
             serverSocket.setSoTimeout(interval);
 //            String poolMax = Configurations.getProperty("pool"); //DEBUG
 //            ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(Integer.parseInt(poolMax)); //DEBUG
-            ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(2);
+            ExecutorService threadPoolExecutor = Executors.newCachedThreadPool();
             while (!stop)
             {
                 try {
                     Socket clientSocket = serverSocket.accept();
-                    threadPoolExecutor.execute(() ->{
-                        clientHandle(clientSocket);
-                    });
+                    threadPoolExecutor.execute(() -> clientHandle(clientSocket));
                 }
                 catch (IOException e) {
                     System.out.println("Where are the clients??");

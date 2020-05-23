@@ -8,7 +8,7 @@ import java.util.Hashtable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
-    public static Hashtable<String, String> solvedMazes= new Hashtable<>(); //<Maze,filePath>
+    public static Hashtable<Integer, String> solvedMazes= new Hashtable<>(); //<Maze,filePath>
     private static AtomicInteger fileID = new AtomicInteger(0);
     @Override
     public void handleClient(InputStream inputStream, OutputStream outputStream) throws IOException {
@@ -24,7 +24,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
 //        ISearchingAlgorithm solver = getSolver();
         ISearchingAlgorithm solver = new BreadthFirstSearch();  //DEBUG
         Solution sol = getOrSolve(searchableMaze,solver);
-        Solution sol2 = getOrSolve(searchableMaze,solver);
+//        Solution sol2 = getOrSolve(searchableMaze,solver); //DEBUG
 
         try {
                 toClient.writeObject(sol);
@@ -54,28 +54,30 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
     private Solution getOrSolve(SearchableMaze toSearch, ISearchingAlgorithm solver){
         boolean exists=false;
         Solution solution=null;
-        byte[] maze = toSearch.getMaze().toByteArray();
-        if (solvedMazes.contains(maze.toString())){
+        int hashcode = toSearch.getMaze().hashCode();
+        if (solvedMazes.containsKey(hashcode)){
             exists=true;
             try {
-                FileInputStream fileInputStream = new FileInputStream(System.getProperty("java.io.tmpdir")+"\\"+solvedMazes.get(maze));
+                FileInputStream fileInputStream = new FileInputStream(System.getProperty("java.io.tmpdir")+"\\"+solvedMazes.get(hashcode));
 //                FileInputStream fileInputStream = new FileInputStream(System.getProperty("java.io.tmpdir")+"\\mazeSol_0"); //DEBUG
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 solution = (Solution)objectInputStream.readObject();
+//                if (solution!=null)
+//                    System.out.println("Solution found on File"); // DEBUG
                 objectInputStream.close();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
         if (!exists) {
-            System.out.println("This maze wasnt solved before"); // DEBUG
+//            System.out.println("This maze wasnt solved before"); // DEBUG
             solution=solver.solve(toSearch);
-            saveToFile(toSearch.getMaze(), solution);
+            saveToFile(hashcode, solution);
         }
         return solution;
     }
 
-    private void saveToFile (Maze toSave, Solution sol){
+    private void saveToFile (int toSave, Solution sol){
         String fileName = "mazeSol_"+fileID.getAndIncrement();
         try {
             FileOutputStream outputStream = new FileOutputStream(System.getProperty("java.io.tmpdir")+"\\"+fileName);
@@ -86,6 +88,6 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        solvedMazes.put(toSave.toByteArray().toString(),fileName);
+        solvedMazes.put(toSave,fileName);
     }
 }
