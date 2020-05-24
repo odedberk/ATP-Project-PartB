@@ -84,7 +84,6 @@ public class MyCompressorOutputStream extends OutputStream {
 
     @Override
     public void write(byte[] b) {
-        ByteArrayOutputStream test = new ByteArrayOutputStream();
         if (b.length<12 || b==null)
             try {
                 throw new IOException();
@@ -105,7 +104,5 @@ public class MyCompressorOutputStream extends OutputStream {
             }
             write(cell);
         }
-        System.out.println("");
-
     }
 }
