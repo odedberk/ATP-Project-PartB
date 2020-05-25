@@ -83,10 +83,13 @@ public class MyDecompressorInputStream extends InputStream {
         int pos=13+sizeOfUnit;
 
         dictionary.add(new Pair<>(0,0));
-        while(pos<array.size()-1){
+        while(pos<array.size()-2){
                 int val=(array.get(pos)>>7)&1;
-                if(val==-1)
-                    break;
+                if(pos+sizeOfUnit+1==array.size())
+                    if(array.get(pos+sizeOfUnit)==2)
+                        val=2;
+                //if(val==-1)
+                  //  break;
                 int p=(array.get(pos++)&127) & 0xFF;
                 for(int i=sizeOfUnit-2; i>=0; i--)
                     p = (p <<(8)) | (array.get(pos++) & 0xFF);
