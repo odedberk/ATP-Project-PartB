@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class CompressionTests {
     public static void main(String[] args) {
 //        runStatistics();
-        test(50,true);
+        test(10,true);
     }
     public static void runStatistics (){
         int[] size = new int[50];
@@ -60,7 +60,7 @@ public class CompressionTests {
         System.out.println("Compression Summary for "+row+"x"+row+" maze :");
         System.out.println("Uncompressed file size :"+ uncompressedSize+" bytes");
         System.out.println("Compressed file size :"+compressedSize+" bytes");
-        System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
+        System.out.println("Compression Ratio : "+ (((double)compressedSize/uncompressedSize)*100)+" %" );
         System.out.println("----------------------------");
         }
         new File(uncompressed).delete();
