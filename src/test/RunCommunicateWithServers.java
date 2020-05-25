@@ -23,7 +23,7 @@ public class RunCommunicateWithServers {
 
         //Communicating with servers
 //        CommunicateWithServer_MazeGenerating();
-//        for (int i =0 ; i<5; i++)
+        for (int i =0 ; i<5; i++)
             CommunicateWithServer_SolveSearchProblem();
         //CommunicateWithServer_StringReverser();
 

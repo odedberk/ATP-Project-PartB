@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Server implements Runnable{
 
@@ -64,10 +65,12 @@ public class Server implements Runnable{
                     System.out.println("Where are the clients??");
                 }
             }
+
             serverSocket.close();
+            threadPoolExecutor.awaitTermination(50000, TimeUnit.SECONDS);
             threadPoolExecutor.shutdown();
             System.out.println("The server has stopped!");
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
