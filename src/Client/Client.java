@@ -22,7 +22,7 @@ public class Client implements Runnable {
     {
         try {
             Socket socket = new Socket(address,serverPort);
-//            System.out.println("Client is connected to server!");
+            System.out.println("Client is connected to server!");
             clientStrategy.clientStrategy(socket.getInputStream(),socket.getOutputStream());
             socket.close();
         } catch (IOException e) {

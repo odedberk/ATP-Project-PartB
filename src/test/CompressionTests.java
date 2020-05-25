@@ -9,10 +9,10 @@ import java.util.Arrays;
 public class CompressionTests {
     public static void main(String[] args) {
 //        runStatistics();
-        test(10,true);
+        test(120,true);
     }
     public static void runStatistics (){
-        int[] size = new int[50];
+        int[] size = new int[100];
         double[] ratios = new double[size.length];
         String output = "output.csv";
         FileWriter file =null ;
@@ -24,7 +24,7 @@ public class CompressionTests {
         PrintWriter printer = new PrintWriter(file);
 
         for (int i =0 ; i <size.length; i++) {
-            size[i]=20*(i+1);
+            size[i]=10*(i+1);
             ratios[i]=test(size[i],false);
             System.out.println("---------------------------");
             System.out.println("Maze size: "+size[i]+"x"+size[i]);
@@ -60,7 +60,7 @@ public class CompressionTests {
         System.out.println("Compression Summary for "+row+"x"+row+" maze :");
         System.out.println("Uncompressed file size :"+ uncompressedSize+" bytes");
         System.out.println("Compressed file size :"+compressedSize+" bytes");
-        System.out.println("Compression Ratio : "+ (((double)compressedSize/uncompressedSize)*100)+" %" );
+        System.out.println("Compression Ratio : "+ (100-((double)compressedSize/uncompressedSize)*100)+" %" );
         System.out.println("----------------------------");
         }
         new File(uncompressed).delete();
