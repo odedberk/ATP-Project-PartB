@@ -46,7 +46,7 @@ public class MyCompressorOutputStream extends OutputStream {
     }
 
     public void writeBig (byte[] b) {
-        if (b.length<12 || b==null)
+        if (b.length<12)
             try {
                 throw new IOException();
             } catch (IOException e) {
@@ -64,7 +64,7 @@ public class MyCompressorOutputStream extends OutputStream {
         for (; k<b.length; k++){
             int pointer=0;
             String current = String.valueOf(b[k]);
-            while (codes.containsKey(current) && k<b.length-1){ // 0 00 01 010
+            while (codes.containsKey(current) && k<b.length-1){
                 pointer=codes.get(current);
                 k++;
                 current+=String.valueOf(b[k]);
@@ -82,14 +82,10 @@ public class MyCompressorOutputStream extends OutputStream {
         //Write compressed array//
         for (int i=0; i< 12 ; i++) //maze dimensions + start/goal
             write(b[i]);
-
-        int pointerSize= array.size()>128 ? (array.size()>32768 ? 3 : 2) : 1; // how many bytes to represent pointer
-        write(pointerSize); //pointer + val {0/1}
+        int pointerSize= array.size()>128 ? (array.size()>32768 ? 3 : 2) : 1; // how many bytes to represent the pointer
+        write(pointerSize);
 //        System.out.println("DEBUG : array size:" + array.size()+" unit size: "+(pointerSize+1)); //DEBUGGING
-        byte last=0;
         for (Pair<Integer, Integer> Pair : array) { //send array
-//            write(Pair.getKey());
-            last=(byte)(Pair.getKey()<<0);
             byte cell = (byte) (Pair.getKey()<<7);
             cell = (byte) (cell | (Pair.getValue()>>(8*(pointerSize-1))));
             write(cell);
@@ -98,16 +94,14 @@ public class MyCompressorOutputStream extends OutputStream {
                 write(cell);
             }
         }
-        write(last);
-
-//        out.close();
+        write(array.get(array.size()-1).getKey()); //last cell key (0/1/2)
         //Finish writing compressed array//
     }
 
 
 
     public void writeSmall(byte[] b) {
-        if (b.length<12 || b==null)
+        if (b.length<12)
             try {
                 throw new IOException();
             } catch (IOException e) {
@@ -123,7 +117,7 @@ public class MyCompressorOutputStream extends OutputStream {
                 if (i<b.length)
                     cell=(byte)((cell<<1)|b[i++]);
                 else
-                    cell=(byte)((cell<<1)|0);
+                    cell=(byte)((cell << 1));
             }
             write(cell);
         }

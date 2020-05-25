@@ -9,7 +9,6 @@ import java.util.Objects;
 public class Maze implements Serializable {
     private Position start;
     private  Position goal;
-//    private static Object printLock=new Object();
     int[][] maze;
 
     public Maze(Position start, Position goal, int[][] maze) {
@@ -27,11 +26,6 @@ public class Maze implements Serializable {
         for(int i=0 ; i<rowSize; i++)
             for (int j=0; j<colSize; j++)
                 maze[i][j] = byteMaze[pos++];
-
-//        int rowSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[0]),8)+intToBinary(convertByteToInt(byteMaze[1]),8));
-//        int colSize = binaryToInt(intToBinary(convertByteToInt(byteMaze[2]),8)+intToBinary(convertByteToInt(byteMaze[3]),8));
-//        start=new Position(binaryToInt(intToBinary(convertByteToInt(byteMaze[4]),8)+intToBinary(convertByteToInt(byteMaze[5]),8)),binaryToInt(intToBinary(convertByteToInt(byteMaze[6]),8)+intToBinary(convertByteToInt(byteMaze[7]),8)));
-//        goal = new Position(binaryToInt(intToBinary(convertByteToInt(byteMaze[8]),8)+intToBinary(convertByteToInt(byteMaze[9]),8)),binaryToInt(intToBinary(convertByteToInt(byteMaze[10]),8)+intToBinary(convertByteToInt(byteMaze[11]),8)));
     }
 
 
@@ -74,38 +68,6 @@ public class Maze implements Serializable {
 //        }
     }
 
-//    private String intToBinary(int a,int stringLength){
-//        String binary ="";
-//        while (a!=0){
-//            binary=a%2+binary;
-//            a=a/2;
-//        }
-//        while (binary.length()<stringLength)
-//            binary="0"+binary;
-//        return binary;
-//    }
-//    public int binaryToInt(String binary){
-//        int l = binary.length();
-//        int val=0;
-//        while (l>0){
-//            if(binary.charAt(l-1)=='1')
-//                val+=Math.pow(2,binary.length()-l);
-//            l--;
-//        }
-//        return val;
-//    }
-//
-//    public byte binaryToByte(String binary){
-//        int l = binary.length();
-//        byte val=0;
-//        while (l>0){
-//            if(binary.charAt(l-1)=='1')
-//                val+=Math.pow(2,binary.length()-l);
-//            l--;
-//        }
-//        return val;
-//    }
-
     public byte[] toByteArray(){
         byte r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2;
         ArrayList<Byte> list = new ArrayList<>();
@@ -122,18 +84,6 @@ public class Maze implements Serializable {
         gr2=(byte)(getGoalPosition().getRowIndex());
         gc1=(byte)(getGoalPosition().getColumnIndex()>>8);
         gc2=(byte)(getGoalPosition().getColumnIndex ());
-////        r1=splitInt(maze.length)[0];
-////        r2=splitInt(maze.length)[1];
-////        c1=splitInt(maze[0].length)[0];
-////       c2=splitInt(maze[0].length)[1];
-//        sr1=splitInt(getStartPosition().getRowIndex())[0];
-//        sr2=splitInt(getStartPosition().getRowIndex())[1];
-//        sc1=splitInt(getStartPosition().getColumnIndex())[0];
-//        sc2=splitInt(getStartPosition().getColumnIndex())[1];
-//        gr1=splitInt(getGoalPosition().getRowIndex())[0];
-//        gr2=splitInt(getGoalPosition().getRowIndex())[1];
-//        gc1=splitInt(getGoalPosition().getColumnIndex())[0];
-//        gc2=splitInt(getGoalPosition().getColumnIndex())[1];
 
         byte[] bytes = new byte[12+ maze.length*maze[0].length];
         bytes[0] = r1;
@@ -157,19 +107,6 @@ public class Maze implements Serializable {
         return bytes;
     }
 
-//    private byte[] splitInt(int input){
-//        String binary = intToBinary(input,16);
-//        String L = binary.substring(0,8), R=binary.substring(8);
-//        byte left = binaryToByte(L);
-//        byte right = binaryToByte(R);
-//        return new byte[]{left,right};
-//    }
-//
-//    private int convertByteToInt(byte b){
-//        if(b>=0)
-//            return b;
-//        return  (int)Math.pow(2,8)+b;
-//    }
 
     @Override
     public boolean equals(Object o) {

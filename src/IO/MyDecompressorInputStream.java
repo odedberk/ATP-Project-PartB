@@ -106,7 +106,6 @@ public class MyDecompressorInputStream extends InputStream {
     }
 //
     public int readSmall(byte[] byteArray) {
-
         ArrayList<Byte> array = new ArrayList<>();
         int next = 0;
         try {
