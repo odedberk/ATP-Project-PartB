@@ -22,6 +22,7 @@ public class MyCompressorOutputStream extends OutputStream {
         }
     }
 
+
     @Override
     public void close() {
         try {
@@ -30,9 +31,21 @@ public class MyCompressorOutputStream extends OutputStream {
             e.printStackTrace();
         }
     }
-
     @Override
-    public void write(byte[] b) {
+    public void write(byte[] byteMaze){
+        int rowSize = ((byteMaze[0] & 0xFF) <<8) | (byteMaze[1] & 0xFF);
+        int colSize = ((byteMaze[2] & 0xFF) <<8) | (byteMaze[3] & 0xFF);
+        if (rowSize*colSize>= 170*170) {
+            write(1);
+            writeBig(byteMaze);
+        }
+        else {
+            write(0);
+            writeSmall(byteMaze);
+        }
+    }
+
+    public void writeBig (byte[] b) {
         if (b.length<12 || b==null)
             try {
                 throw new IOException();
@@ -92,27 +105,27 @@ public class MyCompressorOutputStream extends OutputStream {
     }
 
 
-//    @Override
-//    public void write(byte[] b) {
-//        if (b.length<12 || b==null)
-//            try {
-//                throw new IOException();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        //Write compressed array//
-//        int i=0;
-//        for (; i< 12 ; i++) //maze dimensions + start/goal
-//            write(b[i]);
-//        while (i<b.length){
-//            byte cell=b[i++]; 10110100
-//            for (int j =0 ; j<7; j++){
-//                if (i<b.length)
-//                    cell=(byte)((cell<<1)|b[i++]);
-//                else
-//                    cell=(byte)((cell<<1)|0);
-//            }
-//            write(cell);
-//        }
-//    }
+
+    public void writeSmall(byte[] b) {
+        if (b.length<12 || b==null)
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        //Write compressed array//
+        int i=0;
+        for (; i< 12 ; i++) //maze dimensions + start/goal
+            write(b[i]);
+        while (i<b.length){
+            byte cell=b[i++];
+            for (int j =0 ; j<7; j++){
+                if (i<b.length)
+                    cell=(byte)((cell<<1)|b[i++]);
+                else
+                    cell=(byte)((cell<<1)|0);
+            }
+            write(cell);
+        }
+    }
 }
