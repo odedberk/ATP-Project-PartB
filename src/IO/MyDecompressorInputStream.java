@@ -32,6 +32,11 @@ public class MyDecompressorInputStream extends InputStream {
         }
     }
 
+    /**
+     * read mhatod to read byte array that rprasante maze
+     * @param byteArray
+     * @return
+     */
     public int read(byte[] byteArray){
 
         ArrayList<Integer> array = new ArrayList<>();
@@ -81,15 +86,12 @@ public class MyDecompressorInputStream extends InputStream {
     private LinkedList<Pair<Integer,Integer>>getDictionary(ArrayList<Integer> array ,int sizeOfUnit){
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
         int pos=13+sizeOfUnit;
-
         dictionary.add(new Pair<>(0,0));
         while(pos<array.size()-2){
                 int val=(array.get(pos)>>7)&1;
                 if(pos+sizeOfUnit+1==array.size())
                     if(array.get(pos+sizeOfUnit)==2)
                         val=2;
-                //if(val==-1)
-                  //  break;
                 int p=(array.get(pos++)&127) & 0xFF;
                 for(int i=sizeOfUnit-2; i>=0; i--)
                     p = (p <<(8)) | (array.get(pos++) & 0xFF);
