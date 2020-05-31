@@ -43,7 +43,7 @@ public class MyDecompressorInputStream extends InputStream {
     }
 
     /**
-     * decompressed mazes that compressed with big-compress  method
+     * decompressed a maze that was compressed with big-compress method
      * @param byteArray
      * @return
      */
@@ -92,7 +92,7 @@ public class MyDecompressorInputStream extends InputStream {
     }
 
     /**
-     * return the dictionary of the compress-method
+     * return the dictionary of the compress-method (LZ78 implementation)
      * @param array
      * @param sizeOfUnit
      * @return
@@ -115,7 +115,7 @@ public class MyDecompressorInputStream extends InputStream {
     }
 
     /**
-     * decompressed mazes that compressed with big-compress  method
+     * decompressed a maze that was compressed with small-compress method
      * @param byteArray
      * @return
      */

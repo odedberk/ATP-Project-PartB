@@ -7,9 +7,15 @@ import java.io.*;
 import java.util.Hashtable;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * A server strategy used to receive a decompressed maze and return a solution for it.
+ * Saves each solved maze (in each run) in a file, to quickly draw the solution from the disk instead
+ * of having to solve it all over again.
+ */
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
     public static Hashtable<Integer, String> solvedMazes= new Hashtable<>(); //<Maze,filePath>
     private static AtomicInteger fileID = new AtomicInteger(0);
+
     @Override
     public void handleClient(InputStream inputStream, OutputStream outputStream) throws IOException {
         ObjectInputStream fromClient = new ObjectInputStream(inputStream);

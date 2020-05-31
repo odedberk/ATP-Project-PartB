@@ -3,6 +3,10 @@ package Client;
 import java.io.IOException;
 import java.net.*;
 
+/**
+ * a client that can connect to a server and act corresponding to
+ * an injected strategy
+ */
 public class Client implements Runnable {
     private InetAddress address;
     private int serverPort;
