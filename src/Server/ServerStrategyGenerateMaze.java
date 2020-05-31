@@ -9,7 +9,7 @@ import java.util.Collection;
 public class ServerStrategyGenerateMaze implements IServerStrategy {
 
     /**
-     * get maze size from client and return the a compressed maze to the client
+     * get maze size from client and return a compressed maze to the client
      * @param inputStream
      * @param outputStream
      */
@@ -44,7 +44,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
     }
 
     /**
-     * function to get the most update AMazeGenerator from the Configurations file
+     * function to get the most updated AMazeGenerator from the Configurations file
      * @return AMazeGenerator
      */
     private AMazeGenerator fGenerator(){
