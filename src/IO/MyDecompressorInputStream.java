@@ -34,7 +34,7 @@ public class MyDecompressorInputStream extends InputStream {
 
     @Override
     public int read(byte[] b) throws IOException {
-        int method = in.read();
+        int method = in.read();//read the first input that determines the type of compression
         if (method==0)
             readSmall(b);
         else
@@ -42,6 +42,11 @@ public class MyDecompressorInputStream extends InputStream {
         return 0;
     }
 
+    /**
+     * decompressed mazes that compressed with big-compress  method
+     * @param byteArray
+     * @return
+     */
     public int readBig(byte[] byteArray){
         ArrayList<Integer> array = new ArrayList<>();
         int next = 0;
@@ -83,28 +88,37 @@ public class MyDecompressorInputStream extends InputStream {
                     byteArray[insert++]=0;
             }
         }
-
         return 0;
     }
 
+    /**
+     * return the dictionary of the compress-method
+     * @param array
+     * @param sizeOfUnit
+     * @return
+     */
     private LinkedList<Pair<Integer,Integer>>getDictionary(ArrayList<Integer> array ,int sizeOfUnit){
         LinkedList<Pair<Integer,Integer>> dictionary = new LinkedList<>();
-        int pos=13+sizeOfUnit;
-
+        int pos=13+sizeOfUnit;//the first index of the compress dictionary
         dictionary.add(new Pair<>(0,0));
         while(pos<array.size()-2){
-                int val=(array.get(pos)>>7)&1;
+                int val=(array.get(pos)>>7)&1;//get value( is the key in the dictionary)
                 if(pos+sizeOfUnit+1==array.size())
                     if(array.get(pos+sizeOfUnit)==2)
                         val=2;
                 int p=(array.get(pos++)&127) & 0xFF;
                 for(int i=sizeOfUnit-2; i>=0; i--)
-                    p = (p <<(8)) | (array.get(pos++) & 0xFF);
+                    p = (p <<(8)) | (array.get(pos++) & 0xFF);//get the value pointer (the dictionary value)
                 dictionary.add(new Pair<>(val,p));
         }
         return dictionary;
     }
-//
+
+    /**
+     * decompressed mazes that compressed with big-compress  method
+     * @param byteArray
+     * @return
+     */
     public int readSmall(byte[] byteArray) {
         ArrayList<Byte> array = new ArrayList<>();
         int next = 0;
