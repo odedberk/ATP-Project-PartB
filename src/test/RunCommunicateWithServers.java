@@ -22,18 +22,18 @@ public class RunCommunicateWithServers {
         //stringReverserServer.start();
 
         //Communicating with servers
-//        for (int i =0 ; i<20; i++) {
-            CommunicateWithServer_SolveSearchProblem();
-            CommunicateWithServer_MazeGenerating();
-//        }
+        for (int i =0 ; i<10; i++) {
+            new Thread(RunCommunicateWithServers::CommunicateWithServer_MazeGenerating).start();
+            new Thread(RunCommunicateWithServers::CommunicateWithServer_SolveSearchProblem).start();
+        }
         //CommunicateWithServer_StringReverser();
 
         //Stopping all servers
-//        try {
-//            Thread.sleep(10000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         mazeGeneratingServer.stop();
         solveSearchProblemServer.stop();
         //stringReverserServer.stop();

@@ -71,8 +71,9 @@ public class MyCompressorOutputStream extends OutputStream {
 
     /**
      * Compressing a received maze which has a size larger than the threshold,
-     * and sending it using the OutputStream data member
-     * @param b
+     * and writing it using the OutputStream data member.
+     * using the LZ78 algorithm.
+     * @param b - uncompressed maze byte array
      */
     public void writeBig (byte[] b) {
         if (b.length<12)
@@ -127,7 +128,11 @@ public class MyCompressorOutputStream extends OutputStream {
         //Finish writing compressed array//
     }
 
-
+    /**
+     * Compressing a received maze which has a size smaller than the threshold,
+     * and writing it using the OutputStream data member
+     * @param b - uncompressed maze byte array
+     */
     public void writeSmall(byte[] b) {
         if (b.length<12)
             try {

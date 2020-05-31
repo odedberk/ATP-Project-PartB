@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Maze implements Serializable {
     private Position start;
     private  Position goal;
+    final Integer printLock=0;
     int[][] maze;
 
     public Maze(Position start, Position goal, int[][] maze) {
@@ -54,7 +55,7 @@ public class Maze implements Serializable {
     }
 
     public void print(){
-//        synchronized (printLock) {
+        synchronized (printLock) {
             for (int i = 0; i < maze.length; i++) {
                 for (int j = 0; j < maze[i].length; j++) {
                     if (i == start.getRowIndex() && j == start.getColumnIndex())
@@ -65,7 +66,7 @@ public class Maze implements Serializable {
                 }
                 System.out.println(); // print
             }
-//        }
+        }
     }
 
     public byte[] toByteArray(){
