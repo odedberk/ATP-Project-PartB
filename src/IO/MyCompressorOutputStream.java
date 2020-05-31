@@ -7,12 +7,27 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.*;
 
+/**
+ * An OutputStream used to compress mazes received as byte arrays.
+ * Using the Lempel-Ziv (LZ78) algorithm above a predefined size (writeBig method),
+ * and a simpler method that groups every 8 cells of the maze together, for
+ * mazes smaller than that size (writeSmall method).
+ * Works in correlation with {@link MyDecompressorInputStream}.
+ */
 public class MyCompressorOutputStream extends OutputStream {
     private OutputStream out;
 
     public MyCompressorOutputStream(OutputStream out) {
         this.out = out;
     }
+
+    /**
+     * Writing a single byte using the OutputStream
+     * received in the constructor.
+     * Writing the eight low-order bits of the argument, while the 24
+     * high-order bits of 'b' are ignored.
+     * @param b - the byte to write
+     */
     @Override
     public void write(int b) {
         try {
@@ -22,7 +37,10 @@ public class MyCompressorOutputStream extends OutputStream {
         }
     }
 
-
+    /**
+     * Closes the received OutputStream and releases any system resources
+     * associated with this stream
+     */
     @Override
     public void close() {
         try {
@@ -31,12 +49,18 @@ public class MyCompressorOutputStream extends OutputStream {
             e.printStackTrace();
         }
     }
+
+    /**
+     * A "mediator" function used to decide which compression method
+     * is used for the received uncompressed byte array, representing a maze.
+     * @param byteMaze - uncompressed maze
+     */
     @Override
     public void write(byte[] byteMaze){
         int rowSize = ((byteMaze[0] & 0xFF) <<8) | (byteMaze[1] & 0xFF);
         int colSize = ((byteMaze[2] & 0xFF) <<8) | (byteMaze[3] & 0xFF);
-        if (rowSize*colSize>= 170*170) {
-            write(1);
+        if (rowSize*colSize>= 170*170) { // Threshold between big and small mazes
+            write(1); //first byte - tells the decompressor which method was used
             writeBig(byteMaze);
         }
         else {
@@ -45,6 +69,11 @@ public class MyCompressorOutputStream extends OutputStream {
         }
     }
 
+    /**
+     * Compressing a received maze which has a size larger than the threshold,
+     * and sending it using the OutputStream data member
+     * @param b
+     */
     public void writeBig (byte[] b) {
         if (b.length<12)
             try {
@@ -97,7 +126,6 @@ public class MyCompressorOutputStream extends OutputStream {
         write(array.get(array.size()-1).getKey()); //last cell key (0/1/2)
         //Finish writing compressed array//
     }
-
 
 
     public void writeSmall(byte[] b) {

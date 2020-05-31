@@ -8,12 +8,13 @@ import java.util.Arrays;
 
 public class CompressionTests {
     public static void main(String[] args) {
-//        runStatistics();
-        test(120,true);
+        System.out.println("Max Compression ratio: "+runStatistics());
+//        test(120,true);
     }
-    public static void runStatistics (){
+    public static double runStatistics (){
         int[] size = new int[100];
         double[] ratios = new double[size.length];
+        double max=0;
         String output = "output.csv";
         FileWriter file =null ;
         try {
@@ -24,15 +25,18 @@ public class CompressionTests {
         PrintWriter printer = new PrintWriter(file);
 
         for (int i =0 ; i <size.length; i++) {
-            size[i]=10*(i+1);
+            size[i]=2*(i+1);
             ratios[i]=test(size[i],false);
             System.out.println("---------------------------");
             System.out.println("Maze size: "+size[i]+"x"+size[i]);
             System.out.println("Compression Ration: "+ratios[i]);
             System.out.println("---------------------------");
             printer.write(size[i]+", "+ratios[i]+"\n");
+            if(ratios[i]>max)
+                max=ratios[i];
         }
         printer.close();
+        return max;
     }
     public static double test (int row, boolean debug){
         String mazeFileName = "compressedMaze"+row+"x"+row+".maze";
