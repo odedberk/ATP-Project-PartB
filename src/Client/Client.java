@@ -21,9 +21,9 @@ public class Client implements Runnable {
     public void run()
     {
         try {
-            Socket socket = new Socket(address,serverPort);
+            Socket socket = new Socket(address,serverPort);//try to connect to the server
             System.out.println("Client is connected to server!");
-            clientStrategy.clientStrategy(socket.getInputStream(),socket.getOutputStream());
+            clientStrategy.clientStrategy(socket.getInputStream(),socket.getOutputStream());//send the Soket input and output to the strategy
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();

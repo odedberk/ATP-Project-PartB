@@ -5,6 +5,10 @@ import java.io.Serializable;
 public abstract class AMazeGenerator implements IMazeGenerator, Serializable {
     public int steps=0; //Debug - recursions taken to create the maze
 
+    /**
+     * get sizes of maze and measure the time to build such a maze
+     *
+     */
     @Override
     public long measureAlgorithmTimeMillis(int row, int col) {
         long start = System.currentTimeMillis();
@@ -12,6 +16,7 @@ public abstract class AMazeGenerator implements IMazeGenerator, Serializable {
         long end = System.currentTimeMillis();
         return end-start;
     }
+
 
     public int getSteps() {
         return steps;

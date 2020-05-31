@@ -53,17 +53,20 @@ public class Server implements Runnable{
         this.stop = true;
     }
 
+    /**
+     *handle the server thread
+     */
     @Override
     public void run() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            serverSocket.setSoTimeout(interval);
+            serverSocket.setSoTimeout(interval);//whit an interval seconds while clients "arrives"
             threadPoolExecutor = Executors.newFixedThreadPool(5);
             while (!stop)
             {
                 try {
-                    Socket clientSocket = serverSocket.accept();
-                    threadPoolExecutor.execute(() -> clientHandle(clientSocket));
+                    Socket clientSocket = serverSocket.accept();//get new client
+                    threadPoolExecutor.execute(() -> clientHandle(clientSocket));// send to the thread pool
                 }
                 catch (IOException e) {
                     System.out.println("Where are the clients??");

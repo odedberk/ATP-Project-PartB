@@ -17,6 +17,11 @@ public class Maze implements Serializable {
         this.goal = goal;
         this.maze = maze;
     }
+
+    /**
+     *
+     * get byte array that represent a maze and build a maze
+     */
     public Maze(byte [] byteMaze){
         int rowSize = ((byteMaze[0] & 0xFF) <<8) | (byteMaze[1] & 0xFF);
         int colSize = ((byteMaze[2] & 0xFF) <<8) | (byteMaze[3] & 0xFF);
@@ -69,6 +74,10 @@ public class Maze implements Serializable {
         }
     }
 
+    /**
+     *return a byte array that represent the maze
+     *
+     */
     public byte[] toByteArray(){
         byte r1,r2,c1,c2,sr1,sr2,sc1,sc2,gr1,gr2,gc1,gc2;
         ArrayList<Byte> list = new ArrayList<>();

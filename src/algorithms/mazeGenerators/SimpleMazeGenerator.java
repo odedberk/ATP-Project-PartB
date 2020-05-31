@@ -30,7 +30,7 @@ public class SimpleMazeGenerator extends AMazeGenerator {
             eRow = rand.nextInt(row);
             eCol = rand.nextInt(col);
         }
-//        System.out.println(""+sRow+" "+sCol+ " " + eRow + " "+eCol);
+        // make sure there is a path from start position to end position
         if(sRow<eRow){
             int r=rand.nextInt(eRow-sRow+1)+sRow;
             if(sCol<eCol){
@@ -70,6 +70,11 @@ public class SimpleMazeGenerator extends AMazeGenerator {
         Position end = new Position(eRow,eCol); //end position
         return new Maze(start,end,maze);
     }
+
+    /**
+     *
+     * get position to start and to finish on the same row or column and create a path
+     */
     private void Path(int [][]maze,int s,int f,int constant ,Boolean Row){
         if(Row){
             for(int i = s; i<=f; i++)

@@ -3,7 +3,10 @@ package algorithms.mazeGenerators;
 import java.util.Random;
 
 public class EmptyMazeGenerator extends AMazeGenerator {
-
+    /**
+     *
+     *generate a empty maze (no walls)
+     */
     @Override
     public Maze generate(int row, int col) {
         if (row<=1 && col<=1)

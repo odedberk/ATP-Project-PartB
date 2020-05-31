@@ -31,6 +31,9 @@ public class Position implements Serializable {
         return "{"+row+","+col+"}";
     }
 
+    /**
+     *compare to positions
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
