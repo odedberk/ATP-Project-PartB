@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Properties;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -24,10 +25,17 @@ public class Server implements Runnable{
         stop = false;
     }
 
+    /**
+     * start the server in a new Thread to allow main program to continue running
+     */
     public void start() {
        new Thread(this).start();
     }
 
+    /**
+     * handle a new client that was connected to the server
+     * @param clientSocket
+     */
     private void clientHandle(Socket clientSocket) {
         try {
             InputStream inputClient = clientSocket.getInputStream();
@@ -67,6 +75,31 @@ public class Server implements Runnable{
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public static class Configurations {
+        private static Properties prop;
+
+        private static void initProp() {
+            try (InputStream input = Configurations.class.getClassLoader().getResourceAsStream("config.properties")) {
+                if (input == null)
+                    return;
+                prop = new Properties();
+                prop.load(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static String getProperty(String name) {
+            if (prop == null)
+                initProp();
+            return prop.getProperty(name);
+        }
+
+        public static void main(String[] args) {
+            System.out.println(getProperty("test"));
+            System.out.println(System.getProperty("java.io.tmpdir"));
         }
     }
 }

@@ -35,7 +35,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
     }
 
     private ISearchingAlgorithm getSolver(){
-        String algorithm = Configurations.getProperty("algorithm");
+        String algorithm = Server.Configurations.getProperty("algorithm");
         ISearchingAlgorithm solver=new BreadthFirstSearch();
         switch (algorithm) {
             case "BreadthFirstSearch":

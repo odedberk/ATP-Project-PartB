@@ -48,7 +48,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
      * @return AMazeGenerator
      */
     private AMazeGenerator fGenerator(){
-        String generatorType = Configurations.getProperty("generator");
+        String generatorType = Server.Configurations.getProperty("generator");
         AMazeGenerator generator;
         if(generatorType.equals("MyMazeGenerator")){
             generator = new MyMazeGenerator();
